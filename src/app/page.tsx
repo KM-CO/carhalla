@@ -1,12 +1,30 @@
 "use client";
-import Image from "next/image";
 import Card from "./components/Card"
+import Filter from "./components/Filter";
+import Header from "./components/Header"
 
 export default function Home() {
   return (
-    <>
-      <Card price={200} alt="test" img="https://ecs-static.teamtreehouse.com/assets/views/marketing/shared/community-banner-white-47072046c51352fe6a69f5e691ff5700b28bb11d45197d7bdf066d9ea3f72d0c.webp"/>
-      <p>Hello, world.</p>
-    </>
+    <div className="grid grid-rows-[min-content] h-full">
+      <Header />
+      <div className="grid grid-cols-[min-content_auto]">
+        <Filter />
+        <div className="flex flex-wrap">
+          <Card price={200} alt="test" img="https://media.istockphoto.com/id/1409329028/vector/no-picture-available-placeholder-thumbnail-icon-illustration-design.jpg?s=612x612&w=0&k=20&c=_zOuJu755g2eEUioiOUdz_mHKJQJn-tDgIAhQzyeKUQ=" />
+          <Card price={800} alt="test" img="https://media.istockphoto.com/id/1409329028/vector/no-picture-available-placeholder-thumbnail-icon-illustration-design.jpg?s=612x612&w=0&k=20&c=_zOuJu755g2eEUioiOUdz_mHKJQJn-tDgIAhQzyeKUQ=" />
+
+          <Card price={200} alt="test" img="https://media.istockphoto.com/id/1409329028/vector/no-picture-available-placeholder-thumbnail-icon-illustration-design.jpg?s=612x612&w=0&k=20&c=_zOuJu755g2eEUioiOUdz_mHKJQJn-tDgIAhQzyeKUQ=" />
+          <Card price={800} alt="test" img="https://media.istockphoto.com/id/1409329028/vector/no-picture-available-placeholder-thumbnail-icon-illustration-design.jpg?s=612x612&w=0&k=20&c=_zOuJu755g2eEUioiOUdz_mHKJQJn-tDgIAhQzyeKUQ=" />
+
+          <Card price={200} alt="test" img="https://media.istockphoto.com/id/1409329028/vector/no-picture-available-placeholder-thumbnail-icon-illustration-design.jpg?s=612x612&w=0&k=20&c=_zOuJu755g2eEUioiOUdz_mHKJQJn-tDgIAhQzyeKUQ=" />
+          <Card price={800} alt="test" img="https://media.istockphoto.com/id/1409329028/vector/no-picture-available-placeholder-thumbnail-icon-illustration-design.jpg?s=612x612&w=0&k=20&c=_zOuJu755g2eEUioiOUdz_mHKJQJn-tDgIAhQzyeKUQ=" />
+
+          <Card price={200} alt="test" img="https://media.istockphoto.com/id/1409329028/vector/no-picture-available-placeholder-thumbnail-icon-illustration-design.jpg?s=612x612&w=0&k=20&c=_zOuJu755g2eEUioiOUdz_mHKJQJn-tDgIAhQzyeKUQ=" />
+          <Card price={800} alt="test" img="https://media.istockphoto.com/id/1409329028/vector/no-picture-available-placeholder-thumbnail-icon-illustration-design.jpg?s=612x612&w=0&k=20&c=_zOuJu755g2eEUioiOUdz_mHKJQJn-tDgIAhQzyeKUQ=" />
+          <Card price={200} alt="test" img="https://media.istockphoto.com/id/1409329028/vector/no-picture-available-placeholder-thumbnail-icon-illustration-design.jpg?s=612x612&w=0&k=20&c=_zOuJu755g2eEUioiOUdz_mHKJQJn-tDgIAhQzyeKUQ=" />
+          <Card price={800} alt="test" img="https://media.istockphoto.com/id/1409329028/vector/no-picture-available-placeholder-thumbnail-icon-illustration-design.jpg?s=612x612&w=0&k=20&c=_zOuJu755g2eEUioiOUdz_mHKJQJn-tDgIAhQzyeKUQ=" />
+        </div>
+      </div>
+    </div>
   );
 }
