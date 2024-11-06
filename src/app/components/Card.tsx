@@ -29,7 +29,7 @@ export default function Card({ price, img, alt, desc }: CardProps) {
         </div>
         <Image height={200} width={250} src={img} alt={alt} className="min-h-[200px] min-w-[250px] max-h-[200px] max-w-[250px] resize-none rounded-3xl border-gray-600 border-2" priority />
       </div>
-      <Button onClick={() => {}}><Link href="form-submission">Test</Link></Button>
+      <Link href="form-submission"><Button onClick={() => {}}>Test</Button></Link>
     </div>
   );
 }
