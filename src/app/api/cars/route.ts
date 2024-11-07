@@ -3,7 +3,7 @@ import Car from "../../models/carSchema";
 import { NextResponse } from "next/server";
 import { NextRequest } from "next/server";
 
-export async function GET(request: NextRequest) {
+export async function GET() {
     // Handle GET requests
     await connectMongoDB();
     const cars = await Car.find();

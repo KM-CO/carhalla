@@ -7,7 +7,7 @@ import { NextRequest } from "next/server";
  * Make this secure? Maybe can't request users directly
  * really just ask PLAs about this or Dr. Stephens
  */
-export async function GET(request: NextRequest) {
+export async function GET() {
     // Handle GET requests
     await connectMongoDB();
     const users = await User.find();
