@@ -1,4 +1,5 @@
 import Card from "./Card";
+import fetch from 'node-fetch';
 
 type Car = {
     _id: string;
@@ -7,6 +8,10 @@ type Car = {
     price: number;
     image: string | "";
     desc: string | "";
+}
+
+type Cars = {
+    cars: Car[];
 }
 
 export default async function Cars() {
@@ -19,7 +24,7 @@ export default async function Cars() {
         throw new Error('Failed to fetch cars');
     }
 
-    const { cars } = await response.json();
+    const { cars } = await response.json() as Cars;
 
     return (
         <div className="m-3 grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-3" >

@@ -8,14 +8,14 @@ interface RouteParams {
     params: { id: string };
 }
 
-export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
+export async function GET(request: NextRequest, respone: NextResponse, { params }: RouteParams) {
     const { id } = await params;
     await connectMongoDB();
     const car = await Car.findOne({ _id: id });
     return NextResponse.json({ car }, { status: 200 });
 }
 
-export async function PUT(request: NextRequest, { params }: RouteParams) {
+export async function PUT(request: NextRequest, respone: NextResponse, { params }: RouteParams) {
     const { id } = await params;
     const { car_model: car_model, make: make, price: price, image: image, desc: desc } = await request.json();
     await connectMongoDB();
@@ -23,7 +23,7 @@ export async function PUT(request: NextRequest, { params }: RouteParams) {
     return NextResponse.json({ message: "Car updated" }, { status: 200 });
 }
 
-export async function DELETE(request: NextRequest, { params }: RouteParams) {
+export async function DELETE(request: NextRequest, respone: NextResponse, { params }: RouteParams) {
     const { id } = await params;
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
