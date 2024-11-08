@@ -8,7 +8,7 @@ interface RouteParams {
     params: { id: string };
 }
 
-export async function GET(request: NextRequest, { params }: RouteParams) {
+export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
     const { id } = await params;
     await connectMongoDB();
     const car = await Car.findOne({ _id: id });
