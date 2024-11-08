@@ -1,5 +1,5 @@
 import Card from "./Card";
-import fetch from 'node-fetch';
+import { GET } from '../api/cars/route'
 
 type Car = {
     _id: string;
@@ -15,10 +15,7 @@ type Cars = {
 }
 
 export default async function Cars() {
-    const response = await fetch('http://localhost:3000/api/cars',
-        {
-            method: 'GET',
-        });
+    const response = await GET();
 
     if (!response.ok) {
         throw new Error('Failed to fetch cars');
