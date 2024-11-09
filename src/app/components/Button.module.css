@@ -1,0 +1,16 @@
+/* Button.module.css */
+
+.button {
+    margin: auto;
+    border: 2px solid;
+    min-width: 75px;
+    padding: 0.5rem 1rem;
+    border-radius: 9999px; /* For fully rounded button */
+    background-color: #FFC107; /* Amber color */
+    transition: all 0.3s ease;
+}
+
+.button:hover {
+    border-color: red;
+    transform: translateY(-2px);
+}

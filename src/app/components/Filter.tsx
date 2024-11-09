@@ -1,7 +1,11 @@
+import styles from './Filter.module.css';
+
 export default function Filter() {
     return (
-        <div className="min-w-[100px] drop-shadow-[2px_0_2px_rgb(0,0,0,.5)] bg-gray-500">
-            test
+        <div className={styles.filterContainer}>
+            <button className={styles.filterButton}>Model</button>
+            <button className={styles.filterButton}>Year</button>
+            <button className={styles.filterButton}>Price</button>
         </div>
     );
 }
