@@ -16,14 +16,30 @@ type Car = {
 }
 
 const DEFAULT_CARS: Car[] = [
-    {
-        _id: "1",
-        car_model: "CRV",
-        make: "Honda",
-        price: 5000,
-        desc: "This is cool car.",
-        image: "https://media.istockphoto.com/id/1409329028/vector/no-picture-available-placeholder-thumbnail-icon-illustration-design.jpg?s=612x612&w=0&k=20&c=_zOuJu755g2eEUioiOUdz_mHKJQJn-tDgIAhQzyeKUQ=",
-    },
+  {
+      _id: "1",
+      car_model: "CRV",
+      make: "Honda",
+      price: 5000,
+      desc: "This is cool car.",
+      image: "https://media.istockphoto.com/id/1409329028/vector/no-picture-available-placeholder-thumbnail-icon-illustration-design.jpg?s=612x612&w=0&k=20&c=_zOuJu755g2eEUioiOUdz_mHKJQJn-tDgIAhQzyeKUQ=",
+  },
+  {
+      _id: "2",
+      car_model: "CRV",
+      make: "Honda",
+      price: 5000,
+      desc: "This is cool car.",
+      image: "https://media.istockphoto.com/id/1409329028/vector/no-picture-available-placeholder-thumbnail-icon-illustration-design.jpg?s=612x612&w=0&k=20&c=_zOuJu755g2eEUioiOUdz_mHKJQJn-tDgIAhQzyeKUQ=",
+  },
+  {
+      _id: "3",
+      car_model: "CRV",
+      make: "Honda",
+      price: 5000,
+      desc: "This is cool car.",
+      image: "https://media.istockphoto.com/id/1409329028/vector/no-picture-available-placeholder-thumbnail-icon-illustration-design.jpg?s=612x612&w=0&k=20&c=_zOuJu755g2eEUioiOUdz_mHKJQJn-tDgIAhQzyeKUQ=",
+  },
 ];
 
 export default function Home() {
