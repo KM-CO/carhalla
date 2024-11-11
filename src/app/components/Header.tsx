@@ -57,18 +57,19 @@ const Header = ({ loggedInHandler }: HeaderProps) => {
       <nav className={styles.nav}>
         {/* TEMPORARY for the project; will create authentication later*/}
         {loggedInStatus ? <Link href="/"><Button onClick={() => loggedInHandler(false)}>Logout</Button></Link>
-        : (/*<><Link href="/login">
+          : (/*<><Link href="/login">
           <button className={`${styles.button} ${styles.loginButton}`}>
             Login
           </button>
-        </Link>
+        </Link>)*/<Link href="/"><Button onClick={() => loggedInHandler(true)}>Login</Button></Link>)}
+
         <Link href="/signup">
           <button className={`${styles.button} ${styles.signupButton}`}>
             Sign Up
           </button>
-        </Link></>)*/<Link href="/"><Button onClick={() => loggedInHandler(true)}>Login</Button></Link>)}
+        </Link>
       </nav>
-    </header>
+    </header >
   );
 };
 

@@ -50,7 +50,7 @@ export default function Page() {
                     </div>
                 </div>
                 <div className="col-span-2 flex flex-col justify-center">
-                    <textarea rows={8} className="mx-auto w-[90%] resize-none border-2 border-slate-400 p-2" defaultValue={desc || ""} onChange={(e) => setDesc(e.target.value)} />
+                    <textarea rows={8} className="mx-auto w-[90%] resize-none border-2 border-slate-400 p-2" value={desc || ""} onChange={(e) => setDesc(e.target.value)} />
                     <Link href={ { pathname: "", query: { model: model, make: make, price: price, img: img, alt: "", desc: desc, loggedIn: loggedInStatus } } } className="m-auto"><Button onClick={addCarHandler} onSubmit={(e) => e.preventDefault()}>Submit</Button></Link>
                 </div>
             </div>
