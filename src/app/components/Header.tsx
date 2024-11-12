@@ -8,9 +8,7 @@ import { LoggedStatus } from './Contexts';
 import Button from './Button';
 
 interface HeaderProps {
-  loggedInHandler: (
-    loggedIn: boolean
-  ) => void;
+  loggedInHandler: (loggedIn: boolean) => void;
 }
 
 
@@ -56,12 +54,21 @@ const Header = ({ loggedInHandler }: HeaderProps) => {
       {/* Right Section: Navigation Links */}
       <nav className={styles.nav}>
         {/* TEMPORARY for the project; will create authentication later*/}
-        {loggedInStatus ? <Link href="/"><Button onClick={() => loggedInHandler(false)}>Logout</Button></Link>
+        {loggedInStatus ? 
+        <Link href="/">
+          <Button onClick={() => loggedInHandler(false)} className={`${styles.button} ${styles.loginButton}`}>
+            Logout</Button>
+            </Link>
           : (/*<><Link href="/login">
           <button className={`${styles.button} ${styles.loginButton}`}>
             Login
           </button>
-        </Link>)*/<Link href="/"><Button onClick={() => loggedInHandler(true)}>Login</Button></Link>)}
+        </Link>)*/
+        <Link href="/">
+          <Button onClick={() => loggedInHandler(true)} className={`${styles.button} ${styles.loginButton}`}>
+            Login
+            </Button>
+            </Link>)}
 
         <Link href="/signup">
           <button className={`${styles.button} ${styles.signupButton}`}>
