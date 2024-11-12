@@ -67,7 +67,7 @@ export default function Page() {
 
             router.push('/');
         } catch (error) {
-            console.error('Error in updating item')
+            console.error('Error in updating item', error)
         }
     };
 
