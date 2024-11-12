@@ -4,7 +4,7 @@ interface ICar extends Document {
     car_model: string;
     make: string;
     price: number;
-    image?: string;
+    img?: string;
     desc?: string;
     date_modified: Date;
 }
@@ -22,7 +22,7 @@ const carSchema = new Schema<ICar>({
         type: Number,
         required: true,
     },
-    image: {
+    img: {
         type: String,
         required: false,
         default: "https://media.istockphoto.com/id/1409329028/vector/no-picture-available-placeholder-thumbnail-icon-illustration-design.jpg?s=612x612&w=0&k=20&c=_zOuJu755g2eEUioiOUdz_mHKJQJn-tDgIAhQzyeKUQ=",

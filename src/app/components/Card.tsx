@@ -1,11 +1,10 @@
 "use client"
 import Link from "next/link";
-import Button from "./Button"
-import Image from 'next/image'
-import { LoggedStatus } from "./Contexts";
-import { useContext } from "react";
+import Button from "./Button";
+import Image from 'next/image';
 
 interface CardProps {
+  id: string,
   model: string,
   make: string,
   price: number,
@@ -20,8 +19,7 @@ interface CardProps {
  * Add fonts and more CSS
  * Change button stuff to EDIT when logged in (should be something about it on slides using ternary operators)
  */
-export default function Card({ model, make, price, img, alt, desc }: CardProps, key: string) {
-  const loggedInStatus = useContext(LoggedStatus)
+export default function Card({ id, model, make, price, img, alt, desc }: CardProps) {
   return (
     <div className="mx-auto relative flex flex-grow-0 flex-col h-[300px] min-w-[300px] max-w-[300px] bg-slate-500 content-center rounded-3xl border-2 border-gray-500">
       <div className="absolute z-10 m-2 border-2 rounded-full p-2 min-w-[100px] text-center bg-white drop-shadow-[0_5px_5px_rgba(0,0,0,0.25)] flex-1">${price}</div>
@@ -36,7 +34,7 @@ export default function Card({ model, make, price, img, alt, desc }: CardProps, 
         </div>
         <Image height={200} width={250} src={img} alt={alt} className="min-h-[200px] min-w-[250px] max-h-[200px] max-w-[250px] resize-none rounded-3xl border-gray-600 border-2" priority />
       </div>
-      {loggedInStatus ? <Link href={ { pathname:"form-submission"/* + `/${key}` */, query: { model: model, make: make, price: price, img: img, alt: alt, desc: desc, loggedIn: loggedInStatus } } }  className="m-auto"><Button onClick={() => {}}>Edit</Button></Link> : <Link href={ { pathname:"view"/* + `/${key}` */, query: { model: model, make: make, price: price, img: img, alt: alt, desc: desc, loggedIn: loggedInStatus } } } className="m-auto"><Button onClick={() => {}}>Buy</Button></Link>}
+      <Link href={`view/${id}`} className="m-auto"><Button onClick={() => {}}>View</Button></Link>
     </div>
   );
 }

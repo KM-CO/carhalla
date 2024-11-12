@@ -3,21 +3,12 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import styles from './Header.module.css';
-import { Dispatch, SetStateAction, useContext } from 'react';
-import { LoggedStatus } from './Contexts';
 import Button from './Button';
 
-interface HeaderProps {
-  loggedInHandler: (
-    loggedIn: boolean
-  ) => void;
-}
 
-
-const Header = ({ loggedInHandler }: HeaderProps) => {
+const Header = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const title = "Carhalla";
-  const loggedInStatus = useContext(LoggedStatus);
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(event.target.value);
@@ -52,19 +43,15 @@ const Header = ({ loggedInHandler }: HeaderProps) => {
           </button>
         </div>
       </div>
-
-      {/* Right Section: Navigation Links */}
       <nav className={styles.nav}>
-        {/* TEMPORARY for the project; will create authentication later*/}
-        {loggedInStatus ? <Link href="/"><Button onClick={() => loggedInHandler(false)}>Logout</Button></Link>
-          : (/*<><Link href="/login">
-          <button className={`${styles.button} ${styles.loginButton}`}>
+        <Link href="/login">
+          <Button onClick={() => null}> {/* Make this a login/logout button component using Button component*/}
             Login
-          </button>
-        </Link>)*/<Link href="/"><Button onClick={() => loggedInHandler(true)}>Login</Button></Link>)}
+          </Button>
+        </Link>
 
         <Link href="/signup">
-          <button className={`${styles.button} ${styles.signupButton}`}>
+          <button className={`${styles.button} ${styles.signupButton}`}> {/* Make this a signup button component using Button component */}
             Sign Up
           </button>
         </Link>
