@@ -7,10 +7,10 @@ interface ButtonProps {
     onSubmit?: FormEventHandler<HTMLButtonElement>;
     className?: string;
 } 
-
-export default function Button({children, onClick, onSubmit, className}: ButtonProps) {
+/** NEED TO ALLOW CUSTOM CSS USING className FOR EACH BUTTON (Signup, Login, and Logout) */
+export default function Button({children, onClick, onSubmit}: ButtonProps) {
     return (
-        <button onClick={onClick} onSubmit={onSubmit} className={className}>
+        <button onClick={onClick} onSubmit={onSubmit} className={styles.button}>
             {children}
             </button> 
     );
