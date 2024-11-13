@@ -20,7 +20,7 @@ const Header = () => {
 
   return (
     <header className={styles.header}>
-      {/* Left Section: Logo and Search Bar */}
+      {/* Logo Section */}
       <div className={styles.leftSection}>
         <h1 className={styles.title}>
           {title.split('').map((letter, index) => (
@@ -29,35 +29,37 @@ const Header = () => {
             </span>
           ))}
         </h1>
-
+        </div>
+        
+        {/* Search Bar Section */}
         <div className={styles.searchContainer}>
           <input
-            type="text"
-            className={styles.searchInput}
-            value={searchQuery}
-            onChange={handleSearchChange}
-            placeholder="Search cars..."
+          type="text"
+          className={styles.searchInput}
+          value={searchQuery}
+          onChange={handleSearchChange}
+          placeholder="Search cars..."
           />
           <button className={styles.searchButton} onClick={handleSearchSubmit}>
             Search
-          </button>
-        </div>
-      </div>
-      <nav className={styles.nav}>
-        <Link href="/login">
-          <Button onClick={() => null}> {/* Make this a login/logout button component using Button component*/}
-            Login
-          </Button>
-        </Link>
-
-        <Link href="/signup">
-          <button className={`${styles.button} ${styles.signupButton}`}> {/* Make this a signup button component using Button component */}
-            Sign Up
-          </button>
-        </Link>
-      </nav>
-    </header >
-  );
-};
+            </button>
+            </div>
+            
+            {/* Login and Signup Section */}
+            <nav className={styles.nav}>
+              <Link href="/login">
+              <button onClick={() => null} className={`${styles.button} ${styles.loginButton}`}>
+                Login
+                </button>
+                </Link>
+                <Link href="/signup">
+                <button className={`${styles.button} ${styles.signupButton}`}> {/* Make this a signup button component using Button component */}
+                  Sign Up
+                  </button>
+                  </Link>
+                  </nav>
+                  </header >
+                  );
+                };
 
 export default Header;

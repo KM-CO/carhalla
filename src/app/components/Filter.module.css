@@ -20,6 +20,8 @@
     background-color: #FFC107; /* Custom color for Filter */
     cursor: pointer;
     transition: all 0.3s ease;
+    width: 105px;
+    max-width: 100%;
 }
 
 .filterButton:hover {
