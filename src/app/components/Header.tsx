@@ -3,7 +3,6 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import styles from './Header.module.css';
-import Button from './Button';
 
 
 const Header = () => {
