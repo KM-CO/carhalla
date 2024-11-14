@@ -2,7 +2,6 @@
 import { useEffect, useState } from "react";
 import Card from "./Card";
 import Link from "next/link";
-import Button from "./Button";
 
 export type Car = {
     _id: string;
@@ -35,7 +34,7 @@ export default function Cars() {
             {cars.map((car: Car) => (
                 <Card key={car._id} id={car._id} model={car.car_model} make={car.make} price={car.price} desc={car.desc} img={car.img} alt={car.car_model + " " + car.make} />
             ))}
-            <Link href="form-submission/add"><Button>Add</Button></Link>
+            <Link href="form-submission/add" className="m-auto justify-self-center text-9xl text-neutral-500 hover:text-neutral-700">+</Link>
         </div >
     );
 }
