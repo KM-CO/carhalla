@@ -46,7 +46,7 @@ export default function Page() {
      */
     return (
         <div className={styles.formContainer}>
-            <Link href="/" className={styles.closeButton}><div className={styles['link-icon']}></div></Link>
+            <Link href="/"><div className={styles['link-icon']}></div></Link>
             <div className={styles.imageContainer}>
                 <Image height={200} width={250} src={(car || DEFAULT_CAR).img} alt={(car || DEFAULT_CAR).car_model + " " + (car || DEFAULT_CAR).make} className={styles.image} priority />
             </div>

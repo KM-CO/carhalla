@@ -79,7 +79,7 @@ export default function Page() {
      */
     return (
         <form className={styles.formContainer} onSubmit={onSubmit}>
-            <Link href="/" className={styles.closeButton}><div className={styles['link-icon']}></div></Link>
+            <Link href="/"><div className={styles['link-icon']}></div></Link>
             <div className={styles.imageContainer}>
                 <Image height={200} width={250} src={img} alt={car_model + " " + make} className={styles.image} priority />
                 <div className={styles.inputFieldContainer}>
