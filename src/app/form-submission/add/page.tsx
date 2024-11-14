@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
+import styles from "../form-submission.module.css"
 
 export default function Page() {
 
@@ -23,9 +24,9 @@ export default function Page() {
             const response = await fetch(`/api/cars`, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',                    
+                    'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ car_model, make, price, img: (img === "" ? initialImg : img), desc }),                
+                body: JSON.stringify({ car_model, make, price, img: (img === "" ? initialImg : img), desc }),
             });
 
             if (!response.ok) {
@@ -50,28 +51,28 @@ export default function Page() {
      * fix appearance when resizing
      */
     return (
-        <form className="grid grid-rows-[min-content] h-full" name="car-add" onSubmit={onSubmit}>
-            <div className="grid grid-cols-2 grid-rows-2">
-                <Link href="/" className="absolute right-5 my-4"><div className="right-5 absolute h-[30px] w-[30px] after:content-[''] after:right-[14px] before:right-[14px] after:h-[30px] after:border-[1px] after:border-black after:bg-black before:bg-black after:rotate-45 after:absolute before:content-[''] before:h-[30px] before:border-[1px] before:border-black before:-rotate-45 before:absolute"></div></Link>
-                <div className="flex flex-col items-center justify-evenly">
-                    <Image height={200} width={250} src={img === "" ?  initialImg : img} alt={car_model + " " + make} className="min-h-[200px] min-w-[250px] max-h-[200px] max-w-[250px] resize-none rounded-3xl border-gray-600 border-2" priority />
-                    <div className="flex w-[300px] p-2 bg-slate-600 justify-center">
-                        <input className="w-[100%] p-1" placeholder="Image link" value={img || ""} onChange={(e) => setImg(e.target.value)}/>
-                    </div>
+        <form className={styles.formContainer} name="car-add" onSubmit={onSubmit}>
+            <Link href="/" className={styles.closeButton}><div className={styles['link-icon']}></div></Link>
+            <div className={styles.imageContainer}>
+                <Image height={200} width={250} src={img === "" ? initialImg : img} alt={car_model + " " + make} className={styles.image} priority />
+                <div className={styles.inputFieldContainer}>
+                    <input className={styles.inputField} placeholder="Image link" value={img || ""} onChange={(e) => setImg(e.target.value)} />
                 </div>
-                <div className="flex flex-col items-center justify-evenly">
-                    <div className="flex w-[300px] p-2 bg-slate-600 justify-center">
-                        <input className="w-[100%] p-1" placeholder="Model" value={car_model || ""} onChange={(e) => setCarModel(e.target.value)} />
-                    </div><div className="flex w-[300px] p-2 bg-slate-600 justify-center">
-                        <input className="w-[100%] p-1" placeholder="Make" value={make || ""} onChange={(e) => setMake(e.target.value)} />
-                    </div><div className="flex w-[300px] p-2 bg-slate-600 justify-center">
-                        <input className="w-[100%] p-1" placeholder="Price" value={price || ""} onChange={(e) => setPrice(parseInt(e.target.value))} />
-                    </div>
+            </div>
+            <div className={styles.formFieldsContainer}>
+                <div className={styles.inputFieldContainer}>
+                    <input className={styles.inputField} placeholder="Model" value={car_model || ""} onChange={(e) => setCarModel(e.target.value)} />
+                </div><div className={styles.inputFieldContainer}>
+                    <input className={styles.inputField} placeholder="Make" value={make || ""} onChange={(e) => setMake(e.target.value)} />
+                </div><div className={styles.inputFieldContainer}>
+                    <input className={styles.inputField} placeholder="Price" value={price || ""} onChange={(e) => setPrice(parseInt(e.target.value))} />
                 </div>
-                <div className="col-span-2 flex flex-col justify-center">
-                    <textarea rows={8} className="mx-auto w-[90%] resize-none border-2 border-slate-400 p-2" value={desc || ""} onChange={(e) => setDesc(e.target.value)} />
-                    <Button>Submit</Button>
+                <div className={styles.textareaContainer}>
+                    <textarea rows={8} className={styles.textareaField} value={desc || ""} onChange={(e) => setDesc(e.target.value)} />
                 </div>
+            </div>
+            <div className={styles.buttonContainer}>
+                <Button>Submit</Button>
             </div>
         </form>
     );
