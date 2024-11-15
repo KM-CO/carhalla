@@ -1,9 +1,8 @@
 "use client"
-import Link from "next/link";
-import Button from "./Button";
 import Image from 'next/image';
 import styles from './Card.module.css';
 import CloseButton from "./CloseButton";
+import View from "./View";
 
 interface CardProps {
   id: string,
@@ -39,7 +38,7 @@ export default function Card({ id, model, make, price, img, alt, desc }: CardPro
 
   return (
     <div className={styles.card} id={id}>
-      <div className={styles['card-price']}>${price}</div>
+      <div className={styles['card-price']}>${Intl.NumberFormat().format(price)}</div>
       <CloseButton onClick={onDeleteClick} />
       <div className={styles['card-image-container']}>
         <Image
@@ -56,7 +55,7 @@ export default function Card({ id, model, make, price, img, alt, desc }: CardPro
         </div>
       </div>
       <div className={styles['card-button-container']}>
-        <Link href={`view/${id}`} className="m-auto"><Button onClick={() => { }}>View</Button></Link>
+        <View id={id} />
       </div>
     </div>
   );

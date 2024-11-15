@@ -1,4 +1,4 @@
-/* Page.module.css */
+/* Form.module.css */
 
 .formContainer {
     display: flex;
@@ -14,13 +14,14 @@
   }
   
   .imageContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    position: relative;
+    height: 400px;
+    width: 100%;
     margin-bottom: 2rem;
   }
   
   .image {
+    object-fit: contain;
     border-radius: 20px;
     border: 2px solid #4a5568;
     transition: transform 0.3s ease-in-out;
@@ -35,8 +36,6 @@
   .inputFieldContainer {
     width: 100%;
     margin-bottom: 1.5rem;
-    padding: 0.5rem 1rem;
-    background-color: #2d3748;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   }
@@ -49,13 +48,14 @@
     font-size: 1rem;
     color: #1a202c;
     background-color: #edf2f7;
-    transition: border-color 0.2s ease-in-out;
+    transition: border-color 0.2s ease-in-out, transform 0.3s ease-in-out;
   }
   
   .inputField:focus {
-    border-color: #4299e1;
+    border-color: var(--secondary-active);
     outline: none;
-    box-shadow: 0 0 8px rgba(66, 153, 225, 0.6);
+    box-shadow: 0 0 8px rgba(from var(--secondary-active) r g b / 0.6);
+    transform: scale(1.02);
   }
   
   .formFieldsContainer {
@@ -70,27 +70,11 @@
     margin: 1.5rem 0;
   }
   
-  .textareaField {
-    width: 100%;
-    padding: 1rem;
-    border-radius: 10px;
-    border: 2px solid #4a5568;
-    background-color: #edf2f7;
-    color: #1a202c;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease-in-out;
-  }
-  
-  .textareaField:focus {
-    border-color: #4299e1;
-    outline: none;
-    transform: scale(1.02);
-  }
-  
   .buttonContainer {
-    display: flex;
+    display: grid;
+    grid: auto / auto auto;
+    gap: 1rem;
     justify-content: center;
     margin-top: 2rem;
   }
-  
   

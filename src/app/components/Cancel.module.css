@@ -1,0 +1,7 @@
+.cancelButton {
+    background-color: #f5b143;
+  }
+  
+  .cancelButton:hover {
+    background-color: #db9e3a;
+  }

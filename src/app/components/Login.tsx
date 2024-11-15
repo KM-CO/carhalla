@@ -5,7 +5,7 @@ import styles from "./Login.module.css";
 export default function Login() {
     return (
         <Link href="/login">
-            <Button onClick={() => null} className={`${styles.button} ${styles.loginButton}`}>
+            <Button onClick={() => null} className={`${styles.loginButton}`}>
                 Login
             </Button>
         </Link>

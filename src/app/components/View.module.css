@@ -1,0 +1,11 @@
+.viewButton {
+    background-color: var(--secondary);
+  }
+  
+  .viewButton:hover {
+    background-color: var(--secondary-hover);
+  }
+
+  .viewButton:active {
+    background-color: var(--secondary-active);
+  }
