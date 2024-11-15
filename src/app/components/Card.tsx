@@ -3,6 +3,7 @@ import Link from "next/link";
 import Button from "./Button";
 import Image from 'next/image';
 import styles from './Card.module.css';
+import CloseButton from "./CloseButton";
 
 interface CardProps {
   id: string,
@@ -21,9 +22,25 @@ interface CardProps {
  * Change button stuff to EDIT when logged in (should be something about it on slides using ternary operators)
  */
 export default function Card({ id, model, make, price, img, alt, desc }: CardProps) {
+  const onDeleteClick = async () => {
+    try {
+      const response = await fetch(`/api/cars/${id}`, {
+        method: 'DELETE',
+      });
+      if (!response.ok) {
+        throw new Error('Network response was not okay');
+      }
+      document.getElementById(id)!.innerHTML = "";
+      document.getElementById(id)!.remove();
+    } catch (error) {
+      console.log(`Error deleting car ${id}:`, error);
+    }
+  };
+
   return (
-    <div className={styles.card}>
+    <div className={styles.card} id={id}>
       <div className={styles['card-price']}>${price}</div>
+      <CloseButton onClick={onDeleteClick} />
       <div className={styles['card-image-container']}>
         <Image
           height={200}

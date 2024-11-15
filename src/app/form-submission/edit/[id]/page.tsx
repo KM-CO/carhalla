@@ -1,10 +1,11 @@
 "use client";
-import Button from "../../../components/Button";
+import Button from "@/app/components/Button";
 import Image from "next/image";
 import Link from "next/link";
 import { FormEvent, useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import styles from "../../form-submission.module.css";
+import CloseButton from "@/app/components/CloseButton";
 
 export default function Page() {
 
@@ -43,6 +44,19 @@ export default function Page() {
         }
     }, [id]);
 
+    const onDeleteClick = async () => {
+        try {
+            const response = await fetch(`/api/items/${id}`, {
+                method: 'DELETE',
+            });
+            if (!response.ok) {
+                throw new Error('Network response was not okay');                
+            }
+            router.push('/');
+        } catch (error) {
+            console.log(`Error deleting car ${id}:`, error);
+        }
+    };
 
     const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -79,7 +93,7 @@ export default function Page() {
      */
     return (
         <form className={styles.formContainer} onSubmit={onSubmit}>
-            <Link href="/"><div className={styles['link-icon']}></div></Link>
+            <Link href="/"><CloseButton /></Link>
             <div className={styles.imageContainer}>
                 <Image height={200} width={250} src={img} alt={car_model + " " + make} className={styles.image} priority />
                 <div className={styles.inputFieldContainer}>
@@ -100,6 +114,7 @@ export default function Page() {
             </div>
             <div className={styles.buttonContainer}>
                 <Button>Submit</Button>
+                <Button onClick={onDeleteClick}>Delete</Button>
             </div>
         </form>
     );

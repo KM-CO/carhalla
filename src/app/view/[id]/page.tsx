@@ -5,6 +5,7 @@ import { useParams } from 'next/navigation';
 import { Car } from "../../components/Cars";
 import { useEffect, useState } from "react";
 import styles from "./page.module.css"
+import CloseButton from "@/app/components/CloseButton";
 
 const DEFAULT_CAR: Car = {
     _id: "",
@@ -46,7 +47,7 @@ export default function Page() {
      */
     return (
         <div className={styles.formContainer}>
-            <Link href="/"><div className={styles['link-icon']}></div></Link>
+            <Link href="/"><CloseButton /></Link>
             <div className={styles.imageContainer}>
                 <Image height={200} width={250} src={(car || DEFAULT_CAR).img} alt={(car || DEFAULT_CAR).car_model + " " + (car || DEFAULT_CAR).make} className={styles.image} priority />
             </div>

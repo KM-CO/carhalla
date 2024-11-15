@@ -29,6 +29,7 @@ export default function Cars() {
         }
         getCars();
     }, []);
+
     return (
         <div className="m-3 grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-3" >
             {cars.map((car: Car) => (

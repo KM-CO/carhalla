@@ -5,6 +5,7 @@ import Link from "next/link";
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import styles from "../form-submission.module.css"
+import CloseButton from "@/app/components/CloseButton";
 
 export default function Page() {
 
@@ -52,7 +53,7 @@ export default function Page() {
      */
     return (
         <form className={styles.formContainer} name="car-add" onSubmit={onSubmit}>
-            <Link href="/"><div className={styles['link-icon']}></div></Link>
+            <Link href="/"><CloseButton /></Link>
             <div className={styles.imageContainer}>
                 <Image height={200} width={250} src={img === "" ? initialImg : img} alt={car_model + " " + make} className={styles.image} priority />
                 <div className={styles.inputFieldContainer}>
@@ -73,6 +74,7 @@ export default function Page() {
             </div>
             <div className={styles.buttonContainer}>
                 <Button>Submit</Button>
+                <Link href="/"><Button>Cancel</Button></Link>
             </div>
         </form>
     );
