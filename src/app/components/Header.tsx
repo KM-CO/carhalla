@@ -1,8 +1,9 @@
 // src/app/Header.tsx
 "use client";
-import Link from 'next/link';
 import { useState } from 'react';
 import styles from './Header.module.css';
+import Login from './Login';
+import Signup from './Signup';
 
 
 const Header = () => {
@@ -28,37 +29,29 @@ const Header = () => {
             </span>
           ))}
         </h1>
-        </div>
-        
-        {/* Search Bar Section */}
-        <div className={styles.searchContainer}>
-          <input
+      </div>
+
+      {/* Search Bar Section */}
+      <div className={styles.searchContainer}>
+        <input
           type="text"
           className={styles.searchInput}
           value={searchQuery}
           onChange={handleSearchChange}
           placeholder="Search cars..."
-          />
-          <button className={styles.searchButton} onClick={handleSearchSubmit}>
-            Search
-            </button>
-            </div>
-            
-            {/* Login and Signup Section */}
-            <nav className={styles.nav}>
-              <Link href="/login">
-              <button onClick={() => null} className={`${styles.button} ${styles.loginButton}`}>
-                Login
-                </button>
-                </Link>
-                <Link href="/signup">
-                <button className={`${styles.button} ${styles.signupButton}`}> {/* Make this a signup button component using Button component */}
-                  Sign Up
-                  </button>
-                  </Link>
-                  </nav>
-                  </header >
-                  );
-                };
+        />
+        <button className={styles.searchButton} onClick={handleSearchSubmit}>
+          Search
+        </button>
+      </div>
+
+      {/* Login and Signup Section */}
+      <nav className={styles.nav}>
+        <Login />
+        <Signup />
+      </nav>
+    </header >
+  );
+};
 
 export default Header;

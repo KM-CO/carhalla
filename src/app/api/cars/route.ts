@@ -1,4 +1,4 @@
-import connectMongoDB from "../../libs/mongodb";
+import { connectMongoDB } from "../../libs/mongodb";
 import Car from "../../models/carSchema";
 import { NextResponse } from "next/server";
 import { NextRequest } from "next/server";

@@ -2,6 +2,8 @@
 import Link from "next/link";
 import Button from "./Button";
 import Image from 'next/image';
+import styles from './Card.module.css';
+import CloseButton from "./CloseButton";
 
 interface CardProps {
   id: string,
@@ -20,21 +22,42 @@ interface CardProps {
  * Change button stuff to EDIT when logged in (should be something about it on slides using ternary operators)
  */
 export default function Card({ id, model, make, price, img, alt, desc }: CardProps) {
+  const onDeleteClick = async () => {
+    try {
+      const response = await fetch(`/api/cars/${id}`, {
+        method: 'DELETE',
+      });
+      if (!response.ok) {
+        throw new Error('Network response was not okay');
+      }
+      document.getElementById(id)!.innerHTML = "";
+      document.getElementById(id)!.remove();
+    } catch (error) {
+      console.log(`Error deleting car ${id}:`, error);
+    }
+  };
+
   return (
-    <div className="mx-auto relative flex flex-grow-0 flex-col h-[300px] min-w-[300px] max-w-[300px] bg-slate-500 content-center rounded-3xl border-2 border-gray-500">
-      <div className="absolute z-10 m-2 border-2 rounded-full p-2 min-w-[100px] text-center bg-white drop-shadow-[0_5px_5px_rgba(0,0,0,0.25)] flex-1">${price}</div>
-      <div className="relative m-auto mb-0 content-center">
-        <div className="absolute h-[200px] w-[250px] duration-1000 opacity-0 hover:opacity-100">
-          <div className="absolute grid grid-rows-2 w-[250px] h-[200px] rounded-3xl bg-[rgb(255,255,255,.5)] opacity-0 hover:opacity-100 duration-200 border-2 border-slate-600">
-          <div className="justify-self-center self-end text-xl">{model} <b>{make}</b></div>
-            <div className="absolute top-[100px] max-h-[100px] h-[98px] px-2 max-w-[250px] w-[246px] line-clamp-4 after:bg-gradient-to-t after:from-white after:via-transparent after:to-transparent after:h-[200px] after:w-[250px] after:content-[''] after:absolute after:bottom-0 after:-left-[2px] rounded-b-3xl after:pointer-events-none after:border-slate-600 after:border-2 after:rounded-b-3xl">
-              {desc}
-            </div>
-          </div>
+    <div className={styles.card} id={id}>
+      <div className={styles['card-price']}>${price}</div>
+      <CloseButton onClick={onDeleteClick} />
+      <div className={styles['card-image-container']}>
+        <Image
+          height={200}
+          width={250}
+          src={img}
+          alt={alt}
+          className={styles['card-image']}
+          priority
+        />
+        <div className={styles['card-info-overlay']}>
+          <div className={styles['card-model-make']}>{model} <b>{make}</b></div>
+          <div className={styles['card-desc']}>{desc}</div>
         </div>
-        <Image height={200} width={250} src={img} alt={alt} className="min-h-[200px] min-w-[250px] max-h-[200px] max-w-[250px] resize-none rounded-3xl border-gray-600 border-2" priority />
       </div>
-      <Link href={`view/${id}`} className="m-auto"><Button onClick={() => {}}>View</Button></Link>
+      <div className={styles['card-button-container']}>
+        <Link href={`view/${id}`} className="m-auto"><Button onClick={() => { }}>View</Button></Link>
+      </div>
     </div>
   );
 }

@@ -1,0 +1,33 @@
+
+  
+  .link {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    z-index: 20;
+  }
+  
+  .link::before, .link::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: #f7fafc;
+    top: 50%;
+    left: 0;
+  }
+  
+  .link::before {
+    transform: rotate(45deg);
+  }
+  
+  .link::after {
+    transform: rotate(-45deg);
+  }
+  
+  .link:hover::after, .link:hover::before {
+    background-color: #878787;
+  }
