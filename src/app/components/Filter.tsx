@@ -101,6 +101,11 @@ const Filter: React.FC<FilterProps> = ({ onModelFilterChange, onYearFilterChange
         <i className="fas fa-undo"></i>
         {/*Undo icon*/}
         </button>
+      {/* Reset Filters w/ Font Awesome Icon*/}
+      <button className={styles.resetButton} onClick={onResetFilters}>
+      <i className="fas fa-undo"></i>
+        {/* Undo icon */}
+        </button>
     </div>
   );
 };
