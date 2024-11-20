@@ -9,7 +9,7 @@ export default function Page() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSignup = async (e: FormEvent) => {
+  const handleSignup = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       const response = await fetch(`/api/users/signup`, {
@@ -35,7 +35,7 @@ export default function Page() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100" onSubmit={handleSignup}>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
       <h2 className="text-3xl font-bold mb-6">Create an Account</h2>
       <form onSubmit={handleSignup} className="w-full max-w-md bg-white p-8 rounded-lg shadow-md">
         <div className="mb-4">
@@ -76,7 +76,7 @@ export default function Page() {
             className="mt-1 px-3 py-2 border border-gray-300 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
           />
-        </div> 
+        </div>
         <button
           type="submit"
           className="w-full px-4 py-2 bg-green-500 text-white font-semibold rounded-md hover:bg-green-600 transition duration-200 ease-in-out"

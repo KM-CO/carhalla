@@ -38,7 +38,7 @@ export default function Form({ readOnly }: InputHTMLAttributes<HTMLInputElement>
                 setPrice(carData.price || 0);
                 setImg(carData.img || "");
                 setDesc(carData.desc || "");
-                setImgPreview(carData.img || "");
+                setImgPreview(carData.img || noImage);
             } catch (error) {
                 console.log(`Error getting car ${id}:`, error);
             }

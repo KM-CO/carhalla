@@ -12,6 +12,7 @@ export async function POST(request: NextRequest) {
     const { username, email, password } = await request.json();
     const hashedPassword = await bcrypt.hash(password, 5);
     const newUser = { username, email, password: hashedPassword };
+    await connectMongoDB();
     await User.create(newUser);
     return NextResponse.json({ message: "User added successfully" }, { status: 201 });
 }
