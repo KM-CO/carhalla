@@ -11,7 +11,7 @@ const Header = () => {
 
   const [searchQuery, setSearchQuery] = useState('');
   const title = "Carhalla";
-  const { data: session, status, update } = useSession()
+  const { data: session, status } = useSession()
   const loggedInUser = session?.user;
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
