@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from 'react';
+import React, { FormEvent, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
@@ -9,9 +9,10 @@ export default function Page() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSignup = async () => {
+  const handleSignup = async (e: FormEvent) => {
+    e.preventDefault();
     try {
-      const response = await fetch(`/api/users`, {
+      const response = await fetch(`/api/users/signup`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -27,7 +28,7 @@ export default function Page() {
       setEmail("");
       setPassword("");
 
-      router.push('/');
+      router.push("/");
     } catch (error) {
       console.error('Error in creating user', error);
     }
@@ -75,7 +76,7 @@ export default function Page() {
             className="mt-1 px-3 py-2 border border-gray-300 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
           />
-        </div>
+        </div> 
         <button
           type="submit"
           className="w-full px-4 py-2 bg-green-500 text-white font-semibold rounded-md hover:bg-green-600 transition duration-200 ease-in-out"

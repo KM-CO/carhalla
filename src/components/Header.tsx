@@ -11,8 +11,8 @@ const Header = () => {
 
   const [searchQuery, setSearchQuery] = useState('');
   const title = "Carhalla";
-  const session = useSession();
-  const loggedInUser = session?.data?.user;
+  const { data: session, status, update } = useSession()
+  const loggedInUser = session?.user;
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(event.target.value);
@@ -49,7 +49,7 @@ const Header = () => {
         </button>
       </div>
       <nav className={styles.nav}>
-        { session?.status === "authenticated" ? <>Hello, {loggedInUser?.name} <Logout /></> :
+        { status === "authenticated" ? <>Hello, {loggedInUser?.name} <Logout /></> :
           <><Login />
           <Signup /></>}
       </nav >
