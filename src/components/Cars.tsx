@@ -46,7 +46,7 @@ export default function Cars({ selectedModel, selectedYear, selectedPrice }: Car
   }, [selectedModel, selectedYear, selectedPrice]);
 
     return (
-        <div className="m-3 grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-3 grid-rows-2 items-center" >
+        <div className="m-3 grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-3 grid-rows-[repeat(auto-fill,minmax(280px,280px))] items-center" >
             {cars.map((car: Car) => (
                 <Card key={car._id} id={car._id} model={car.car_model} make={car.make} price={car.price} desc={car.desc} img={car.img} alt={car.car_model + " " + car.make} />
             ))}

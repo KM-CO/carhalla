@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import bcrypt from "bcrypt";
-import connectMongoDB from "../libs/mongodb"; 
+import connectMongoDB from "../../libs/mongodb"; 
 
 
 const getUserByUsername = async (username: string) => {

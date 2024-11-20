@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import bcrypt from 'bcrypt';
-import connectMongoDB from '../libs/mongodb'; 
+import connectMongoDB from '../../libs/mongodb'; 
 
 export default async function signupHandler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'POST') {

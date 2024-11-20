@@ -1,20 +1,40 @@
 "use client";
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
-const SignupPage: React.FC = () => {
+export default function Page() {
+  const router = useRouter();
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSignup = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Add signup logic here
-    console.log('Signup with:', { username, email, password });
+  const handleSignup = async () => {
+    try {
+      const response = await fetch(`/api/users`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, email, password }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok')
+      }
+
+      setUsername("");
+      setEmail("");
+      setPassword("");
+
+      router.push('/');
+    } catch (error) {
+      console.error('Error in creating user', error);
+    }
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100" onSubmit={handleSignup}>
       <h2 className="text-3xl font-bold mb-6">Create an Account</h2>
       <form onSubmit={handleSignup} className="w-full max-w-md bg-white p-8 rounded-lg shadow-md">
         <div className="mb-4">
@@ -74,5 +94,3 @@ const SignupPage: React.FC = () => {
     </div>
   );
 };
-
-export default SignupPage;

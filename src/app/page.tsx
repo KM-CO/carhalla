@@ -1,36 +1,21 @@
-"use client";
-import { useState } from "react";
-import Cars from "./components/Cars";
-import Filter from "./components/Filter";
-import Header from "./components/Header";
+"use server";
+import { auth } from "@/auth";
+import Header from "../components/Header";
+import HomeBody from "@/components/HomeBody";
+import { SessionProvider } from "next-auth/react";
 
-export default function Home() {
-  const [selectedModel, setSelectedModel] = useState<string | null>(null);
-  const [selectedYear, setSelectedYear] = useState<string | null>(null);
-  const [selectedPrice, setSelectedPrice] = useState<string | null>(null);
+export default async function Home() {
 
-  const resetFilters = () => {
-    setSelectedModel(null);
-    setSelectedYear(null);
-    setSelectedPrice(null);
-  };
+  const session = await auth();
 
   return (
-    <div className="grid grid-rows-[min-content] h-full">
-      <Header />
-      <div className="grid grid-cols-[min-content_auto]">
-        <Filter
-          onModelFilterChange={setSelectedModel}
-          onYearFilterChange={setSelectedYear}
-          onPriceFilterChange={setSelectedPrice}
-          onResetFilters={resetFilters}
-        />
-        <Cars
-          selectedModel={selectedModel}
-          selectedYear={selectedYear}
-          selectedPrice={selectedPrice}
-        />
+    <SessionProvider session={session}>
+      <div className="grid grid-rows-[min-content] h-full">
+        <Header />
+        <div className="grid grid-cols-[min-content_auto]">
+          <HomeBody />
+        </div>
       </div>
-    </div>
+    </SessionProvider>
   );
 }

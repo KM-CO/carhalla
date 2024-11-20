@@ -1,5 +1,5 @@
-import { connectMongoDB } from "../../../libs/mongodb";
-import Car from "../../../models/carSchema";
+import { connectMongoDB } from "@/libs/mongodb";
+import Car from "@/models/carSchema";
 import { NextResponse } from "next/server";
 import { NextRequest } from "next/server";
 import mongoose from "mongoose";

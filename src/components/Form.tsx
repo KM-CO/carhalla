@@ -4,7 +4,7 @@ import Link from "next/link";
 import { FormEvent, InputHTMLAttributes, useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import styles from "./Form.module.css";
-import CloseButton from "@/app/components/CloseButton";
+import CloseButton from "@/components/CloseButton";
 import noImage from "../images/no-image.svg"
 import Submit from "./Submit";
 import Delete from "./Delete";
@@ -87,7 +87,7 @@ export default function Form({ readOnly }: InputHTMLAttributes<HTMLInputElement>
 
                 router.push('/');
             } catch (error) {
-                console.error('Error in updating item', error)
+                console.error('Error in updating car', error)
             }
         } else {
             e.preventDefault();
@@ -113,7 +113,7 @@ export default function Form({ readOnly }: InputHTMLAttributes<HTMLInputElement>
 
                 router.push('/');
             } catch (error) {
-                console.error('Error in creating item', error);
+                console.error('Error in creating car', error);
             }
         }
     };

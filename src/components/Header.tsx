@@ -1,14 +1,18 @@
-// src/app/Header.tsx
 "use client";
 import { useState } from 'react';
 import styles from './Header.module.css';
+import { useSession } from 'next-auth/react';
 import Login from './Login';
 import Signup from './Signup';
+import Logout from './Logout';
 
 
 const Header = () => {
+
   const [searchQuery, setSearchQuery] = useState('');
   const title = "Carhalla";
+  const session = useSession();
+  const loggedInUser = session?.data?.user;
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(event.target.value);
@@ -44,12 +48,11 @@ const Header = () => {
           Search
         </button>
       </div>
-
-      {/* Login and Signup Section */}
       <nav className={styles.nav}>
-        <Login />
-        <Signup />
-      </nav>
+        { session?.status === "authenticated" ? <>Hello, {loggedInUser?.name} <Logout /></> :
+          <><Login />
+          <Signup /></>}
+      </nav >
     </header >
   );
 };
