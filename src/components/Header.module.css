@@ -68,6 +68,21 @@
   transform: scale(1.5);
 }
 
+.greeting {
+  font-size: 1.2rem; /* Adjust size */
+  font-weight: bold;
+  color: #68d391; /* Light green for emphasis */
+  padding: 0.5rem;
+  border: 1px solid #68d391; /* Optional border */
+  border-radius: 5px;
+  background-color: #1a202c; /* Match the header background */
+  transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.greeting:hover {
+  color: #38a169; /* Darker green on hover */
+}
+
 /* Responsive layout for small screens */
 @media (max-width: 768px) {
   .header {
