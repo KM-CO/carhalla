@@ -165,10 +165,10 @@ export default function Form({ readOnly }: InputHTMLAttributes<HTMLInputElement>
                     <textarea readOnly={readOnly} rows={8} className={styles.inputField} value={desc || ""} onChange={(e) => setDesc(e.target.value)} />
                 </div>
             </div>
-            <div className={styles.buttonContainer}>
+            {!readOnly ? <div className={styles.buttonContainer}>
                 <Submit />
                 {id ? <Delete onClick={onDeleteClick} /> : <Cancel />}
-            </div>
+            </div> : <div>Contact/Buy button</div>}
         </form>
     );
 }
