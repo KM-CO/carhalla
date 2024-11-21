@@ -5,7 +5,6 @@ import NextAuth from "next-auth";
 const { auth } = NextAuth(authConfig);
 
 export async function middleware(request: NextRequest) {
-    const { nextUrl } = request;
     const session = await auth();
     const isAuthenticated = !!session?.user;
 
@@ -21,8 +20,8 @@ export async function middleware(request: NextRequest) {
             return NextResponse.redirect(new URL(reqUrl.pathname.replace("view", "car"), request.url))
         }
     } else {
-        if (!reqUrl.pathname.startsWith("/view")
-            && !(reqUrl.pathname == "/signup" || reqUrl.pathname == "/login" || reqUrl.pathname == "/api/cars")) {
+        if (!reqUrl.pathname.startsWith("/view") && !reqUrl.pathname.startsWith("/api/auth/")
+            && !(reqUrl.pathname == "/signup" || reqUrl.pathname == "/login" || reqUrl.pathname == "/api/cars" || reqUrl.pathname == "/api/users/signup")) {
             return NextResponse.redirect(new URL("/", request.url));
         }
     }
