@@ -5,7 +5,7 @@ import connectMongoDB from "../../libs/mongodb";
 
 const getUserByUsername = async (username: string) => {
   const client = await connectMongoDB;
-  const db = client.db("yourDatabaseName"); 
+  const db = client.db("carhalla"); 
   return db.collection("users").findOne({ username });
 };
 
