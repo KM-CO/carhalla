@@ -8,16 +8,33 @@ export async function middleware(request: NextRequest) {
     const { nextUrl } = request;
     const session = await auth();
     const isAuthenticated = !!session?.user;
-    console.log(isAuthenticated, nextUrl.pathname);
 
     const reqUrl = new URL(request.url);
-    if (!isAuthenticated && reqUrl.pathname !=="/" ){
-        return NextResponse.redirect(new URL("/", request.url));        
+    if (isAuthenticated) {
+        if (reqUrl.pathname.startsWith('/login')) {
+            return NextResponse.redirect(new URL('/', request.url))
+        }
+        if (reqUrl.pathname.startsWith('/signup')) {
+            return NextResponse.redirect(new URL('/', request.url))
+        }
+        if (reqUrl.pathname.startsWith('/view')) {
+            return NextResponse.redirect(new URL(reqUrl.pathname.replace("view", "car"), request.url))
+        }
+    } else {
+        if (!reqUrl.pathname.startsWith("/view")
+            && !(reqUrl.pathname == "/signup" || reqUrl.pathname == "/login" || reqUrl.pathname == "/api/cars")) {
+            return NextResponse.redirect(new URL("/", request.url));
+        }
     }
     return NextResponse.next();
 }
 
 export const config = {
     matcher: [
+        "/car/:id*",
+        "/view/:id*",
+        "/login",
+        "/signup",
+        "/api/:path*"
     ]
 };

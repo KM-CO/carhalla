@@ -1,26 +1,39 @@
 "use client";
 
 import React, { useState } from "react";
-import styles from "./LoginForm.module.css";
+import styles from "./LoginSignupForms.module.css";
 import { useRouter } from "next/navigation";
 import { doCredentialLogin } from "./LoginFuncs";
 
 
 const LoginForm: React.FC = () => {
+
   const router = useRouter();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState<string | null>(null); // Error message state
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    setErrorMessage(null); // Clear any previous error message
     const form = new FormData(e.currentTarget);
-    await doCredentialLogin(form);
-    router.push("/");
+
+    const response = await doCredentialLogin(form);
+
+    if (response.error) {
+      // Display error message from the response
+      setErrorMessage(response.error);
+    } else {
+      // Redirect to home page on successful login
+      router.push("/");
+    }
   }
 
   return (
     <form onSubmit={handleSubmit} className={styles.formContainer}>
       <h2 className={styles.title}>Login</h2>
+
+      {errorMessage && <p className={styles.error}>{errorMessage}</p>} {/* Error message */}
 
       <div className={styles.inputGroup}>
         <label className={styles.label}>Username:</label>

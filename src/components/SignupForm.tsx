@@ -1,49 +1,56 @@
 "use client";
-import React, { useState } from "react";
-import styles from "./SignupForm.module.css";
+import React, { FormEvent, useState } from "react";
+import styles from "./LoginSignupForms.module.css";
 import { useRouter } from "next/navigation";
 
 const SignupForm: React.FC = () => {
-
+  
   const router = useRouter();
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  const handleSubmit = async () => {
+  const handleSignup = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setErrorMessage(null);
+
     try {
-      const response = await fetch(`/api/users`, {
-        method: 'POST',
+      const response = await fetch(`/api/users/signup`, {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ username, email, password }),
       });
 
       if (!response.ok) {
-        throw new Error('Network response was not ok')
+        const data = await response.json();
+        throw new Error(data.message || "Something went wrong");
       }
 
       setUsername("");
       setEmail("");
       setPassword("");
 
-      router.push('/');
-    } catch (error) {
-      console.error('Error in creating user', error);
+      router.push("/");
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        setErrorMessage(error.message);
+        console.error("Error in creating user:", error.message);
+      } else {
+        setErrorMessage("An unexpected error occurred. Please try again.");
+        console.error("Error in creating user:", error);
+      }
     }
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className={styles.formContainer}
-    >
+    <form onSubmit={handleSignup} className={styles.formContainer}>
+      <h2 className={styles.title}>Create an Account</h2>
+      {errorMessage && <p className={styles.error}>{errorMessage}</p>}
       <div className={styles.inputGroup}>
-        <label
-          htmlFor="username"
-          className={styles.label}
-        >
+        <label htmlFor="username" className={styles.label}>
           Username
         </label>
         <input
@@ -56,10 +63,7 @@ const SignupForm: React.FC = () => {
         />
       </div>
       <div className={styles.inputGroup}>
-        <label
-          htmlFor="email"
-          className={styles.label}
-        >
+        <label htmlFor="email" className={styles.label}>
           Email
         </label>
         <input
@@ -72,10 +76,7 @@ const SignupForm: React.FC = () => {
         />
       </div>
       <div className={styles.inputGroup}>
-        <label
-          htmlFor="password"
-          className={styles.label}
-        >
+        <label htmlFor="password" className={styles.label}>
           Password
         </label>
         <input
@@ -87,10 +88,7 @@ const SignupForm: React.FC = () => {
           required
         />
       </div>
-      <button
-        type="submit"
-        className={styles.submitButton}
-      >
+      <button type="submit" className={styles.submitButton}>
         Sign Up
       </button>
     </form>

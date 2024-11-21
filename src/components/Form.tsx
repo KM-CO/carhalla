@@ -38,7 +38,7 @@ export default function Form({ readOnly }: InputHTMLAttributes<HTMLInputElement>
                 setPrice(carData.price || 0);
                 setImg(carData.img || "");
                 setDesc(carData.desc || "");
-                setImgPreview(carData.img || "");
+                setImgPreview(carData.img || noImage);
             } catch (error) {
                 console.log(`Error getting car ${id}:`, error);
             }
@@ -165,10 +165,10 @@ export default function Form({ readOnly }: InputHTMLAttributes<HTMLInputElement>
                     <textarea readOnly={readOnly} rows={8} className={styles.inputField} value={desc || ""} onChange={(e) => setDesc(e.target.value)} />
                 </div>
             </div>
-            <div className={styles.buttonContainer}>
+            {!readOnly ? <div className={styles.buttonContainer}>
                 <Submit />
                 {id ? <Delete onClick={onDeleteClick} /> : <Cancel />}
-            </div>
+            </div> : <div>Contact/Buy button</div>}
         </form>
     );
 }

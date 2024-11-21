@@ -1,4 +1,5 @@
-import clientPromise from "@/libs/mongodb";
+import clientPromise, { connectMongoDB } from "@/libs/mongodb";
+import Car from "@/models/carSchema";
 import { NextResponse } from "next/server";
 import { NextRequest } from "next/server";
 
@@ -39,4 +40,12 @@ export async function GET(request: NextRequest) {
 
   // Return the results
   return NextResponse.json({ cars });
+}
+
+export async function POST(request: NextRequest) {
+  // Handle POST requests
+  const { car_model, make, price, img, desc } = await request.json();
+  await connectMongoDB();
+  await Car.create({ car_model, make, price, img, desc });
+  return NextResponse.json({ message: "Car added successfully" }, { status: 201 });
 }
