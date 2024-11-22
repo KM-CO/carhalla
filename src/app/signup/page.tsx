@@ -23,7 +23,7 @@ export default function Page() {
           </button>
         </Link>
         <Link href="/login">
-          <button className={styles.linkButton}>Already have an account? Log In</button>
+          <button className={styles.signupButton}>Already have an account? Log In</button>
         </Link>
       </div>
     </div>
