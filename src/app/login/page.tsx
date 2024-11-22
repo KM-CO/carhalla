@@ -1,68 +1,14 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import Link from "next/link";
 import styles from "./LoginPage.module.css";
-import { doCredentialLogin } from "@/components/LoginFuncs";
-import { useRouter } from "next/navigation";
+import LoginForm from "@/components/LoginForm";
 
-const LoginPage = () => {
-  const router = useRouter();
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [errorMessage, setErrorMessage] = useState<string | null>(null); // Error message state
-
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    setErrorMessage(null); // Clear any previous error message
-    const form = new FormData(e.currentTarget);
-
-    const response = await doCredentialLogin(form);
-
-    if (response.error) {
-      // Display error message from the response
-      setErrorMessage(response.error);
-    } else {
-      // Redirect to home page on successful login
-      router.push("/");
-    }
-  }
+const Page = () => {
 
   return (
     <div className={styles.pageContainer}>
-      <form onSubmit={handleSubmit} className={styles.formContainer}>
-        <h2 className={styles.title}>Login</h2>
-
-        {errorMessage && <p className={styles.error}>{errorMessage}</p>} {/* Error message */}
-
-        <div className={styles.inputGroup}>
-          <label className={styles.label}>Username:</label>
-          <input
-            type="text"
-            name="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-            className={styles.input}
-          />
-        </div>
-
-        <div className={styles.inputGroup}>
-          <label className={styles.label}>Password:</label>
-          <input
-            type="password"
-            name="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            className={styles.input}
-          />
-        </div>
-
-        <button type="submit" className={styles.submitButton}>
-          Login
-        </button>
-      </form>
-
+      <LoginForm />
       <div className={styles.linksContainer}>
         <Link href="/">
           <button className={styles.iconButton}>
@@ -84,4 +30,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default Page;

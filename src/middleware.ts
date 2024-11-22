@@ -5,21 +5,35 @@ import NextAuth from "next-auth";
 const { auth } = NextAuth(authConfig);
 
 export async function middleware(request: NextRequest) {
-    const { nextUrl } = request;
     const session = await auth();
     const isAuthenticated = !!session?.user;
-    console.log(isAuthenticated, nextUrl.pathname);
 
     const reqUrl = new URL(request.url);
-    if (!isAuthenticated && reqUrl.pathname !=="/" ){
-        return NextResponse.redirect(new URL("/", request.url));        
+    if (isAuthenticated) {
+        if (reqUrl.pathname.startsWith('/login')) {
+            return NextResponse.redirect(new URL('/', request.url))
+        }
+        if (reqUrl.pathname.startsWith('/signup')) {
+            return NextResponse.redirect(new URL('/', request.url))
+        }
+        if (reqUrl.pathname.startsWith('/view')) {
+            return NextResponse.redirect(new URL(reqUrl.pathname.replace("view", "car"), request.url))
+        }
+    } else {
+        if (!reqUrl.pathname.startsWith("/view") && !reqUrl.pathname.startsWith("/api/auth/")
+            && !(reqUrl.pathname == "/signup" || reqUrl.pathname == "/login" || reqUrl.pathname == "/api/cars" || reqUrl.pathname == "/api/users/signup")) {
+            return NextResponse.redirect(new URL("/", request.url));
+        }
     }
     return NextResponse.next();
 }
 
 export const config = {
     matcher: [
-        "/car/:id*", 
+        "/car/:id*",
         "/view/:id*",
+        "/login",
+        "/signup",
+        "/api/:path*"
     ]
-  };
+};

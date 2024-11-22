@@ -1,98 +1,14 @@
 "use client";
-import React, { FormEvent, useState } from "react";
+import React from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import styles from "./SignupPage.module.css";
+import SignupForm from "@/components/SignupForm";
 
 export default function Page() {
-  const router = useRouter();
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
-
-  const handleSignup = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setErrorMessage(null);
-
-    try {
-      const response = await fetch(`/api/users/signup`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ username, email, password }),
-      });
-
-      if (!response.ok) {
-        const data = await response.json();
-        throw new Error(data.message || "Something went wrong");
-      }
-
-      setUsername("");
-      setEmail("");
-      setPassword("");
-
-      router.push("/");
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        setErrorMessage(error.message);
-        console.error("Error in creating user:", error.message);
-      } else {
-        setErrorMessage("An unexpected error occurred. Please try again.");
-        console.error("Error in creating user:", error);
-      }
-    }
-  };
 
   return (
     <div className={styles.pageContainer}>
-      <h2 className={styles.title}>Create an Account</h2>
-      <form onSubmit={handleSignup} className={styles.formContainer}>
-        {errorMessage && <p className={styles.error}>{errorMessage}</p>}
-        <div className={styles.inputGroup}>
-          <label htmlFor="username" className={styles.label}>
-            Username
-          </label>
-          <input
-            type="text"
-            id="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            className={styles.input}
-            required
-          />
-        </div>
-        <div className={styles.inputGroup}>
-          <label htmlFor="email" className={styles.label}>
-            Email
-          </label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className={styles.input}
-            required
-          />
-        </div>
-        <div className={styles.inputGroup}>
-          <label htmlFor="password" className={styles.label}>
-            Password
-          </label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className={styles.input}
-            required
-          />
-        </div>
-        <button type="submit" className={styles.submitButton}>
-          Sign Up
-        </button>
-      </form>
+      <SignupForm />
       <div className={styles.linksContainer}>
         <Link href="/">
           <button className={styles.iconButton}>
@@ -107,7 +23,7 @@ export default function Page() {
           </button>
         </Link>
         <Link href="/login">
-          <button className={styles.linkButton}>{`Already have an account? Log In`}</button>
+          <button className={styles.linkButton}>Already have an account? Log In</button>
         </Link>
       </div>
     </div>

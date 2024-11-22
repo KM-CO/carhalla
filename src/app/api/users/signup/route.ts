@@ -14,9 +14,14 @@ export async function POST(request: NextRequest) {
         await connectMongoDB();
 
         // Check if the email already exists
-        const existingUser = await User.findOne({ email });
-        if (existingUser) {
+        const existingEmail = await User.findOne({ email });
+        if (existingEmail) {
             return NextResponse.json({ message: "Email is already in use!" }, { status: 409 });
+        }
+
+        const existingUser = await User.findOne({ username });
+        if (existingUser) {
+            return NextResponse.json({ message: "Username is already in use!" }, { status: 409 });
         }
 
         // Create the new user
