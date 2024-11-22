@@ -1,26 +1,20 @@
-"use client"
 import Image from 'next/image';
 import styles from './Card.module.css';
 import CloseButton from "./CloseButton";
 import View from "./View";
 
 interface CardProps {
-  id: string,
-  model: string,
-  make: string,
-  price: number,
-  img: string,
-  alt: string,
-  desc: string,
+  id: string;
+  model: string;
+  make: string;
+  price: number;
+  img: string;
+  alt: string;
+  desc: string;
+  isLoggedIn: boolean; 
 }
 
-/** TO DO
- * Add functionality to clicking card/image
- * Add functionality to clicking BUY button (should take to same page as clicking anywhere else)
- * Add fonts and more CSS
- * Change button stuff to EDIT when logged in (should be something about it on slides using ternary operators)
- */
-export default function Card({ id, model, make, price, img, alt, desc }: CardProps) {
+export default function Card({ id, model, make, price, img, alt, desc, isLoggedIn }: CardProps) {
   const onDeleteClick = async () => {
     try {
       const response = await fetch(`/api/cars/${id}`, {
@@ -29,7 +23,6 @@ export default function Card({ id, model, make, price, img, alt, desc }: CardPro
       if (!response.ok) {
         throw new Error('Network response was not okay');
       }
-      document.getElementById(id)!.innerHTML = "";
       document.getElementById(id)!.remove();
     } catch (error) {
       console.log(`Error deleting car ${id}:`, error);
@@ -39,7 +32,7 @@ export default function Card({ id, model, make, price, img, alt, desc }: CardPro
   return (
     <div className={styles.card} id={id}>
       <div className={styles['card-price']}>${Intl.NumberFormat().format(price)}</div>
-      <CloseButton onClick={onDeleteClick} />
+      {isLoggedIn && <CloseButton onClick={onDeleteClick} />} 
       <div className={styles['card-image-container']}>
         <Image
           height={200}
