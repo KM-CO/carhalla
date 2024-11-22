@@ -52,17 +52,17 @@ const Header = () => {
       <nav className={styles.nav}>
         {status === "authenticated" ? (
           <>
-          <span className={styles.greeting}>Hello, {loggedInUser?.name}</span>
-          <Logout />
+            <span className={styles.greeting}>Hello, {loggedInUser?.name}</span>
+            <Logout />
           </>
-          ) : (
+        ) : (
           <>
-          <Login />
-          <Signup />
+            <Login />
+            <Signup />
           </>
         )}
-        </nav>
-        </header >
-        );
-      };
-  export default Header;
+      </nav>
+    </header >
+  );
+};
+export default Header;

@@ -91,7 +91,11 @@
     text-transform: uppercase;
     letter-spacing: 1.2px;
     align-items: center;
-    
+}
+
+.resetButton:hover {
+    background: linear-gradient(360deg, #f44336, #e53935);
+    box-shadow: 0 12px 24px rgba(229, 57, 53, 0.6);
 }
 
 @keyframes spin {
@@ -103,8 +107,10 @@
     }
 }
 
-.resetButton:hover {
-    background: linear-gradient(360deg, #f44336, #e53935);
-    box-shadow: 0 12px 24px rgba(229, 57, 53, 0.6);
+.resetIcon {
+    transition: all 0.3s ease;
+}
+
+.resetIcon:hover {
     animation: spin 0.5s ease-in-out;
 }

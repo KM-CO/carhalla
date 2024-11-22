@@ -8,6 +8,7 @@ export async function middleware(request: NextRequest) {
     const session = await auth();
     const isAuthenticated = !!session?.user;
 
+    const res = NextResponse.next()
     const reqUrl = new URL(request.url);
     if (isAuthenticated) {
         if (reqUrl.pathname.startsWith('/login')) {
@@ -20,12 +21,20 @@ export async function middleware(request: NextRequest) {
             return NextResponse.redirect(new URL(reqUrl.pathname.replace("view", "car"), request.url))
         }
     } else {
-        if (!reqUrl.pathname.startsWith("/view") && !reqUrl.pathname.startsWith("/api/auth/")
-            && !(reqUrl.pathname == "/signup" || reqUrl.pathname == "/login" || reqUrl.pathname == "/api/cars" || reqUrl.pathname == "/api/users/signup")) {
+        if (!reqUrl.pathname.startsWith("/view") && !reqUrl.pathname.startsWith("/api/auth/") && !reqUrl.pathname.startsWith("/api/cars")
+            && !(reqUrl.pathname == "/signup" || reqUrl.pathname == "/login" || reqUrl.pathname == "/api/users/signup")) {
             return NextResponse.redirect(new URL("/", request.url));
         }
+    
+        res.headers.append('Access-Control-Allow-Credentials', "true");
+        res.headers.append('Access-Control-Allow-Origin', 'https://localhost:3000'); // replace this your actual origin
+        res.headers.append('Access-Control-Allow-Methods', 'GET');
+        res.headers.append(
+            'Access-Control-Allow-Headers',
+            'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
+        );
     }
-    return NextResponse.next();
+    return res;
 }
 
 export const config = {

@@ -44,12 +44,12 @@ const Filter: React.FC<FilterProps> = ({ onModelFilterChange, onYearFilterChange
       {isModelDropdownOpen && (
         <div className={styles.dropdownContainer}>
           {carModels.map((model, index) => (
-            <div 
-              key={index} 
-              className={styles.dropdownItem} 
-              onClick={() => { 
+            <div
+              key={index}
+              className={styles.dropdownItem}
+              onClick={() => {
                 onModelFilterChange(model === "All Models" ? null : model);
-                setIsModelDropdownOpen(false); 
+                setIsModelDropdownOpen(false);
               }}
             >
               {model}
@@ -63,12 +63,12 @@ const Filter: React.FC<FilterProps> = ({ onModelFilterChange, onYearFilterChange
       {isYearDropdownOpen && (
         <div className={styles.dropdownContainer}>
           {carYears.map((year, index) => (
-            <div 
-              key={index} 
-              className={styles.dropdownItem} 
-              onClick={() => { 
+            <div
+              key={index}
+              className={styles.dropdownItem}
+              onClick={() => {
                 onYearFilterChange(year === "All Years" ? null : year);
-                setIsYearDropdownOpen(false); 
+                setIsYearDropdownOpen(false);
               }}
             >
               {year}
@@ -82,12 +82,12 @@ const Filter: React.FC<FilterProps> = ({ onModelFilterChange, onYearFilterChange
       {isPriceDropdownOpen && (
         <div className={styles.dropdownContainer}>
           {carPrices.map((price, index) => (
-            <div 
-              key={index} 
-              className={styles.dropdownItem} 
-              onClick={() => { 
+            <div
+              key={index}
+              className={styles.dropdownItem}
+              onClick={() => {
                 onPriceFilterChange(price === "All Prices" ? null : price);
-                setIsPriceDropdownOpen(false); 
+                setIsPriceDropdownOpen(false);
               }}
             >
               {price}
@@ -97,9 +97,10 @@ const Filter: React.FC<FilterProps> = ({ onModelFilterChange, onYearFilterChange
       )}
       {/* Reset Filters w/ Font Awesome Icon*/}
       <button className={styles.resetButton} onClick={onResetFilters}>
-      <i className="fas fa-undo"></i>
+        Reset&nbsp;
+        <i className={`fas fa-undo ${styles.resetIcon}`}></i>
         {/* Undo icon */}
-        </button>
+      </button>
     </div>
   );
 };
