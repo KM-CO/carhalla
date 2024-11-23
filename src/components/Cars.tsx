@@ -1,6 +1,5 @@
 "use client";
 import { useState, useEffect } from "react";
-import { useSession } from "next-auth/react";
 import Card from "./Card";
 import Link from "next/link";
 import noImage from "@/images/no-image.svg";
@@ -22,9 +21,6 @@ interface CarsProps {
 }
 
 export default function Cars({ selectedModel, selectedYear, selectedPrice }: CarsProps) {
-  const { data: session } = useSession(); 
-  const isLoggedIn = !!session; 
-
   const [cars, setCars] = useState<Car[]>([]);
 
   useEffect(() => {
@@ -58,7 +54,6 @@ export default function Cars({ selectedModel, selectedYear, selectedPrice }: Car
           desc={car.desc}
           img={car?.img || noImage}
           alt={`${car.car_model} ${car.make}`}
-          isLoggedIn={isLoggedIn} 
         />
       ))}
       <div className="flex border-3 border-neutral-500 items-center hover:border-neutral-700 align-middle justify-center h-[280px] w-[300px] mx-auto">
