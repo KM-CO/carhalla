@@ -9,14 +9,25 @@ export async function GET(request: NextRequest) {
     await connectMongoDB();
 
     const { searchParams } = new URL(request.url);
+    const filterOptions = searchParams.get("filterOptions");
     const make = searchParams.get("make");
     const model = searchParams.get("model");
     const year = searchParams.get("year");
     const priceRange = searchParams.get("priceRange");
 
+    // Handle filter options request
+    if (filterOptions) {
+      const makes = await Car.distinct("make");
+      const models = await Car.distinct("car_model");
+      const years = await Car.distinct("year");
+
+      return NextResponse.json({ makes, models, years });
+    }
+
+    // Build query for cars
     const query: Record<string, unknown> = {};
-    if (make) query.make = make; // Filters by make
-    if (model) query.car_model = model; // Filters by model
+    if (make) query.make = make;
+    if (model) query.car_model = model;
     if (year) query.year = year;
 
     if (priceRange) {
@@ -34,7 +45,7 @@ export async function GET(request: NextRequest) {
 
     console.log("Query:", query); // Debug the query
 
-    // Use the Car model to fetch data
+    // Fetch cars
     const cars = await Car.find(query);
 
     return NextResponse.json({ cars });
@@ -43,6 +54,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: "Failed to fetch cars" }, { status: 500 });
   }
 }
+
 
 export async function POST(request: NextRequest) {
   // Handle POST requests

@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from './Filter.module.css';
 
 interface FilterProps {
@@ -11,15 +11,33 @@ interface FilterProps {
 }
 
 const Filter: React.FC<FilterProps> = ({ onMakeFilterChange, onModelFilterChange, onYearFilterChange, onPriceFilterChange, onResetFilters }) => {
+  const [makes, setMakes] = useState<string[]>([]);
+  const [models, setModels] = useState<string[]>([]);
+  const [years, setYears] = useState<string[]>([]);
+
   const [isMakeDropdownOpen, setIsMakeDropdownOpen] = useState(false);
   const [isModelDropdownOpen, setIsModelDropdownOpen] = useState(false);
   const [isYearDropdownOpen, setIsYearDropdownOpen] = useState(false);
   const [isPriceDropdownOpen, setIsPriceDropdownOpen] = useState(false);
 
-  const carMakes = ["All Makes", "Tesla", "BMW", "Toyota", "Audi", "Lexus", "Jaguar", "Ferrari", "Honda"];
-  const carModels = ["All Models", "Cybertruck", "SF90 Stradale", "Model 3", "Camry"];
-  const carYears = ["All Years", "2024", "2023", "2022", "2021", "2020", "2019", "2018"];
   const carPrices = ["All Prices", "Under $30,000", "$30,000 - $50,000", "$50,000 - $70,000", "Above $70,000"];
+
+  // Fetch filter options
+  useEffect(() => {
+    const fetchFilterOptions = async () => {
+      try {
+        const response = await fetch("/api/cars?filterOptions=true");
+        if (!response.ok) throw new Error("Failed to fetch filter options");
+        const data = await response.json();
+        setMakes(data.makes || []);
+        setModels(data.models || []);
+        setYears(data.years || []);
+      } catch (error) {
+        console.error("Error fetching filter options:", error);
+      }
+    };
+    fetchFilterOptions();
+  }, []);
 
   const toggleMakeDropdown = () => {
     setIsMakeDropdownOpen(prev => !prev);
@@ -56,7 +74,7 @@ const Filter: React.FC<FilterProps> = ({ onMakeFilterChange, onModelFilterChange
         <button className={styles.filterButton} onClick={toggleMakeDropdown}>Make</button>
         {isMakeDropdownOpen && (
           <div className={styles.dropdownContainer}>
-            {carMakes.map((make, index) => (
+            {["All Makes", ...makes].map((make, index) => (
               <div
                 key={index}
                 className={styles.dropdownItem}
@@ -77,7 +95,7 @@ const Filter: React.FC<FilterProps> = ({ onMakeFilterChange, onModelFilterChange
         <button className={styles.filterButton} onClick={toggleModelDropdown}>Model</button>
         {isModelDropdownOpen && (
           <div className={styles.dropdownContainer}>
-            {carModels.map((model, index) => (
+            {["All Models", ...models].map((model, index) => (
               <div
                 key={index}
                 className={styles.dropdownItem}
@@ -98,7 +116,7 @@ const Filter: React.FC<FilterProps> = ({ onMakeFilterChange, onModelFilterChange
         <button className={styles.filterButton} onClick={toggleYearDropdown}>Year</button>
         {isYearDropdownOpen && (
           <div className={styles.dropdownContainer}>
-            {carYears.map((year, index) => (
+            {["All Years", ...years].map((year, index) => (
               <div
                 key={index}
                 className={styles.dropdownItem}
@@ -134,7 +152,8 @@ const Filter: React.FC<FilterProps> = ({ onMakeFilterChange, onModelFilterChange
           </div>
         )}
       </div>
-      {/* Reset Filters w/ Font Awesome Icon*/}
+
+      {/* Reset Filters */}
       <button className={styles.resetButton} onClick={onResetFilters}>
         Reset&nbsp;
         <i className={`fas fa-undo ${styles.resetIcon}`}></i>
