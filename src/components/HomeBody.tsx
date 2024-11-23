@@ -1,7 +1,8 @@
 "use client";
 import { useState } from "react";
-import Cars from "../components/Cars";
-import Filter from "../components/Filter";
+import Cars from "./Cars";
+import Filter from "./Filter";
+import styles from "./HomeBody.module.css"
 
 export default function HomeBody() {
 
@@ -15,7 +16,7 @@ export default function HomeBody() {
         setSelectedPrice(null);
     };
     return (
-        <>
+        <div className={`${styles.container} gradient`}>
             <Filter
                 onModelFilterChange={setSelectedModel}
                 onYearFilterChange={setSelectedYear}
@@ -27,6 +28,6 @@ export default function HomeBody() {
                 selectedYear={selectedYear}
                 selectedPrice={selectedPrice}
             />
-        </>
+        </div>
     );
 }

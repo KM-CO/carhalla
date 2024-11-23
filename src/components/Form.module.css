@@ -59,9 +59,9 @@
   }
   
   .inputField:focus {
-    border-color: var(--secondary-active);
+    border-color: var(--tertiary-active);
     outline: none;
-    box-shadow: 0 0 8px rgba(from var(--secondary-active) r g b / 0.6);
+    box-shadow: 0 0 8px rgba(from var(--tertiary-active) r g b / 0.6);
     transform: scale(1.02);
   }
   

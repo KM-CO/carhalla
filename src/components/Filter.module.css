@@ -7,12 +7,13 @@
     padding: 25px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
     align-items: center;
+    gap: 10px;
 }
 
 .filterButton {
     padding: 0.85rem 1.5rem;
+    position: relative;
     border: none;
     border-radius: 30px;
     font-size: 1.1rem;
@@ -36,6 +37,8 @@
 
 .dropdownContainer {
     position: relative;
+    display: flex;
+    flex-direction: column;
     margin-top: 15px;
     padding: 20px;
     background: #2a2a2a; 
@@ -118,4 +121,27 @@
 
 .resetIcon:hover {
     animation: spin 0.5s ease-in-out;
+}
+
+.buttonDropdownContainer {
+    position: relative;
+}
+
+@media (max-width: 768px) {
+    .filterContainer {
+        box-shadow: 0 30px 30px rgba(0, 0, 0, 0.5);
+        flex-direction: row;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        justify-content: center;
+    }
+    .resetButton {
+        margin-top: 0;
+        margin-left: 1em;
+    }
+    .dropdownContainer {
+        position: absolute;
+        width: min-content;
+    }
 }

@@ -40,61 +40,67 @@ const Filter: React.FC<FilterProps> = ({ onModelFilterChange, onYearFilterChange
   return (
     <div className={styles.filterContainer}>
       {/* Model Dropdown */}
-      <button className={styles.filterButton} onClick={toggleModelDropdown}>Model</button>
-      {isModelDropdownOpen && (
-        <div className={styles.dropdownContainer}>
-          {carModels.map((model, index) => (
-            <div
-              key={index}
-              className={styles.dropdownItem}
-              onClick={() => {
-                onModelFilterChange(model === "All Models" ? null : model);
-                setIsModelDropdownOpen(false);
-              }}
-            >
-              {model}
-            </div>
-          ))}
-        </div>
-      )}
+      <div className={styles.buttonDropdownContainer}>
+        <button className={styles.filterButton} onClick={toggleModelDropdown}>Model</button>
+        {isModelDropdownOpen && (
+          <div className={styles.dropdownContainer}>
+            {carModels.map((model, index) => (
+              <div
+                key={index}
+                className={styles.dropdownItem}
+                onClick={() => {
+                  onModelFilterChange(model === "All Models" ? null : model);
+                  setIsModelDropdownOpen(false);
+                }}
+              >
+                {model}
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
 
       {/* Year Dropdown */}
-      <button className={styles.filterButton} onClick={toggleYearDropdown}>Year</button>
-      {isYearDropdownOpen && (
-        <div className={styles.dropdownContainer}>
-          {carYears.map((year, index) => (
-            <div
-              key={index}
-              className={styles.dropdownItem}
-              onClick={() => {
-                onYearFilterChange(year === "All Years" ? null : year);
-                setIsYearDropdownOpen(false);
-              }}
-            >
-              {year}
-            </div>
-          ))}
-        </div>
-      )}
+      <div className={styles.buttonDropdownContainer}>
+        <button className={styles.filterButton} onClick={toggleYearDropdown}>Year</button>
+        {isYearDropdownOpen && (
+          <div className={styles.dropdownContainer}>
+            {carYears.map((year, index) => (
+              <div
+                key={index}
+                className={styles.dropdownItem}
+                onClick={() => {
+                  onYearFilterChange(year === "All Years" ? null : year);
+                  setIsYearDropdownOpen(false);
+                }}
+              >
+                {year}
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
 
       {/* Price Dropdown */}
-      <button className={styles.filterButton} onClick={togglePriceDropdown}>Price</button>
-      {isPriceDropdownOpen && (
-        <div className={styles.dropdownContainer}>
-          {carPrices.map((price, index) => (
-            <div
-              key={index}
-              className={styles.dropdownItem}
-              onClick={() => {
-                onPriceFilterChange(price === "All Prices" ? null : price);
-                setIsPriceDropdownOpen(false);
-              }}
-            >
-              {price}
-            </div>
-          ))}
-        </div>
-      )}
+      <div className={styles.buttonDropdownContainer}>
+        <button className={styles.filterButton} onClick={togglePriceDropdown}>Price</button>
+        {isPriceDropdownOpen && (
+          <div className={styles.dropdownContainer}>
+            {carPrices.map((price, index) => (
+              <div
+                key={index}
+                className={styles.dropdownItem}
+                onClick={() => {
+                  onPriceFilterChange(price === "All Prices" ? null : price);
+                  setIsPriceDropdownOpen(false);
+                }}
+              >
+                {price}
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
       {/* Reset Filters w/ Font Awesome Icon*/}
       <button className={styles.resetButton} onClick={onResetFilters}>
         Reset&nbsp;
