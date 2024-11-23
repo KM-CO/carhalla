@@ -162,8 +162,24 @@
     }
 }
 
+@media (min-width: 516px) and (max-width: 768px) {
+    .dropdownContainer {
+        position: absolute; 
+        z-index: 100;
+        min-width: 100px;
+        width: max-content;
+        max-width: 200px;
+    }
+}
+
+@media (min-width: 516px) and (max-width: 768px) {
+    .resetButton {
+        margin-top: 0px;
+    }
+}
+
 /* Media Queries for Phones */
-@media (max-width: 480px) {
+@media (max-width: 516px) {
     .filterContainer {
         flex-direction: column; /* Stack everything vertically */
         align-items: stretch; /* Make items take full width */
