@@ -24,9 +24,16 @@
     transition: all 0.4s ease;
     width: 140px;
     max-width: 100%;
-    box-shadow: 0 4x 8px rgba(255, 140, 0, 0.4); /* Handles the intensity of the gradient */
+    box-shadow: 0 4px 8px rgba(255, 140, 0, 0.4); /* Handles the intensity of the gradient */
     text-transform: uppercase;
     letter-spacing: 1.2px;
+}
+
+/* Specific Ellipsis Styling for Make and Model */
+.filterButtonEllipsis {
+    white-space: nowrap; /* Prevents text wrapping */
+    overflow: hidden; /* Hides overflow content */
+    text-overflow: ellipsis; /* Adds ellipsis to truncated text */
 }
 
 .filterButton:hover {
@@ -39,8 +46,10 @@
     position: relative;
     display: flex;
     flex-direction: column;
+    width: 200px; /* Fixed width */
+    height: 250px; /* Fixed height */
     margin-top: 15px;
-    padding: 20px;
+    padding: 10px;
     background: #2a2a2a; 
     border: 1px solid #444444;
     border-radius: 15px;
