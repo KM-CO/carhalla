@@ -27,6 +27,35 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+.error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--foreground);
+}
+
+.error h1 {
+  font-size: 3em;
+  font-weight: 600;
+}
+.error p {
+  font-size: 1.5em;
+  margin-bottom: .5em;
+}
+
+.textContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-bottom: 2em;
+}
+
+.fullpage {
+  width: 100vw;
+  height: 100vh;
+}
+
 .gradient {
   background: linear-gradient(to right bottom, var(--background-lighter), var(--background));
 }
@@ -47,6 +76,12 @@ input:focus, textarea:focus {
   /* focus:ring-2 focus:ring-blue-500 */
 }
 
+svg {
+  color: red;
+}
+.test {
+  color: red;
+}
 @media (prefers-color-scheme: light) {
   :root {
     --background: #c9c9c9;
@@ -61,5 +96,8 @@ input:focus, textarea:focus {
     color: var(--foreground-dark);
     background-color: white;
     border: 1px solid #cbd5e0;
+  }
+  .error {
+    color: var(--foreground-dark);
   }
 }

@@ -1,10 +1,4 @@
 /* Form.module.css */
-
-.pageContainer {
-  min-width: 100vw;
-  min-height: 100vh;
-}
-
 .formContainer {
     display: flex;
     position: relative;
@@ -21,9 +15,12 @@
   
   .imageContainer {
     position: relative;
-    height: 400px;
+    min-height: 200px;
+    height: min(50vw, 40vh);
+    max-height: 400px;
     width: 100%;
     margin-bottom: 2rem;
+    flex-shrink: 2;
   }
   
   .image {
@@ -32,6 +29,7 @@
     border: 2px solid var(--secondary-accent);
     transition: transform 0.3s ease-in-out;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    color: var(--secondary);
   }
   
   .image:hover {

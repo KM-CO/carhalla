@@ -144,12 +144,12 @@ export default function Form({ readOnly }: InputHTMLAttributes<HTMLInputElement>
      * fix appearance when resizing
      */
     return (
-        <div className={`${styles.pageContainer} gradient`}>
+        <div className={`gradient`}>
             <form className={styles.formContainer} onSubmit={onSubmit}>
                 <Link href="/"><CloseButton /></Link>
                 <div className={styles.imageContainer}>
                     {/*FIGURE OUT URL VALIDATION*/}
-                    <Image unoptimized fill onError={() => setImgPreview(noImage)} src={imgPreview != noImage ? imgPreview : noImage} alt={car_model + " " + make} className={styles.image} priority />
+                    <Image unoptimized fill onError={() => setImgPreview(noImage)} src={imgPreview != noImage ? imgPreview : noImage} alt={car_model + " " + make} className={`${styles.image}`} priority />
                 </div>
                 <div className={styles.formFieldsContainer}>
                     <div className={styles.inputFieldContainer}>
