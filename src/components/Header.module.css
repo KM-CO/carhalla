@@ -39,11 +39,7 @@
 .searchInput {
   padding: 0.5rem;
   border-radius: 5px;
-  border: 1px solid #cbd5e0;
   font-size: 1rem;
-  min-width: 200px;
-  color: #1a202c;
-  width: 100%;
 }
 
 .searchButton {
@@ -115,11 +111,6 @@
     width: 100%;
     display: flex;
     justify-content: center;
-  }
-
-  .searchInput {
-    width: 100%;
-    min-width: 300px; /* Optional max-width for mobile */
   }
 
   .nav {

@@ -163,7 +163,7 @@ export default function Form({ readOnly }: InputHTMLAttributes<HTMLInputElement>
                         <input readOnly={readOnly} className={styles.inputField} placeholder="Price" value={price || ""} onChange={(e) => setPrice(parseInt(e.target.value))} required />
                     </div>
                     <div className={styles.inputFieldContainer}>
-                        <textarea readOnly={readOnly} rows={8} className={styles.inputField} value={desc || ""} onChange={(e) => setDesc(e.target.value)} />
+                        <textarea readOnly={readOnly} rows={8} className={`${styles.inputField} ${styles.textareaField}`} value={desc || ""} onChange={(e) => setDesc(e.target.value)} />
                     </div>
                 </div>
                 {!readOnly ? <div className={styles.buttonContainer}>

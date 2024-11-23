@@ -4,7 +4,7 @@
     width: 100%;
     max-width: 24rem; /* max-w-sm */
     padding: 1.5rem;
-    background-color: white;
+    background-color: var(--primary);
     border-radius: 0.5rem; /* rounded-lg */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* shadow-md */
 }
@@ -13,7 +13,7 @@
     font-size: 1.5rem; /* text-2xl */
     font-weight: 600; /* font-semibold */
     text-align: center;
-    color: #2d3748; /* text-gray-800 */
+    color: var(--foreground); /* text-gray-800 */
     margin-bottom: 1rem;
 }
 
@@ -23,21 +23,9 @@
 
 .label {
     display: block;
-    color: #4a5568; /* text-gray-700 */
+    color: var(--foreground); /* text-gray-700 */
     font-weight: 500; /* font-medium */
-}
-
-.input {
-    width: 100%;
-    padding: 0.5rem 1rem;
-    margin-top: 0.25rem;
-    border: 1px solid #cbd5e0; /* gray-300 */
-    border-radius: 0.375rem; /* rounded-md */
-    outline: none;
-}
-
-.input:focus {
-    box-shadow: 0 0 0 2px var(--tertiary-active); /* focus:ring-2 focus:ring-blue-500 */
+    margin-bottom: .35em;
 }
 
 .submitButton {
