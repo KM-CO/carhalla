@@ -1,13 +1,14 @@
 /* src/app/Header.module.css */
 
 .header {
+  z-index: 1;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 1rem 1.5rem;
-  background-color: #1a202c;
+  background-color: var(--primary);
   color: white;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  /*box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);*/
   flex-wrap: wrap; /* Enable wrapping for smaller screens */
 }
 
@@ -43,7 +44,7 @@
   padding: 0.5rem 1rem;
   border-radius: 5px;
   border: none;
-  background-color: #4299e1;
+  background-color: var(--tertiary);
   color: white;
   font-weight: bold;
   cursor: pointer;
@@ -51,7 +52,11 @@
 }
 
 .searchButton:hover {
-  background-color: #3182ce;
+  background-color: var(--tertiary-hover);
+}
+
+.searchButton:active {
+  background-color: var(--tertiary-active);
 }
 
 .nav {
@@ -71,16 +76,15 @@
 .greeting {
   font-size: .95rem; /* Adjust size */
   font-weight: bold;
-  color: #68d391; /* Light green for emphasis */
+  color: var(--tertiary-alt); /* Light green for emphasis */
   padding: 0.5rem;
-  border: 1px solid #68d391; /* Optional border */
+  border: 1px solid var(--tertiary-alt); /* Optional border */
   border-radius: 5px;
-  background-color: #1a202c; /* Match the header background */
   transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
 }
 
 .greeting:hover {
-  color: #38a169; /* Darker green on hover */
+  color: var(--tertiary-alt-hover); /* Darker green on hover */
 }
 
 /* Responsive layout for small screens */

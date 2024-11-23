@@ -1,5 +1,11 @@
 /* Form.module.css */
 
+.pageContainer {
+  padding: 1em;
+  min-width: 100vw;
+  min-height: 100vh;
+}
+
 .formContainer {
     display: flex;
     position: relative;

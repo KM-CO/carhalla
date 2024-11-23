@@ -1,15 +1,5 @@
 /* login/LoginPage.module.css */
 
-.pageContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    background-color: #f3f4f6; /* bg-gray-100 */
-    gap: 1rem;
-}
-
 .formContainer {
     width: 100%;
     max-width: 24rem; /* max-w-sm */
@@ -47,7 +37,7 @@
 }
 
 .input:focus {
-    box-shadow: 0 0 0 2px #4299e1; /* focus:ring-2 focus:ring-blue-500 */
+    box-shadow: 0 0 0 2px var(--tertiary-active); /* focus:ring-2 focus:ring-blue-500 */
 }
 
 .submitButton {
@@ -55,14 +45,37 @@
     padding: 0.5rem;
     margin-top: 1rem;
     color: white;
-    background-color: #48bb78; /* bg-green-500 */
+    background-color: var(--tertiary-alt); /* bg-green-500 */
+    border-radius: 0.375rem; /* rounded-md */
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.loginButton {
+    width: 100%;
+    padding: 0.5rem;
+    margin-top: 1rem;
+    color: white;
+    background-color: var(--tertiary); /* bg-green-500 */
     border-radius: 0.375rem; /* rounded-md */
     cursor: pointer;
     transition: background-color 0.2s ease-in-out;
 }
 
 .submitButton:hover {
-    background-color: #38a169; /* hover:bg-green-600 */
+    background-color: var(--tertiary-alt-hover); /* hover:bg-green-600 */
+}
+
+.loginButton:hover {
+    background-color: var(--tertiary-hover); /* hover:bg-green-600 */
+}
+
+.submitButton:active {
+    background-color: var(--tertiary-alt-active); /* hover:bg-green-600 */
+}
+
+.loginButton:active {
+    background-color: var(--tertiary-active); /* hover:bg-green-600 */
 }
 
 .linksContainer {
@@ -72,7 +85,7 @@
 }
 
 .linkButton {
-    color: #4299e1; /* text-blue-500 */
+    color: var(--tertiary); /* text-blue-500 */
     text-decoration: none;
     cursor: pointer;
     transition: color 0.2s ease-in-out;

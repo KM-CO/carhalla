@@ -62,7 +62,7 @@ export default function Cars({ selectedModel, selectedYear, selectedPrice }: Car
         />
       ))}
       <div className="flex border-3 border-neutral-500 items-center hover:border-neutral-700 align-middle justify-center h-[280px] w-[300px] mx-auto">
-        <Link href="car/" className="text-9xl text-neutral-500 hover:text-neutral-700">
+        <Link href="car/" className="text-9xl text-neutral-500 hover:text-neutral-400">
           +
         </Link>
       </div>

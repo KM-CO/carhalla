@@ -7,7 +7,7 @@ import SignupForm from "@/components/SignupForm";
 export default function Page() {
 
   return (
-    <div className={styles.pageContainer}>
+    <div className={`${styles.pageContainer} gradient`}>
       <SignupForm />
       <div className={styles.linksContainer}>
         <Link href="/">

@@ -7,7 +7,7 @@ import LoginForm from "@/components/LoginForm";
 const Page = () => {
 
   return (
-    <div className={styles.pageContainer}>
+    <div className={`${styles.pageContainer} gradient`}>
       <LoginForm />
       <div className={styles.linksContainer}>
         <Link href="/">
