@@ -120,7 +120,7 @@ export default function Form({ readOnly }: InputHTMLAttributes<HTMLInputElement>
 
     function isValidURL(url: string) {
         try {
-            const newUrl = new URL("https://" + url);
+            const newUrl = new URL(url);
             return newUrl.protocol === 'http:' || newUrl.protocol === 'https:';
         } catch (err) {
             console.log(err);
@@ -129,9 +129,11 @@ export default function Form({ readOnly }: InputHTMLAttributes<HTMLInputElement>
     }
 
     function validateURL(url: string) {
-        if (isValidURL(url)) {
+        let newUrl = url;
+        if (!url.startsWith("http")) { newUrl = "https://" + url; }
+        if (isValidURL(newUrl)) {
             setImg(url);
-            setImgPreview(url);
+            setImgPreview(newUrl);
         } else {
             setImg(url);
             setImgPreview(noImage);
@@ -144,31 +146,33 @@ export default function Form({ readOnly }: InputHTMLAttributes<HTMLInputElement>
      * fix appearance when resizing
      */
     return (
-        <form className={styles.formContainer} onSubmit={onSubmit}>
-            <Link href="/"><CloseButton /></Link>
-            <div className={styles.imageContainer}>
-                {/*FIGURE OUT URL VALIDATION*/}
-                <Image unoptimized fill onError={() => setImgPreview(noImage)} src={imgPreview != noImage ? imgPreview : noImage} alt={car_model + " " + make} className={styles.image} priority />
-            </div>
-            <div className={styles.formFieldsContainer}>
-                <div className={styles.inputFieldContainer}>
-                    <input readOnly={readOnly} className={styles.inputField} placeholder="Image link" value={img || ""} onChange={(e) => validateURL(e.target.value)} />
+        <div className={`gradient`}>
+            <form className={styles.formContainer} onSubmit={onSubmit}>
+                <Link href="/"><CloseButton /></Link>
+                <div className={styles.imageContainer}>
+                    {/*FIGURE OUT URL VALIDATION*/}
+                    <Image unoptimized fill onError={() => setImgPreview(noImage)} src={imgPreview != noImage ? imgPreview : noImage} alt={car_model + " " + make} className={`${styles.image}`} priority />
                 </div>
-                <div className={styles.inputFieldContainer}>
-                    <input readOnly={readOnly} className={styles.inputField} placeholder="Model" value={car_model || ""} onChange={(e) => setCarModel(e.target.value)} required />
-                </div><div className={styles.inputFieldContainer}>
-                    <input readOnly={readOnly} className={styles.inputField} placeholder="Make" value={make || ""} onChange={(e) => setMake(e.target.value)} required />
-                </div><div className={styles.inputFieldContainer}>
-                    <input readOnly={readOnly} className={styles.inputField} placeholder="Price" value={price || ""} onChange={(e) => setPrice(parseInt(e.target.value))} required />
+                <div className={styles.formFieldsContainer}>
+                    <div className={styles.inputFieldContainer}>
+                        <input readOnly={readOnly} className={styles.inputField} placeholder="Image link" value={img || ""} onChange={(e) => validateURL(e.target.value)} />
+                    </div>
+                    <div className={styles.inputFieldContainer}>
+                        <input readOnly={readOnly} className={styles.inputField} placeholder="Model" value={car_model || ""} onChange={(e) => setCarModel(e.target.value)} required />
+                    </div><div className={styles.inputFieldContainer}>
+                        <input readOnly={readOnly} className={styles.inputField} placeholder="Make" value={make || ""} onChange={(e) => setMake(e.target.value)} required />
+                    </div><div className={styles.inputFieldContainer}>
+                        <input readOnly={readOnly} className={styles.inputField} placeholder="Price" value={price || ""} onChange={(e) => setPrice(parseInt(e.target.value))} required />
+                    </div>
+                    <div className={styles.inputFieldContainer}>
+                        <textarea readOnly={readOnly} rows={8} className={`${styles.inputField} ${styles.textareaField}`} value={desc || ""} onChange={(e) => setDesc(e.target.value)} />
+                    </div>
                 </div>
-                <div className={styles.inputFieldContainer}>
-                    <textarea readOnly={readOnly} rows={8} className={styles.inputField} value={desc || ""} onChange={(e) => setDesc(e.target.value)} />
-                </div>
-            </div>
-            {!readOnly ? <div className={styles.buttonContainer}>
-                <Submit />
-                {id ? <Delete onClick={onDeleteClick} /> : <Cancel />}
-            </div> : <div>Contact/Buy button</div>}
-        </form>
+                {!readOnly ? <div className={styles.buttonContainer}>
+                    <Submit />
+                    {id ? <Delete onClick={onDeleteClick} /> : <Cancel />}
+                </div> : <div>Contact/Buy button</div>}
+            </form>
+        </div>
     );
 }

@@ -59,7 +59,7 @@ const LoginForm: React.FC = () => {
         />
       </div>
 
-      <button type="submit" className={styles.submitButton}>
+      <button type="submit" className={styles.loginButton}>
         Login
       </button>
     </form>

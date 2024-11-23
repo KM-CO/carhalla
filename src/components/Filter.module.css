@@ -1,18 +1,17 @@
-/*Filter.module.css */
-
 .filterContainer {
     min-width: 100px; 
-    background: #1a202c; 
+    background: var(--primary); 
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
     padding: 25px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
     align-items: center;
+    gap: 10px;
 }
 
 .filterButton {
     padding: 0.85rem 1.5rem;
+    position: relative;
     border: none;
     border-radius: 30px;
     font-size: 1.1rem;
@@ -23,9 +22,16 @@
     transition: all 0.4s ease;
     width: 140px;
     max-width: 100%;
-    box-shadow: 0 4x 8px rgba(255, 140, 0, 0.4); /* Handles the intensity of the gradient */
+    box-shadow: 0 4px 8px rgba(255, 140, 0, 0.4); /* Handles the intensity of the gradient */
     text-transform: uppercase;
     letter-spacing: 1.2px;
+}
+
+/* Specific Ellipsis Styling for Make and Model */
+.filterButtonEllipsis {
+    white-space: nowrap; /* Prevents text wrapping */
+    overflow: hidden; /* Hides overflow content */
+    text-overflow: ellipsis; /* Adds ellipsis to truncated text */
 }
 
 .filterButton:hover {
@@ -36,8 +42,12 @@
 
 .dropdownContainer {
     position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 200px; /* Fixed width */
+    height: 250px; /* Fixed height */
     margin-top: 15px;
-    padding: 20px;
+    padding: 10px;
     background: #2a2a2a; 
     border: 1px solid #444444;
     border-radius: 15px;
@@ -83,7 +93,7 @@
     font-size: 1.1rem;
     font-weight: 800;
     color: #ffffff;
-    background: linear-gradient(360deg, #e53935, #d32f2f); 
+    background: linear-gradient(360deg, var(--red), var(--red-hover)); 
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 6px 12px rgba(229, 57, 53, 0.4);
@@ -94,7 +104,12 @@
 }
 
 .resetButton:hover {
-    background: linear-gradient(360deg, #f44336, #e53935);
+    background: linear-gradient(360deg, var(--red-hover), var(--red-active));
+    box-shadow: 0 12px 24px rgba(229, 57, 53, 0.6);
+}
+
+.resetButton:active {
+    background: linear-gradient(360deg, var(--red-active), #ff5d5d);
     box-shadow: 0 12px 24px rgba(229, 57, 53, 0.6);
 }
 
@@ -113,4 +128,78 @@
 
 .resetIcon:hover {
     animation: spin 0.5s ease-in-out;
+}
+
+.buttonDropdownContainer {
+    position: relative;
+}
+
+/* Media Queries for Tablets */
+@media (max-width: 768px) {
+    .filterContainer {
+        flex-direction: row; /* Align filters in a row */
+        flex-wrap: wrap; /* Allow wrapping to the next line */
+        justify-content: center;
+        padding: 15px; /* Reduce padding */
+        gap: 8px; /* Reduce spacing between items */
+    }
+
+    .filterButton {
+        width: 100%; /* Full width buttons */
+        font-size: 1rem; /* Slightly smaller font */
+        padding: 0.6rem 1rem; /* Adjust padding */
+    }
+
+    .dropdownContainer {
+        width: 90%; /* Use most of the available space */
+        max-height: 200px; /* Adjust dropdown height */
+        left: 5%; /* Center dropdown */
+    }
+
+    .resetButton {
+        margin: 0 auto; /* Center the reset button */
+        margin-top: 10px; /* Add spacing at the top */
+    }
+}
+
+@media (min-width: 516px) and (max-width: 768px) {
+    .dropdownContainer {
+        position: absolute; 
+        z-index: 100;
+        min-width: 100px;
+        width: max-content;
+        max-width: 200px;
+    }
+}
+
+@media (min-width: 516px) and (max-width: 768px) {
+    .resetButton {
+        margin-top: 0px;
+    }
+}
+
+/* Media Queries for Phones */
+@media (max-width: 516px) {
+    .filterContainer {
+        flex-direction: column; /* Stack everything vertically */
+        align-items: stretch; /* Make items take full width */
+        gap: 5px; /* Reduce spacing between items */
+    }
+
+    .filterButton {
+        font-size: 0.9rem; /* Smaller font size */
+        padding: 0.5rem; /* Smaller padding */
+    }
+
+    .dropdownContainer {
+        width: 100%; /* Full width for dropdown */
+        max-height: 150px; /* Reduce height */
+        left: 0; /* Ensure alignment */
+        padding: 5px; /* Reduce padding inside dropdown */
+    }
+
+    .resetButton {
+        font-size: 1rem; /* Slightly smaller reset button */
+        padding: 0.4rem; /* Adjust padding */
+    }
 }

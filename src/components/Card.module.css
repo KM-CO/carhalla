@@ -7,8 +7,8 @@
     align-items: center;
     width: 300px;
     height: 280px;
-    background-color: #2d3748; /* Matches header theme */
-    border: 2px solid #4a5568; /* Subtle border */
+    background-color: var(--secondary); /* Matches header theme */
+    border: 2px solid var(--secondary-accent); /* Subtle border */
     border-radius: 20px;
     overflow: hidden;
     margin-left: auto;
@@ -100,7 +100,7 @@
     overflow: hidden;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 4;
+    line-clamp: 4;
   }
   
   .card-button-container {

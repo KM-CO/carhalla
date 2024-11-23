@@ -1,0 +1,27 @@
+.iconButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px !important;
+    max-height: 40px;
+}
+
+.houseIcon {
+    width: max-content;
+    height: max-content;
+    color: var(--tertiary);
+    transition: color 0.3s ease-in-out;
+}
+
+.houseIcon:hover {
+    color: var(--tertiary-hover);
+}
+
+.houseIcon:active {
+    color: var(--tertiary-active);
+}

@@ -1,11 +1,11 @@
 .viewButton {
-    background-color: var(--secondary);
+    background-color: var(--tertiary);
   }
   
   .viewButton:hover {
-    background-color: var(--secondary-hover);
+    background-color: var(--tertiary-hover);
   }
 
   .viewButton:active {
-    background-color: var(--secondary-active);
+    background-color: var(--tertiary-active);
   }

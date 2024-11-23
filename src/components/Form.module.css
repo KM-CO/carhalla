@@ -1,5 +1,4 @@
 /* Form.module.css */
-
 .formContainer {
     display: flex;
     position: relative;
@@ -9,24 +8,28 @@
     margin: auto;
     max-width: 800px;
     /*background: linear-gradient(135deg, #2d3748, #1a202c); */
-    background: #1a202c;
+    background: var(--primary);
     border-radius: 15px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
   }
   
   .imageContainer {
     position: relative;
-    height: 400px;
+    min-height: 200px;
+    height: min(50vw, 40vh);
+    max-height: 400px;
     width: 100%;
     margin-bottom: 2rem;
+    flex-shrink: 2;
   }
   
   .image {
-    object-fit: contain;
+    object-fit: cover;
     border-radius: 20px;
-    border: 2px solid #4a5568;
+    border: 2px solid var(--secondary-accent);
     transition: transform 0.3s ease-in-out;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    color: var(--secondary);
   }
   
   .image:hover {
@@ -45,17 +48,18 @@
     width: 100%;
     padding: 0.75rem;
     border-radius: 10px;
-    border: 1px solid #cbd5e0;
     font-size: 1rem;
-    color: #1a202c;
-    background-color: #edf2f7;
     transition: border-color 0.2s ease-in-out, transform 0.3s ease-in-out;
   }
   
+  .textareaField {
+    min-height: 16em;
+  }
+
   .inputField:focus {
-    border-color: var(--secondary-active);
+    border-color: var(--tertiary-active);
     outline: none;
-    box-shadow: 0 0 8px rgba(from var(--secondary-active) r g b / 0.6);
+    box-shadow: 0 0 8px rgba(from var(--tertiary-active) r g b / 0.6);
     transform: scale(1.02);
   }
   
@@ -78,4 +82,3 @@
     justify-content: center;
     margin-top: 2rem;
   }
-  

@@ -1,0 +1,10 @@
+.container {
+    display: grid;
+    grid-template: auto / min-content auto;
+}
+
+@media (max-width: 768px) {
+    .container {
+        grid-template: min-content auto / auto; 
+    }
+}

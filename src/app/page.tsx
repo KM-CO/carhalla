@@ -12,9 +12,7 @@ export default async function Home() {
     <SessionProvider session={session}>
       <div className="grid grid-rows-[min-content] h-full">
         <Header />
-        <div className="grid grid-cols-[min-content_auto]">
-          <HomeBody />
-        </div>
+        <HomeBody />
       </div>
     </SessionProvider>
   );
