@@ -1,45 +1,47 @@
-import clientPromise, { connectMongoDB } from "@/libs/mongodb";
+import { connectMongoDB } from "@/libs/mongodb";
 import Car from "@/models/carSchema";
 import { NextResponse } from "next/server";
 import { NextRequest } from "next/server";
 
 export async function GET(request: NextRequest) {
-  // Await connection to MongoDB
-  const client = await clientPromise;
-  const db = client.db("carhalla");
+  try {
+    // Establish a connection to MongoDB
+    await connectMongoDB();
 
-  // Extract query parameters from the request URL
-  const { searchParams } = new URL(request.url);
-  const model = searchParams.get("model");
-  const year = searchParams.get("year");
-  const priceRange = searchParams.get("priceRange");
+    const { searchParams } = new URL(request.url);
+    const make = searchParams.get("make");
+    const model = searchParams.get("model");
+    const year = searchParams.get("year");
+    const priceRange = searchParams.get("priceRange");
 
-  // Construct a query object with appropriate types
-  const query: Record<string, unknown> = {};
-  if (model) query.make = model;
-  if (year) query.year = year;
+    const query: Record<string, unknown> = {};
+    if (make) query.make = make; // Filters by make
+    if (model) query.car_model = model; // Filters by model
+    if (year) query.year = year;
 
-  if (priceRange) {
-    const priceConditions: Record<
-      string,
-      { $lt?: number; $gte?: number; $lte?: number; $gt?: number }
-    > = {
-      "Under $30,000": { $lt: 30000 },
-      "$30,000 - $50,000": { $gte: 30000, $lte: 50000 },
-      "$50,000 - $70,000": { $gte: 50000, $lte: 70000 },
-      "Above $70,000": { $gt: 70000 },
-    };
+    if (priceRange) {
+      const priceConditions: Record<string, { $lt?: number; $gte?: number; $lte?: number; $gt?: number }> = {
+        "Under $30,000": { $lt: 30000 },
+        "$30,000 - $50,000": { $gte: 30000, $lte: 50000 },
+        "$50,000 - $70,000": { $gte: 50000, $lte: 70000 },
+        "Above $70,000": { $gt: 70000 },
+      };
 
-    if (priceConditions[priceRange]) {
-      query.price = priceConditions[priceRange];
+      if (priceConditions[priceRange]) {
+        query.price = priceConditions[priceRange];
+      }
     }
+
+    console.log("Query:", query); // Debug the query
+
+    // Use the Car model to fetch data
+    const cars = await Car.find(query);
+
+    return NextResponse.json({ cars });
+  } catch (error) {
+    console.error("Error fetching cars:", error);
+    return NextResponse.json({ error: "Failed to fetch cars" }, { status: 500 });
   }
-
-  // Fetch filtered cars from the database
-  const cars = await db.collection("cars").find(query).toArray();
-
-  // Return the results
-  return NextResponse.json({ cars });
 }
 
 export async function POST(request: NextRequest) {
