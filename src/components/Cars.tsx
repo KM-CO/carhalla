@@ -15,17 +15,19 @@ export type Car = {
 };
 
 interface CarsProps {
+  selectedMake: string | null;
   selectedModel: string | null;
   selectedYear: string | null;
   selectedPrice: string | null;
 }
 
-export default function Cars({ selectedModel, selectedYear, selectedPrice }: CarsProps) {
+export default function Cars({ selectedMake, selectedModel, selectedYear, selectedPrice }: CarsProps) {
   const [cars, setCars] = useState<Car[]>([]);
 
   useEffect(() => {
     const fetchCars = async () => {
       const params = new URLSearchParams();
+      if (selectedMake) params.append("make", selectedMake);
       if (selectedModel) params.append("model", selectedModel);
       if (selectedYear) params.append("year", selectedYear);
       if (selectedPrice) params.append("priceRange", selectedPrice);
@@ -40,7 +42,7 @@ export default function Cars({ selectedModel, selectedYear, selectedPrice }: Car
       }
     };
     fetchCars();
-  }, [selectedModel, selectedYear, selectedPrice]);
+  }, [selectedMake, selectedModel, selectedYear, selectedPrice]);
 
   return (
     <div className="m-3 grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-3 grid-rows-[repeat(auto-fill,minmax(280px,280px))] items-center">
