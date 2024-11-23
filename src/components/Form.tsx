@@ -120,7 +120,7 @@ export default function Form({ readOnly }: InputHTMLAttributes<HTMLInputElement>
 
     function isValidURL(url: string) {
         try {
-            const newUrl = new URL("https://" + url);
+            const newUrl = new URL(url);
             return newUrl.protocol === 'http:' || newUrl.protocol === 'https:';
         } catch (err) {
             console.log(err);
@@ -129,9 +129,11 @@ export default function Form({ readOnly }: InputHTMLAttributes<HTMLInputElement>
     }
 
     function validateURL(url: string) {
-        if (isValidURL(url)) {
+        let newUrl = url;
+        if (!url.startsWith("http")) { newUrl = "https://" + url; }
+        if (isValidURL(newUrl)) {
             setImg(url);
-            setImgPreview(url);
+            setImgPreview(newUrl);
         } else {
             setImg(url);
             setImgPreview(noImage);
