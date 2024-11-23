@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import { useSession } from "next-auth/react"; 
 import Card from "./Card";
 import Link from "next/link";
 import noImage from "@/images/no-image.svg";
@@ -20,8 +21,13 @@ interface CarsProps {
   selectedPrice: string | null;
 }
 
-export default function Cars({ selectedModel, selectedYear, selectedPrice }: CarsProps) {
+export default function Cars({
+  selectedModel,
+  selectedYear,
+  selectedPrice,
+}: CarsProps) {
   const [cars, setCars] = useState<Car[]>([]);
+  const { data: session } = useSession(); 
 
   useEffect(() => {
     const fetchCars = async () => {
@@ -56,11 +62,18 @@ export default function Cars({ selectedModel, selectedYear, selectedPrice }: Car
           alt={`${car.car_model} ${car.make}`}
         />
       ))}
-      <div className="flex border-3 border-neutral-500 items-center hover:border-neutral-700 align-middle justify-center h-[280px] w-[300px] mx-auto">
-        <Link href="car/" className="text-9xl text-neutral-500 hover:text-neutral-700">
-          +
-        </Link>
-      </div>
+
+      
+      {session?.user && (
+        <div className="flex border-3 border-neutral-500 items-center hover:border-neutral-700 align-middle justify-center h-[280px] w-[300px] mx-auto group">
+          <Link
+            href="car/"
+            className="text-9xl text-neutral-500 hover:text-neutral-700 group-hover:text-neutral-900 transition duration-200 ease-in-out"
+          >
+            +
+          </Link>
+        </div>
+      )}
     </div>
   );
 }
