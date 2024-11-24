@@ -19,7 +19,7 @@
     background: linear-gradient(135deg, #ff8c00, #ff6f00); /* Gradient */
     cursor: pointer;
     transition: all 0.4s ease;
-    width: 140px;
+    width: 140px; /* Maintain fixed width */
     max-width: 100%;
     box-shadow: 0 4px 8px rgba(255, 140, 0, 0.4);
     text-transform: uppercase;
@@ -28,7 +28,20 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    overflow: hidden; /* Ensures content is clipped */
+    text-overflow: ellipsis; /* Adds ellipsis to overflowing text */
+    white-space: nowrap; /* Prevents wrapping to new lines */
 }
+
+.filterButton .filterButtonEllipsis {
+    display: inline-block;
+    max-width: 100%; /* Restrict width within the button */
+    overflow: hidden; /* Clip the overflowing text */
+    text-overflow: ellipsis; /* Show ellipsis for overflowing text */
+    white-space: nowrap; /* Prevent text wrapping */
+    text-align: center; /* Center-align text within the button */
+}
+
 
 /* This is for the drop down arrow. */
 .arrowIcon {

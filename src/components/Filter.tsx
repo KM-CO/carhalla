@@ -62,62 +62,72 @@ const Filter: React.FC<FilterProps> = ({
     onResetFilters();
   };
 
+  const adjustFontSize = (text: string) => {
+    const maxChars = 15; // Adjust based on button width
+    return text.length > maxChars ? "0.85rem" : "1.1rem";
+  };
+
   return (
     <div className={styles.filterContainer}>
-      {/* Make Dropdown */}
-      <div className={styles.buttonDropdownContainer}>
-        <button
-          className={`${styles.filterButton} ${isMakeDropdownOpen ? styles.open : ""}`}
-          onClick={() => setIsMakeDropdownOpen((prev) => !prev)}
+{/* Make Dropdown */}
+<div className={styles.buttonDropdownContainer}>
+  <button
+    className={`${styles.filterButton} ${isMakeDropdownOpen ? styles.open : ""}`}
+    style={{ fontSize: adjustFontSize(selectedMake) }}
+    onClick={() => setIsMakeDropdownOpen((prev) => !prev)}
+  >
+    <span className={styles.filterButtonEllipsis}>{selectedMake}</span>
+    <span className={styles.arrow}>{isMakeDropdownOpen ? "▲" : "▼"}</span>
+  </button>
+  {isMakeDropdownOpen && (
+    <div className={styles.dropdownContainer}>
+      {["All Makes", ...makes].map((make, index) => (
+        <div
+          key={index}
+          className={styles.dropdownItem}
+          onClick={() => {
+            setSelectedMake(make === "All Makes" ? "Make" : make);
+            onMakeFilterChange(make === "All Makes" ? null : make);
+            setIsMakeDropdownOpen(false);
+          }}
         >
-          {selectedMake} <span className={styles.arrow}>{isMakeDropdownOpen ? "▲" : "▼"}</span>
-        </button>
-        {isMakeDropdownOpen && (
-          <div className={styles.dropdownContainer}>
-            {["All Makes", ...makes].map((make, index) => (
-              <div
-                key={index}
-                className={styles.dropdownItem}
-                onClick={() => {
-                  setSelectedMake(make === "All Makes" ? "Make" : make);
-                  onMakeFilterChange(make === "All Makes" ? null : make);
-                  setIsMakeDropdownOpen(false);
-                }}
-              >
-                {make}
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
+          {make}
+        </div>
+      ))}
+    </div>
+  )}
+</div>
 
-      {/* Repeat similar structure for Model, Year, and Price */}
-      {/* Model Dropdown */}
-      <div className={styles.buttonDropdownContainer}>
-        <button
-          className={`${styles.filterButton} ${isModelDropdownOpen ? styles.open : ""}`}
-          onClick={() => setIsModelDropdownOpen((prev) => !prev)}
+
+     {/* Model Dropdown */}
+<div className={styles.buttonDropdownContainer}>
+  <button
+    className={`${styles.filterButton} ${isModelDropdownOpen ? styles.open : ""}`}
+    style={{ fontSize: adjustFontSize(selectedModel) }}
+    onClick={() => setIsModelDropdownOpen((prev) => !prev)}
+  >
+    <span className={styles.filterButtonEllipsis}>{selectedModel}</span>
+    <span className={styles.arrow}>{isModelDropdownOpen ? "▲" : "▼"}</span>
+  </button>
+  {isModelDropdownOpen && (
+    <div className={styles.dropdownContainer}>
+      {["All Models", ...models].map((model, index) => (
+        <div
+          key={index}
+          className={styles.dropdownItem}
+          onClick={() => {
+            setSelectedModel(model === "All Models" ? "Model" : model);
+            onModelFilterChange(model === "All Models" ? null : model);
+            setIsModelDropdownOpen(false);
+          }}
         >
-          {selectedModel} <span className={styles.arrow}>{isModelDropdownOpen ? "▲" : "▼"}</span>
-        </button>
-        {isModelDropdownOpen && (
-          <div className={styles.dropdownContainer}>
-            {["All Models", ...models].map((model, index) => (
-              <div
-                key={index}
-                className={styles.dropdownItem}
-                onClick={() => {
-                  setSelectedModel(model === "All Models" ? "Model" : model);
-                  onModelFilterChange(model === "All Models" ? null : model);
-                  setIsModelDropdownOpen(false);
-                }}
-              >
-                {model}
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
+          {model}
+        </div>
+      ))}
+    </div>
+  )}
+</div>
+
 
       {/* Year Dropdown */}
       <div className={styles.buttonDropdownContainer}>
