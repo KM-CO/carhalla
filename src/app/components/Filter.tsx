@@ -37,10 +37,14 @@ const Filter: React.FC<FilterProps> = ({ onModelFilterChange, onYearFilterChange
     setIsYearDropdownOpen(false);
   };
 
+  
   return (
     <div className={styles.filterContainer}>
       {/* Model Dropdown */}
-      <button className={styles.filterButton} onClick={toggleModelDropdown}>Model</button>
+      <button className={styles.filterButton} onClick={toggleModelDropdown}>
+        Model
+        <span className={`${styles.arrowIcon} ${isModelDropdownOpen ? styles.rotate : ''}`}>▼</span>
+      </button>
       {isModelDropdownOpen && (
         <div className={styles.dropdownContainer}>
           {carModels.map((model, index) => (
@@ -59,7 +63,10 @@ const Filter: React.FC<FilterProps> = ({ onModelFilterChange, onYearFilterChange
       )}
 
       {/* Year Dropdown */}
-      <button className={styles.filterButton} onClick={toggleYearDropdown}>Year</button>
+      <button className={styles.filterButton} onClick={toggleYearDropdown}>
+        Year
+        <span className={`${styles.arrowIcon} ${isYearDropdownOpen ? styles.rotate : ''}`}>▼</span>
+      </button>
       {isYearDropdownOpen && (
         <div className={styles.dropdownContainer}>
           {carYears.map((year, index) => (
@@ -78,7 +85,10 @@ const Filter: React.FC<FilterProps> = ({ onModelFilterChange, onYearFilterChange
       )}
 
       {/* Price Dropdown */}
-      <button className={styles.filterButton} onClick={togglePriceDropdown}>Price</button>
+      <button className={styles.filterButton} onClick={togglePriceDropdown}>
+        Price
+        <span className={`${styles.arrowIcon} ${isPriceDropdownOpen ? styles.rotate : ''}`}>▼</span>
+      </button>
       {isPriceDropdownOpen && (
         <div className={styles.dropdownContainer}>
           {carPrices.map((price, index) => (
@@ -95,7 +105,8 @@ const Filter: React.FC<FilterProps> = ({ onModelFilterChange, onYearFilterChange
           ))}
         </div>
       )}
-      {/* Reset Filters w/ Font Awesome Icon*/}
+
+      {/* Reset Filters */}
       <button className={styles.resetButton} onClick={onResetFilters}>
       <i className="fas fa-undo"></i>
         {/* Undo icon */}

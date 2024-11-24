@@ -23,9 +23,23 @@
     transition: all 0.4s ease;
     width: 140px;
     max-width: 100%;
-    box-shadow: 0 4x 8px rgba(255, 140, 0, 0.4); /* Handles the intensity of the gradient */
+    box-shadow: 0 4px 8px rgba(255, 140, 0, 0.4);
     text-transform: uppercase;
     letter-spacing: 1.2px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.arrowIcon {
+    margin-left: 10px;
+    transition: transform 0.4s ease;
+    font-size: 1rem;
+}
+
+.rotate {
+    transform: rotate(180deg);
 }
 
 .filterButton:hover {
