@@ -1,0 +1,121 @@
+/* Form.module.css */
+.formContainer {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  margin: auto;
+  max-width: 800px;
+  /*background: linear-gradient(135deg, #2d3748, #1a202c); */
+  background: var(--primary);
+  border-radius: 15px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.imageContainer {
+  position: relative;
+  min-height: 200px;
+  height: min(50vw, 40vh);
+  max-height: 400px;
+  width: 100%;
+  margin-bottom: 2rem;
+  flex-shrink: 2;
+}
+
+.image {
+  object-fit: cover;
+  border-radius: 20px;
+  border: 2px solid var(--secondary-accent);
+  transition: transform 0.3s ease-in-out;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  color: var(--secondary);
+}
+
+.image:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.inputFieldContainer {
+  width: 100%;
+  margin-bottom: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.grouped {
+  width: 100%;
+  display: flex;
+  column-gap: .5rem;
+}
+
+.flexGrow {
+  flex-grow: 2;
+}
+
+.flexShrink {
+  flex-shrink: 2;
+}
+
+.inputField {
+  width: 100%;
+  min-width: 100px;
+  padding: 0.75rem;
+  border-radius: 10px;
+  font-size: 1rem;
+  transition: border-color 0.2s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.inputField:disabled, .inputField:read-only {
+  background-color: var(--secondary);
+  box-shadow: none;
+}
+
+.textareaField {
+  min-height: 16em;
+  vertical-align: bottom;
+}
+
+.inputField:read-write:focus {
+  border-color: var(--tertiary-active);
+  box-shadow: 0 0 8px rgba(from var(--tertiary-active) r g b / 0.6);
+  transform: scale(1.02);
+}
+
+.formFieldsContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.textareaContainer {
+  width: 100%;
+  margin: 1.5rem 0;
+}
+
+.buttonContainer {
+  display: grid;
+  grid: auto / auto auto;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.loading {
+  background-color: var(--secondary);
+  width: 5.5rem;
+  height: 2.5rem;
+}
+
+@media (max-width: 570px) {
+  .grouped {
+    display: grid;
+    grid-template: auto auto auto / auto auto;
+  }
+
+  .flexGrow {
+    grid-column: span 2;
+  }
+}

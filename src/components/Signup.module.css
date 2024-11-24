@@ -1,0 +1,11 @@
+.signupButton {
+    background-color: var(--tertiary-alt);
+  }
+  
+  .signupButton:hover {
+    background-color: var(--tertiary-alt-hover);
+  }
+  
+  .signupButton:active {
+    background-color: var(--tertiary-alt-active);
+  }

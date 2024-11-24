@@ -1,0 +1,23 @@
+.viewButton {
+  background-color: var(--tertiary);
+}
+
+.viewButton:hover {
+  background-color: var(--tertiary-hover);
+}
+
+.viewButton:active {
+  background-color: var(--tertiary-active);
+}
+
+.editButton {
+  background-color: var(--tertiary-alt);
+}
+
+.editButton:hover {
+  background-color: var(--tertiary-alt-hover);
+}
+
+.editButton:active {
+  background-color: var(--tertiary-alt-active);
+}

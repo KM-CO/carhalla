@@ -1,0 +1,122 @@
+/* src/app/Header.module.css */
+
+.header {
+  z-index: 1;
+  display: grid;
+  grid-template: 3em / max-content 1fr max-content;
+  gap: 2em;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  background-color: var(--primary);
+  color: white;
+  width: 100%;
+  justify-content: center;
+  grid-template-areas:
+  "title search nav";
+}
+
+/* Default styling for desktop */
+.leftSection {
+  grid-area: title;
+  display: flex;
+  align-items: center;
+  gap: 1rem; /* Space between logo and search bar */
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.searchContainer {
+  grid-area: search;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.searchInput {
+  padding: 0.5rem;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.searchButton {
+  flex-shrink: 2;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  border: none;
+  background-color: var(--tertiary);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.searchButton:hover {
+  background-color: var(--tertiary-hover);
+}
+
+.searchButton:active {
+  background-color: var(--tertiary-active);
+}
+
+.nav {
+  grid-area: nav;
+  display: flex;
+  gap: 1rem;
+}
+
+.letter {
+  display: inline-block;
+  transition: transform 0.2s ease-in-out;
+}
+
+.letter:hover {
+  transform: scale(1.5);
+}
+
+.greeting {
+  font-size: .95rem; /* Adjust size */
+  font-weight: bold;
+  color: var(--tertiary-alt); /* Light green for emphasis */
+  padding: 0.5rem;
+  border: 1px solid var(--tertiary-alt); /* Optional border */
+  border-radius: 5px;
+  transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.greeting:hover {
+  color: var(--tertiary-alt-hover); /* Darker green on hover */
+}
+
+/* Responsive layout for small screens */
+@media (max-width: 700px) {
+  .header {
+    grid-template: 3em 3em / 1fr;
+    grid-template-areas:
+    "title nav"
+    "search search";
+    gap: 1em;
+  }
+
+  .leftSection {
+    width: 100%;
+    display: flex;
+    justify-content: left;
+  }
+
+  .searchContainer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .nav {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+}

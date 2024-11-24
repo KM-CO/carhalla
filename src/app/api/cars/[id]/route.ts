@@ -1,5 +1,5 @@
-import { connectMongoDB } from "../../../libs/mongodb";
-import Car from "../../../models/carSchema";
+import connectMongoDB from "@/libs/mongodb";
+import Car from "@/models/carSchema";
 import { NextResponse } from "next/server";
 import { NextRequest } from "next/server";
 import mongoose from "mongoose";
@@ -17,9 +17,9 @@ export async function GET(request: NextRequest, { params }: RouteParams ) {
 
 export async function PUT(request: NextRequest, { params }: RouteParams) {
     const { id } = await params;
-    const { car_model: car_model, make: make, price: price, image: image, desc: desc } = await request.json();
+    const { car_model: car_model, make: make, year: year, price: price, img: img, desc: desc } = await request.json();
     await connectMongoDB();
-    await Car.findByIdAndUpdate(id, { car_model, make, price, image, desc});
+    await Car.findByIdAndUpdate(id, { car_model, make, year, price, img, desc});
     return NextResponse.json({ message: "Car updated" }, { status: 200 });
 }
 

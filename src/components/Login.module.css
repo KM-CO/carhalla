@@ -1,0 +1,11 @@
+.loginButton {
+    background-color: var(--tertiary);
+  }
+  
+  .loginButton:hover {
+    background-color: var(--tertiary-hover);
+  }
+  
+  .loginButton:active {
+    background-color: var(--tertiary-active);
+  }
