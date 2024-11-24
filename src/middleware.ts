@@ -17,15 +17,33 @@ export async function middleware(request: NextRequest) {
         if (reqUrl.pathname.startsWith('/signup')) {
             return NextResponse.redirect(new URL('/', request.url))
         }
-        if (reqUrl.pathname.startsWith('/view')) {
-            return NextResponse.redirect(new URL(reqUrl.pathname.replace("view", "car"), request.url))
+        if (reqUrl.pathname.startsWith('/car/') || reqUrl.pathname.startsWith('/view/')) {
+            let owner;
+            const id = reqUrl.pathname.startsWith('/car/') ? reqUrl.pathname.replace("/car/", ``) : reqUrl.pathname.replace("/view/", ``)
+            let newUrl;
+            try {
+                const response = await fetch(`http://localhost:3000/api/cars/${id}`);
+                if (!response.ok) {
+                    throw new Error('Network response was not okay');
+                }
+                const data = await response.json();
+                owner = data.owner;
+                if (owner === session?.user?.name) {
+                    newUrl = reqUrl.pathname.replace("/view", `/car`);
+                } else {
+                    newUrl = reqUrl.pathname.replace("/car", `/view`);
+                }
+                return NextResponse.rewrite(new URL(newUrl, request.url));
+            } catch (error) {
+                console.log(`Error checking ownership:`, error);
+            }
         }
     } else {
         if (!reqUrl.pathname.startsWith("/view") && !reqUrl.pathname.startsWith("/api/auth/") && !reqUrl.pathname.startsWith("/api/cars")
             && !(reqUrl.pathname == "/signup" || reqUrl.pathname == "/login" || reqUrl.pathname == "/api/users/signup")) {
             return NextResponse.redirect(new URL("/", request.url));
         }
-    
+
         res.headers.append('Access-Control-Allow-Credentials', "true");
         res.headers.append('Access-Control-Allow-Origin', 'https://localhost:3000'); // replace this your actual origin
         res.headers.append('Access-Control-Allow-Methods', 'GET');

@@ -3,10 +3,12 @@ import mongoose, { Schema, Document, Model } from 'mongoose';
 interface ICar extends Document {
     car_model: string;
     make: string;
+    year: string;
     price: number;
     img?: string;
     desc?: string;
     date_modified: Date;
+    owner: string;
 }
 
 const carSchema = new Schema<ICar>({
@@ -15,6 +17,10 @@ const carSchema = new Schema<ICar>({
         required: true,
     },
     make: {
+        type: String,
+        required: true,
+    },
+    year: {
         type: String,
         required: true,
     },
@@ -34,6 +40,10 @@ const carSchema = new Schema<ICar>({
     date_modified: {
         type: Date,
         default: Date.now(),
+    },
+    owner: {
+        type: String,
+        required: true,
     }
 });
 

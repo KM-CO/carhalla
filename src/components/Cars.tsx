@@ -1,9 +1,10 @@
 "use client";
-import { useState, useEffect } from "react";
-import { useSession } from "next-auth/react"; 
-import Card from "./Card";
+import { useState, useEffect, Suspense, lazy } from "react";
+import { useSession } from "next-auth/react";
+const Card = lazy(() => import("./Card"));
 import Link from "next/link";
 import noImage from "@/images/no-image.svg";
+import LoadingDots from "./LoadingDots";
 
 export type Car = {
   _id: string;
@@ -13,6 +14,7 @@ export type Car = {
   img: string | "";
   desc: string | "";
   year: string;
+  owner: string;
 };
 
 interface CarsProps {
@@ -24,7 +26,7 @@ interface CarsProps {
 
 export default function Cars({ selectedMake, selectedModel, selectedYear, selectedPrice }: CarsProps) {
   const [cars, setCars] = useState<Car[]>([]);
-  useSession(); 
+  const { status } = useSession();
 
   useEffect(() => {
     const fetchCars = async () => {
@@ -49,22 +51,28 @@ export default function Cars({ selectedMake, selectedModel, selectedYear, select
   return (
     <div className="m-3 grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-3 grid-rows-[repeat(auto-fill,minmax(280px,280px))] items-center">
       {cars.map((car: Car) => (
-        <Card
-          key={car._id}
-          id={car._id}
-          model={car.car_model}
-          make={car.make}
-          price={car.price}
-          desc={car.desc}
-          img={car?.img || noImage}
-          alt={`${car.car_model} ${car.make}`}
-        />
+        <Suspense key={car._id} fallback={<LoadingDots />}>
+          <Card
+            key={car._id}
+            id={car._id}
+            model={car.car_model}
+            make={car.make}
+            price={car.price}
+            desc={car.desc}
+            img={car?.img || noImage}
+            alt={`${car.car_model} ${car.make}`}
+            owner={car.owner}
+          />
+        </Suspense>
       ))}
-      <div className="flex border-3 border-neutral-500 items-center hover:border-neutral-700 align-middle justify-center h-[280px] w-[300px] mx-auto">
-        <Link href="car/" className="text-9xl text-neutral-500 hover:text-neutral-400">
-          +
-        </Link>
-      </div>
+      {status === "authenticated" ?
+        <div className="flex border-3 border-neutral-500 items-center hover:border-neutral-700 align-middle justify-center h-[280px] w-[300px] mx-auto">
+          <Link href="car/" className="text-9xl text-neutral-500 hover:text-neutral-400">
+            +
+          </Link>
+        </div>
+        : <></>
+      }
     </div>
   );
 }

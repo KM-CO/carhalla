@@ -9,17 +9,25 @@ import noImage from "../images/no-image.svg"
 import Submit from "./Submit";
 import Delete from "./Delete";
 import Cancel from "./Cancel";
+import Button from "./Button";
+import { useSession } from "next-auth/react";
 
 export default function Form({ readOnly }: InputHTMLAttributes<HTMLInputElement>) {
 
     const params = useParams();
     const id = params?.id as string;
 
+    const { data: session } = useSession();
+    const [isOwner, setIsOwner] = useState(false);
+
     const router = useRouter();
+
+    const [loading, setLoading] = useState(readOnly);
 
     const [img, setImg] = useState("");
     const [imgPreview, setImgPreview] = useState(noImage);
     const [make, setMake] = useState("");
+    const [year, setYear] = useState("");
     const [car_model, setCarModel] = useState("");
     const [price, setPrice] = useState(0);
     const [desc, setDesc] = useState("");
@@ -35,10 +43,14 @@ export default function Form({ readOnly }: InputHTMLAttributes<HTMLInputElement>
                 const carData = data.car;
                 setCarModel(carData.car_model || "");
                 setMake(carData.make || "");
+                setYear(carData.year || "");
                 setPrice(carData.price || 0);
                 setImg(carData.img || "");
                 setDesc(carData.desc || "");
                 setImgPreview(carData.img || noImage);
+                setLoading(false);
+                setIsOwner(carData.owner === session?.user?.name);
+
             } catch (error) {
                 console.log(`Error getting car ${id}:`, error);
             }
@@ -46,7 +58,7 @@ export default function Form({ readOnly }: InputHTMLAttributes<HTMLInputElement>
         if (id) {
             getCar();
         }
-    }, [id]);
+    }, [id, session]);
 
     const onDeleteClick = async () => {
         try {
@@ -63,16 +75,15 @@ export default function Form({ readOnly }: InputHTMLAttributes<HTMLInputElement>
     };
 
     const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
         if (id) {
-            e.preventDefault();
-
             try {
                 const response = await fetch(`/api/cars/${id}`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ car_model, make, price, img, desc }),
+                    body: JSON.stringify({ car_model, make, year, price, img, desc }),
                 });
 
                 if (!response.ok) {
@@ -81,6 +92,7 @@ export default function Form({ readOnly }: InputHTMLAttributes<HTMLInputElement>
 
                 setImg("");
                 setMake("");
+                setYear("");
                 setCarModel("");
                 setPrice(0);
                 setDesc("");
@@ -90,15 +102,13 @@ export default function Form({ readOnly }: InputHTMLAttributes<HTMLInputElement>
                 console.error('Error in updating car', error)
             }
         } else {
-            e.preventDefault();
-
             try {
                 const response = await fetch(`/api/cars`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ car_model, make, price, img, desc }),
+                    body: JSON.stringify({ car_model, make, year, price, img, desc, owner: session?.user?.name as string }),
                 });
 
                 if (!response.ok) {
@@ -107,6 +117,7 @@ export default function Form({ readOnly }: InputHTMLAttributes<HTMLInputElement>
 
                 setImg("");
                 setMake("");
+                setYear("");
                 setCarModel("");
                 setPrice(0);
                 setDesc("");
@@ -155,23 +166,41 @@ export default function Form({ readOnly }: InputHTMLAttributes<HTMLInputElement>
                 </div>
                 <div className={styles.formFieldsContainer}>
                     <div className={styles.inputFieldContainer}>
-                        <input readOnly={readOnly} className={styles.inputField} placeholder="Image link" value={img || ""} onChange={(e) => validateURL(e.target.value)} />
+                        <input disabled={loading} readOnly={readOnly && !isOwner} className={styles.inputField} placeholder={loading ? "Loading..." : "Image link"} value={img || ""} onChange={(e) => validateURL(e.target.value)} />
+                    </div>
+                    <div className={`${styles.grouped}`}>
+                        <div className={`${styles.inputFieldContainer} ${styles.flexGrow}`}>
+                            <input disabled={loading} readOnly={readOnly && !isOwner} className={`${styles.inputField}`} placeholder={loading ? "Loading..." : "Model"} value={car_model || ""} onChange={(e) => setCarModel(e.target.value)} required />
+                        </div>
+                        <div className={`${styles.inputFieldContainer} ${styles.flexGrow}`}>
+                            <input disabled={loading} readOnly={readOnly && !isOwner} className={`${styles.inputField}`} placeholder={loading ? "Loading..." : "Make"} value={make || ""} onChange={(e) => setMake(e.target.value)} required />
+                        </div>
+                        <div className={`${styles.inputFieldContainer} ${styles.flexShrink}`}>
+                            <input disabled={loading} readOnly={readOnly && !isOwner} className={`${styles.inputField}`} placeholder={loading ? "Loading..." : "Year"} value={year || ""} onChange={(e) => setYear(e.target.value)} required />
+                        </div>
+                        <div className={`${styles.inputFieldContainer} ${styles.flexShrink}`}>
+                            <input disabled={loading} readOnly={readOnly && !isOwner} className={`${styles.inputField}`} placeholder={loading ? "Loading..." : "Price"} value={price || ""} onChange={(e) => setPrice(parseInt(e.target.value))} required />
+                        </div>
                     </div>
                     <div className={styles.inputFieldContainer}>
-                        <input readOnly={readOnly} className={styles.inputField} placeholder="Model" value={car_model || ""} onChange={(e) => setCarModel(e.target.value)} required />
-                    </div><div className={styles.inputFieldContainer}>
-                        <input readOnly={readOnly} className={styles.inputField} placeholder="Make" value={make || ""} onChange={(e) => setMake(e.target.value)} required />
-                    </div><div className={styles.inputFieldContainer}>
-                        <input readOnly={readOnly} className={styles.inputField} placeholder="Price" value={price || ""} onChange={(e) => setPrice(parseInt(e.target.value))} required />
-                    </div>
-                    <div className={styles.inputFieldContainer}>
-                        <textarea readOnly={readOnly} rows={8} className={`${styles.inputField} ${styles.textareaField}`} value={desc || ""} onChange={(e) => setDesc(e.target.value)} />
+                        <textarea disabled={loading} readOnly={readOnly && !isOwner} rows={8} className={`${styles.inputField} ${styles.textareaField}`} value={desc || ""} onChange={(e) => setDesc(e.target.value)} placeholder={loading ? "Loading..." : "Description"} />
                     </div>
                 </div>
-                {!readOnly ? <div className={styles.buttonContainer}>
-                    <Submit />
-                    {id ? <Delete onClick={onDeleteClick} /> : <Cancel />}
-                </div> : <div>Contact/Buy button</div>}
+                <div className={styles.buttonContainer}>
+                    {loading ? <Button className={styles.loading} /> :
+                        <>
+                            {!readOnly || isOwner ?
+                                <>
+                                    <Submit />
+                                    {id ?
+                                        <Delete onClick={onDeleteClick} /> : <Cancel />
+                                    }
+                                </> :
+                                <div>Contact/Buy button</div>
+                            }
+                        </>
+                    }
+                </div>
             </form>
         </div>
     );

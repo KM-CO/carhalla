@@ -1,7 +1,7 @@
 import Image from "next/image";
 import styles from "./Card.module.css";
 import CloseButton from "./CloseButton";
-import View from "./View";
+import ViewEdit from "./ViewEdit";
 import { useSession } from "next-auth/react";
 
 interface CardProps {
@@ -12,11 +12,12 @@ interface CardProps {
   img: string;
   alt: string;
   desc: string;
+  owner: string;
 }
 
-export default function Card({ id, model, make, price, img, alt, desc }: CardProps) {
+export default function Card({ id, model, make, price, img, alt, desc, owner }: CardProps) {
   const { data: session } = useSession();
-  const isLoggedIn = !!session; 
+  const isOwner = session?.user as string === owner; 
 
   const onDeleteClick = async () => {
     try {
@@ -37,7 +38,7 @@ export default function Card({ id, model, make, price, img, alt, desc }: CardPro
       <div className={styles["card-price"]}>
         ${Intl.NumberFormat().format(price)}
       </div>
-      {isLoggedIn && <CloseButton onClick={onDeleteClick} />} 
+      {isOwner && <CloseButton onClick={onDeleteClick} />} 
       <div className={styles["card-image-container"]}>
         <Image
           height={200}
@@ -55,7 +56,7 @@ export default function Card({ id, model, make, price, img, alt, desc }: CardPro
         </div>
       </div>
       <div className={styles["card-button-container"]}>
-        <View id={id} />
+        <ViewEdit id={id} owner={owner} />
       </div>
     </div>
   );

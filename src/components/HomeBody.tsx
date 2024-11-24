@@ -2,7 +2,7 @@
 import { useState } from "react";
 import Cars from "./Cars";
 import Filter from "./Filter";
-import styles from "./HomeBody.module.css"
+import styles from "./HomeBody.module.css";
 
 export default function HomeBody() {
 

@@ -3,7 +3,7 @@ import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 import { User } from "./models/userSchema";
-import { connectMongoDB } from "./libs/mongodb";
+import connectMongoDB from "./libs/mongodb";
 
 export const {
     handlers: { GET, POST },
