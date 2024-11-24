@@ -67,10 +67,10 @@ const Filter: React.FC<FilterProps> = ({
       {/* Make Dropdown */}
       <div className={styles.buttonDropdownContainer}>
         <button
-          className={`${styles.filterButton} ${styles.filterButtonEllipsis}`}
+          className={`${styles.filterButton} ${isMakeDropdownOpen ? styles.open : ""}`}
           onClick={() => setIsMakeDropdownOpen((prev) => !prev)}
         >
-          {selectedMake}
+          {selectedMake} <span className={styles.arrow}>{isMakeDropdownOpen ? "▲" : "▼"}</span>
         </button>
         {isMakeDropdownOpen && (
           <div className={styles.dropdownContainer}>
@@ -91,13 +91,14 @@ const Filter: React.FC<FilterProps> = ({
         )}
       </div>
 
+      {/* Repeat similar structure for Model, Year, and Price */}
       {/* Model Dropdown */}
       <div className={styles.buttonDropdownContainer}>
         <button
-          className={`${styles.filterButton} ${styles.filterButtonEllipsis}`}
+          className={`${styles.filterButton} ${isModelDropdownOpen ? styles.open : ""}`}
           onClick={() => setIsModelDropdownOpen((prev) => !prev)}
         >
-          {selectedModel}
+          {selectedModel} <span className={styles.arrow}>{isModelDropdownOpen ? "▲" : "▼"}</span>
         </button>
         {isModelDropdownOpen && (
           <div className={styles.dropdownContainer}>
@@ -121,10 +122,10 @@ const Filter: React.FC<FilterProps> = ({
       {/* Year Dropdown */}
       <div className={styles.buttonDropdownContainer}>
         <button
-          className={styles.filterButton}
+          className={`${styles.filterButton} ${isYearDropdownOpen ? styles.open : ""}`}
           onClick={() => setIsYearDropdownOpen((prev) => !prev)}
         >
-          {selectedYear}
+          {selectedYear} <span className={styles.arrow}>{isYearDropdownOpen ? "▲" : "▼"}</span>
         </button>
         {isYearDropdownOpen && (
           <div className={styles.dropdownContainer}>
@@ -148,10 +149,10 @@ const Filter: React.FC<FilterProps> = ({
       {/* Price Dropdown */}
       <div className={styles.buttonDropdownContainer}>
         <button
-          className={styles.filterButton}
+          className={`${styles.filterButton} ${isPriceDropdownOpen ? styles.open : ""}`}
           onClick={() => setIsPriceDropdownOpen((prev) => !prev)}
         >
-          {selectedPrice}
+          {selectedPrice} <span className={styles.arrow}>{isPriceDropdownOpen ? "▲" : "▼"}</span>
         </button>
         {isPriceDropdownOpen && (
           <div className={styles.dropdownContainer}>
