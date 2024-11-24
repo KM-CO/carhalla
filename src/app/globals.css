@@ -76,12 +76,6 @@ input:focus, textarea:focus {
   /* focus:ring-2 focus:ring-blue-500 */
 }
 
-svg {
-  color: red;
-}
-.test {
-  color: red;
-}
 @media (prefers-color-scheme: light) {
   :root {
     --background: #c9c9c9;

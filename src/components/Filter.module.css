@@ -123,6 +123,8 @@
 }
 
 .resetIcon {
+    width: 1em;
+    fill: #fff;
     transition: all 0.3s ease;
 }
 
