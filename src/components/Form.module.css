@@ -67,8 +67,9 @@
   transition: border-color 0.2s ease-in-out, transform 0.3s ease-in-out;
 }
 
-.inputField:disabled {
+.inputField:disabled, .inputField:read-only {
   background-color: var(--secondary);
+  box-shadow: none;
 }
 
 .textareaField {
@@ -76,9 +77,8 @@
   vertical-align: bottom;
 }
 
-.inputField:focus {
+.inputField:read-write:focus {
   border-color: var(--tertiary-active);
-  outline: none;
   box-shadow: 0 0 8px rgba(from var(--tertiary-active) r g b / 0.6);
   transform: scale(1.02);
 }
