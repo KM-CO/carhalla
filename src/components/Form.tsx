@@ -49,7 +49,7 @@ export default function Form({ readOnly }: InputHTMLAttributes<HTMLInputElement>
                 setDesc(carData.desc || "");
                 setImgPreview(carData.img || noImage);
                 setLoading(false);
-                setIsOwner(carData.owner === session?.user?.name);
+                setIsOwner(session ? carData.owner === session?.user?.name : false);
 
             } catch (error) {
                 console.log(`Error getting car ${id}:`, error);
