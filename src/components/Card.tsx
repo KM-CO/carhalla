@@ -17,7 +17,7 @@ interface CardProps {
 
 export default function Card({ id, model, make, price, img, alt, desc, owner }: CardProps) {
   const { data: session } = useSession();
-  const isOwner = session?.user as string === owner; 
+  const isOwner = session ?  session.user?.name === owner : false; 
 
   const onDeleteClick = async () => {
     try {
