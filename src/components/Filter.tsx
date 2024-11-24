@@ -157,31 +157,32 @@ const Filter: React.FC<FilterProps> = ({
       </div>
 
       {/* Price Dropdown */}
-      <div className={styles.buttonDropdownContainer}>
-        <button
-          className={`${styles.filterButton} ${isPriceDropdownOpen ? styles.open : ""}`}
-          onClick={() => setIsPriceDropdownOpen((prev) => !prev)}
+<div className={styles.buttonDropdownContainer}>
+  <button
+    className={`${styles.filterButton} ${isPriceDropdownOpen ? styles.open : ""}`}
+    onClick={() => setIsPriceDropdownOpen((prev) => !prev)}
+  >
+    {selectedPrice} <span className={styles.arrow}>{isPriceDropdownOpen ? "▲" : "▼"}</span>
+  </button>
+  {isPriceDropdownOpen && (
+    <div className={styles.dropdownContainer}>
+      {carPrices.map((price, index) => (
+        <div
+          key={index}
+          className={styles.dropdownItem}
+          onClick={() => {
+            setSelectedPrice(price === "All Prices" ? "Price" : price);
+            onPriceFilterChange(price === "All Prices" ? null : price);
+            setIsPriceDropdownOpen(false);
+          }}
         >
-          {selectedPrice} <span className={styles.arrow}>{isPriceDropdownOpen ? "▲" : "▼"}</span>
-        </button>
-        {isPriceDropdownOpen && (
-          <div className={styles.dropdownContainer}>
-            {carPrices.map((price, index) => (
-              <div
-                key={index}
-                className={styles.dropdownItem}
-                onClick={() => {
-                  setSelectedPrice(price === "All Prices" ? "Price" : price);
-                  onPriceFilterChange(price === "All Prices" ? null : price);
-                  setIsPriceDropdownOpen(false);
-                }}
-              >
-                {price}
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
+          {price}
+        </div>
+      ))}
+    </div>
+  )}
+</div>
+
 
       {/* Reset Filters */}
       <button className={styles.resetButton} onClick={resetFilters}>
