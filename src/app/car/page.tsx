@@ -7,7 +7,7 @@ export default async function Page() {
     const session = await auth();
     return (
         <SessionProvider session={session}>
-            <Form />
+            <Form readOnly={false} />
         </SessionProvider>
     );
 }

@@ -2,6 +2,7 @@ import Image from "next/image";
 import styles from "./Card.module.css";
 import CloseButton from "./CloseButton";
 import ViewEdit from "./ViewEdit";
+import noImage from "@/images/no-image.svg";
 import { useSession } from "next-auth/react";
 
 interface CardProps {
@@ -43,7 +44,7 @@ export default function Card({ id, model, make, price, img, alt, desc, owner }: 
         <Image
           height={200}
           width={250}
-          src={img}
+          src={img || noImage}
           alt={alt}
           className={styles["card-image"]}
           priority

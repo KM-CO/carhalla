@@ -3,7 +3,7 @@ import mongoose, { Schema, Document, Model } from 'mongoose';
 interface ICar extends Document {
     car_model: string;
     make: string;
-    year: string;
+    year: number;
     price: number;
     img?: string;
     desc?: string;
@@ -21,7 +21,7 @@ const carSchema = new Schema<ICar>({
         required: true,
     },
     year: {
-        type: String,
+        type: Number,
         required: true,
     },
     price: {

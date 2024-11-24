@@ -62,14 +62,27 @@
   width: 100%;
   min-width: 100px;
   padding: 0.75rem;
+  color: var(--foreground);
   border-radius: 10px;
   font-size: 1rem;
   transition: border-color 0.2s ease-in-out, transform 0.3s ease-in-out;
 }
 
-.inputField:disabled, .inputField:read-only {
-  background-color: var(--secondary);
+.yearField {
+  height: 50px;
+  outline: none;
+  min-width: 100px;
+  padding: 0.75rem;
+  color: var(--foreground);
+  border-radius: 10px;
+  font-size: 1rem;
+  transition: border-color 0.2s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.inputField:disabled, .inputField:read-only, .yearField:disabled, .divReadOnly {
+  background-color: var(--secondary) !important;
   box-shadow: none;
+  opacity: 1;
 }
 
 .textareaField {
@@ -77,10 +90,14 @@
   vertical-align: bottom;
 }
 
-.inputField:read-write:focus {
+.inputField:read-write:focus, .yearField:focus {
   border-color: var(--tertiary-active);
   box-shadow: 0 0 8px rgba(from var(--tertiary-active) r g b / 0.6);
   transform: scale(1.02);
+}
+
+.divLoading {
+  color: #9ca3b0 !important;
 }
 
 .formFieldsContainer {
@@ -107,6 +124,12 @@
   background-color: var(--secondary);
   width: 5.5rem;
   height: 2.5rem;
+}
+
+.label {
+  color: var(--foreground);
+  font-weight: 700;
+  padding-left: 5px;
 }
 
 @media (max-width: 570px) {
