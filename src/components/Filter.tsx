@@ -100,7 +100,7 @@ const Filter: React.FC<FilterProps> = ({
           onClick={() => setIsMakeDropdownOpen((prev) => !prev)}
         >
           <span className={styles.filterButtonEllipsis}>{selectedMake}</span>
-          <span className={styles.arrow}>{isMakeDropdownOpen ? "▲" : "▼"}</span>
+          <span className={styles.arrow}>{isMakeDropdownOpen ? "▼" : "►" }</span>
         </button>
         {isMakeDropdownOpen && (
           <div className={styles.dropdownContainer}>
@@ -129,7 +129,7 @@ const Filter: React.FC<FilterProps> = ({
           onClick={() => setIsModelDropdownOpen((prev) => !prev)}
         >
           <span className={styles.filterButtonEllipsis}>{selectedModel}</span>
-          <span className={styles.arrow}>{isModelDropdownOpen ? "▲" : "▼"}</span>
+          <span className={styles.arrow}>{isModelDropdownOpen ? "▼" : "►"}</span>
         </button>
         {isModelDropdownOpen && (
           <div className={styles.dropdownContainer}>
@@ -157,7 +157,7 @@ const Filter: React.FC<FilterProps> = ({
           onClick={() => setIsYearDropdownOpen((prev) => !prev)}
         >
           <span className={styles.filterButtonEllipsis}>{selectedYear}</span>
-          <span className={styles.arrow}>{isYearDropdownOpen ? "▲" : "▼"}</span>
+          <span className={styles.arrow}>{isYearDropdownOpen ? "▼" : "►"}</span>
         </button>
         {isYearDropdownOpen && (
           <div className={styles.dropdownContainer}>
@@ -185,7 +185,7 @@ const Filter: React.FC<FilterProps> = ({
           onClick={() => setIsPriceDropdownOpen((prev) => !prev)}
         >
           <span className={styles.filterButtonEllipsis}>{selectedPrice}</span>
-          <span className={styles.arrow}>{isPriceDropdownOpen ? "▲" : "▼"}</span>
+          <span className={styles.arrow}>{isPriceDropdownOpen ? "▼" : " ►"}</span>
         </button>
         {isPriceDropdownOpen && (
           <div className={styles.dropdownContainer}>
