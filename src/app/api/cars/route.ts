@@ -5,7 +5,7 @@ import { NextRequest } from "next/server";
 
 export async function GET(request: NextRequest) {
   try {
-    // Establish a connection to MongoDB
+    
     await connectMongoDB();
 
     const { searchParams } = new URL(request.url);
@@ -15,7 +15,7 @@ export async function GET(request: NextRequest) {
     const year = searchParams.get("year");
     const priceRange = searchParams.get("priceRange");
 
-    // Handle filter options request with dynamic filtering
+   
     if (filterOptions) {
       const query: Record<string, unknown> = {};
       if (make) query.make = make;
@@ -29,7 +29,7 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ makes, models, years });
     }
 
-    // Build query for fetching cars
+    
     const query: Record<string, unknown> = {};
     if (make) query.make = make;
     if (model) query.car_model = model;
@@ -48,9 +48,9 @@ export async function GET(request: NextRequest) {
       }
     }
 
-    console.log("Query:", query); // Debug the query
+    console.log("Query:", query); 
 
-    // Fetch cars based on the constructed query
+    
     const cars = await Car.find(query);
 
     return NextResponse.json({ cars });
@@ -62,11 +62,18 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
-    // Handle POST requests to add a new car
-    const { car_model, make, year, price, img, desc, owner } = await request.json();
-    await connectMongoDB();
-    await Car.create({ car_model, make, year, price, img, desc, owner });
+    
+    const { car_model, make, year, price, img, desc, owner, ownerEmail } = await request.json();
 
+    console.log('Received data:', { car_model, make, year, price, img, desc, owner, ownerEmail });
+
+    
+    await connectMongoDB();
+
+    
+    const car = await Car.create({ car_model, make, year, price, img, desc, owner, ownerEmail });
+    console.log('Inserted car:', car.toObject());
+    
     return NextResponse.json({ message: "Car added successfully" }, { status: 201 });
   } catch (error) {
     console.error("Error adding car:", error);
