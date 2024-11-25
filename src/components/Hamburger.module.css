@@ -1,0 +1,27 @@
+.hamburger {
+    display: flex;
+    height: 30px;
+    width: 30px;
+    flex-direction: column;
+    gap: .4em;
+    justify-content: center;
+    align-items: center;
+}
+.patty {
+    width: 24px;
+    content: " ";
+    height: 2px;
+    background-color: #f7fafc;
+}
+.hamburger:hover .patty {
+  background-color: #878787;
+}
+.close {
+    position: relative !important;
+    align-items: center;
+    top: 0 !important;
+    right: 0 !important;
+}
+.close::after, .close::before {
+    display: flex;
+}

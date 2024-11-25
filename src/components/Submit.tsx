@@ -1,3 +1,4 @@
+"use client";
 import Button from "./Button";
 import styles from "./Submit.module.css";
 

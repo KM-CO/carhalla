@@ -32,16 +32,10 @@
   color: var(--secondary);
 }
 
-.image:hover {
-  transform: scale(1.05);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-}
-
 .inputFieldContainer {
   width: 100%;
   margin-bottom: 1.5rem;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .grouped {
@@ -62,10 +56,10 @@
   width: 100%;
   min-width: 100px;
   padding: 0.75rem;
-  color: var(--foreground);
   border-radius: 10px;
   font-size: 1rem;
   transition: border-color 0.2s ease-in-out, transform 0.3s ease-in-out;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .yearField {
@@ -73,15 +67,20 @@
   outline: none;
   min-width: 100px;
   padding: 0.75rem;
-  color: var(--foreground);
   border-radius: 10px;
   font-size: 1rem;
+  border: 1px solid var(--secondary);
   transition: border-color 0.2s ease-in-out, transform 0.3s ease-in-out;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.inputField:disabled, .inputField:read-only, .yearField:disabled, .divReadOnly {
+.inputField:disabled,
+.inputField:read-only,
+.yearField:disabled,
+.divReadOnly {
   background-color: var(--secondary) !important;
-  box-shadow: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  color: var(--foreground);
   opacity: 1;
 }
 
@@ -90,7 +89,8 @@
   vertical-align: bottom;
 }
 
-.inputField:read-write:focus, .yearField:focus {
+.inputField:read-write:focus,
+.yearField:focus {
   border-color: var(--tertiary-active);
   box-shadow: 0 0 8px rgba(from var(--tertiary-active) r g b / 0.6);
   transform: scale(1.02);
@@ -140,5 +140,11 @@
 
   .flexGrow {
     grid-column: span 2;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  .yearField {
+    border: 1px solid #cbd5e0;
   }
 }

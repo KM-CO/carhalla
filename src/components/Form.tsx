@@ -69,7 +69,7 @@ export default function Form({ readOnly }: InputHTMLAttributes<HTMLInputElement>
 
     const onDeleteClick = async () => {
         try {
-            const response = await fetch(`/api/items/${id}`, {
+            const response = await fetch(`/api/cars/${id}`, {
                 method: 'DELETE',
             });
             if (!response.ok) {

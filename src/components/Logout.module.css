@@ -2,7 +2,7 @@
     padding: 0.5rem 1rem;
     color: white;
     background-color: var(--red); /* Red color for logout */
-    border-radius: 0.375rem;
+    border-radius: 0.375rem !important;
     font-size: 1rem;
     font-weight: bold;
     cursor: pointer;

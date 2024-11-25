@@ -1,9 +1,11 @@
+"use client";
 import Image from "next/image";
 import styles from "./Card.module.css";
 import CloseButton from "./CloseButton";
 import ViewEdit from "./ViewEdit";
 import noImage from "@/images/no-image.svg";
 import { useSession } from "next-auth/react";
+import Link from "next/link";
 
 interface CardProps {
   id: string;
@@ -35,7 +37,7 @@ export default function Card({ id, model, make, price, img, alt, desc, owner }: 
   };
 
   return (
-    <div className={styles.card} id={id}>
+    <Link href={(isOwner ? `car` : `view`) + `/${id}`} className={styles.card} id={id}>
       <div className={styles["card-price"]}>
         ${Intl.NumberFormat().format(price)}
       </div>
@@ -57,8 +59,8 @@ export default function Card({ id, model, make, price, img, alt, desc, owner }: 
         </div>
       </div>
       <div className={styles["card-button-container"]}>
-        <ViewEdit id={id} owner={owner} />
+        <ViewEdit owner={owner} />
       </div>
-    </div>
+    </Link>
   );
 }
