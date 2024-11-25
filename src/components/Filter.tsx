@@ -154,6 +154,7 @@ const Filter: React.FC<FilterProps> = ({
       <div className={styles.buttonDropdownContainer}>
         <button
           className={`${styles.filterButton} ${isYearDropdownOpen ? styles.open : ""}`}
+          style={{ fontSize: adjustFontSize(selectedModel) }}
           onClick={() => setIsYearDropdownOpen((prev) => !prev)}
         >
           <span className={styles.filterButtonEllipsis}>{selectedYear}</span>
@@ -180,31 +181,34 @@ const Filter: React.FC<FilterProps> = ({
 
       {/* Price Dropdown */}
       <div className={styles.buttonDropdownContainer}>
-        <button
-          className={`${styles.filterButton} ${isPriceDropdownOpen ? styles.open : ""}`}
-          onClick={() => setIsPriceDropdownOpen((prev) => !prev)}
-        >
-          <span className={styles.filterButtonEllipsis}>{selectedPrice}</span>
-          <span className={styles.arrow}>{isPriceDropdownOpen ? "▼" : " ►"}</span>
+      <button
+      className={`${styles.filterButton} ${isPriceDropdownOpen ? styles.open : ""}`}
+      onClick={() => setIsPriceDropdownOpen((prev) => !prev)}
+      >
+        <span className={styles.filterButtonEllipsis}>{selectedPrice}</span>
+        <span className={styles.arrow}>{isPriceDropdownOpen ? "▼" : "►"}</span>
         </button>
         {isPriceDropdownOpen && (
           <div className={styles.dropdownContainer}>
             {carPrices.map((price, index) => (
               <div
-                key={index}
-                className={styles.dropdownItem}
-                onClick={() => {
-                  setSelectedPrice(price === "All Prices" ? "Price" : price);
-                  onPriceFilterChange(price === "All Prices" ? null : price);
-                  setIsPriceDropdownOpen(false);
-                }}
+              key={index}
+              className={styles.dropdownItem}
+              onClick={() => {
+                setSelectedPrice(price === "All Prices" ? "Price" : price);
+                onPriceFilterChange(price === "All Prices" ? null : price);
+                setIsPriceDropdownOpen(false);
+              }}
               >
                 {price}
-              </div>
+                </div>
             ))}
-          </div>
+            </div>
         )}
-      </div>
+        </div>
+      
+
+
 
       {/* Reset Filters */}
       <button className={styles.resetButton} onClick={resetFilters}>
