@@ -1,0 +1,57 @@
+.contact-button {
+    display: inline-block;
+    background: linear-gradient(45deg, #4A90E2, #50E3C2); 
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 12px 20px;
+    border-radius: 30px;
+    text-align: center;
+    text-decoration: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+  }
+  
+  .contact-button:hover {
+    background: linear-gradient(45deg, #50E3C2, #4A90E2); 
+    transform: translateY(-3px); 
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  }
+  
+  .contact-button:active {
+    transform: translateY(1px); 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .contact-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(72, 144, 226, 0.5); 
+  }
+  
+  .edit-button {
+    background: #4A90E2;
+    color: white;
+    border-radius: 25px;
+    border: none;
+    padding: 10px 20px;
+    font-weight: 600;
+    transition: background 0.3s ease;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .edit-button:hover {
+    background: #50E3C2; 
+  }
+  
+  .edit-button:active {
+    transform: translateY(1px);
+  }
+  
+  .edit-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(72, 144, 226, 0.5); 
+  }
+  
