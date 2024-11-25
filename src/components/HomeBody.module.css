@@ -1,10 +1,36 @@
 .container {
     display: grid;
     grid-template: auto / min-content auto;
+    grid-template-areas:
+    "filter cars";
+    min-height: 100vh;
+}
+
+.filter {
+    grid-area: filter;
+}
+.cars {
+    grid-area: cars;
 }
 
 @media (max-width: 768px) {
     .container {
-        grid-template: min-content auto / auto; 
+        grid-template: min-content auto / auto;
+        grid-template-areas:
+        "filter"
+        "cars";
+    }
+    .filter {
+        z-index: 999;
+        position: sticky;
+        top: 5em;
+    }
+}
+
+@media (max-width: 516px) {
+    .filter {
+        z-index: 999;
+        position: sticky;
+        top: 8.5em;
     }
 }

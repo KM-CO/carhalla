@@ -1,7 +1,5 @@
-.filterContainer {
+.filters {
     min-width: 100px; 
-    background: var(--primary); 
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
     padding: 25px;
     display: flex;
     flex-direction: column;
@@ -9,8 +7,14 @@
     gap: 10px;
 }
 
+.filterContainer {
+    background: var(--primary); 
+    height: 100%;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+}
+
 .filterButton {
-    padding: 0.85rem 1.5rem;
+    padding: 0.35rem 1.5rem;
     border: none;
     border-radius: 30px;
     font-size: 1.1rem;
@@ -28,6 +32,15 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+
+.filterButton .filterButtonEllipsis {
+    display: inline-block;
+    max-width: 100%; /* Restrict width within the button */
+    overflow: hidden; /* Clip the overflowing text */
+    text-overflow: ellipsis; /* Show ellipsis for overflowing text */
+    white-space: nowrap; /* Prevent text wrapping */
+    text-align: center; /* Center-align text within the button */
 }
 
 /* This is for the drop down arrow. */
@@ -150,9 +163,33 @@
     position: relative;
 }
 
+/* Styles for the Price Filter */
+.priceFilterContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .priceLine {
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+.arrow {
+    font-size: 1rem;
+    transition: transform 0.3s ease;
+  }
+
+  .menu {
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em;
+    display: none;
+    color: var(--foreground);
+    font-weight: 600;
+}
 /* Media Queries for Tablets */
 @media (max-width: 768px) {
-    .filterContainer {
+    .filters {
         flex-direction: row; /* Align filters in a row */
         flex-wrap: wrap; /* Allow wrapping to the next line */
         justify-content: center;
@@ -186,17 +223,20 @@
         width: max-content;
         max-width: 200px;
     }
-}
-
-@media (min-width: 516px) and (max-width: 768px) {
     .resetButton {
         margin-top: 0px;
     }
 }
 
+@media (min-width: 516px) {
+    .filters {
+        display: flex !important;
+    }
+}
+
 /* Media Queries for Phones */
 @media (max-width: 516px) {
-    .filterContainer {
+    .filters {
         flex-direction: column; /* Stack everything vertically */
         align-items: stretch; /* Make items take full width */
         gap: 5px; /* Reduce spacing between items */
@@ -217,5 +257,9 @@
     .resetButton {
         font-size: 1rem; /* Slightly smaller reset button */
         padding: 0.4rem; /* Adjust padding */
+    }
+
+    .menu {
+        display: flex;
     }
 }

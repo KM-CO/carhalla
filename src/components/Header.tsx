@@ -6,56 +6,71 @@ import Login from './Login';
 import Signup from './Signup';
 import Logout from './Logout';
 import Title from './Title';
-import CloseButton from './CloseButton';
-import Hamburger from './Hamburger';
+import { Car } from './Cars';
 
-const Header = () => {
+interface HeaderProps {
+  onSearchResults: (cars: Car[]) => void; // Allow the header to pass search results
+}
 
+export default function Header({ onSearchResults }: HeaderProps) {
   const [searchQuery, setSearchQuery] = useState('');
-  const [open, setOpen] = useState(false);
-  const { data: session, status } = useSession()
-  const loggedInUser = session?.user;
+  const { status } = useSession();
 
+  // Handle search input changes
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(event.target.value);
   };
+  const handleSearchSubmit = async () => {
+    if (searchQuery.trim() === '') {
+      return; // Exit if there's no search query
+    }
 
-  const handleSearchSubmit = () => {
-    console.log("Search query:", searchQuery);
+    try {
+      // Fetch search results from API
+      const response = await fetch(`/api/cars?make=${encodeURIComponent(searchQuery)}`);
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch search results");
+      }
+
+      // Parse the response to JSON
+      const data = await response.json();
+
+      // Ensure data has cars and pass them to the onSearchResults function
+      if (data?.cars && Array.isArray(data.cars)) {
+        onSearchResults(data.cars);
+      } else {
+        console.error("Invalid response structure:", data);
+      }
+    } catch (error) {
+      console.error("Error searching cars:", error);
+    }
   };
 
-  const toggleMenu = () => {
-    setOpen(!open);
-  }
 
   return (
     <header className={styles.header}>
-      {/* Logo Section */}
-      <div className={styles.leftSection}>
-        <Title />
-      </div>
-
-      {/* Search Bar Section */}
-      <div className={styles.searchContainer}>
-        <input
-          type="text"
-          className={styles.searchInput}
-          value={searchQuery}
-          onChange={handleSearchChange}
-          placeholder="Search cars..."
-        />
-        <button className={styles.searchButton} onClick={handleSearchSubmit}>
-          Search
-        </button>
-      </div>
-
-      <div id="hamburger" className={styles.hamburger} onClick={toggleMenu}><Hamburger /></div>
-
       <nav className={styles.nav}>
-        <div id="buttons" className={`${styles.buttons}`} style={{display: (open ? "" : "none")}}>
+        {/* Logo Section */}
+        <div className={styles.leftSection}>
+          <Title />
+        </div>
+        {/* Search Bar Section */}
+        <div className={styles.searchContainer}>
+          <input
+            type="text"
+            className={styles.searchInput}
+            value={searchQuery}
+            onChange={handleSearchChange}
+            placeholder="Search for a car (e.g., Tesla, Ferrari, etc.)..."
+          />
+          <button className={styles.searchButton} onClick={handleSearchSubmit}>
+            Search
+          </button>
+        </div>
+        <div id="buttons" className={`${styles.buttons}`}>
           {status === "authenticated" ? (
             <>
-              <span className={styles.greeting}>Hello, {loggedInUser?.name}</span>
               <Logout />
             </>
           ) : (
@@ -66,7 +81,6 @@ const Header = () => {
           )}
         </div>
       </nav>
-    </header >
+    </header>
   );
-};
-export default Header;
+}

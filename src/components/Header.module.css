@@ -1,20 +1,23 @@
 /* src/app/Header.module.css */
 
 .header {
-  container: header / size;
-  z-index: 1;
-  display: grid;
-  grid-template: 3em / max-content 1fr auto;
-  gap: 2em;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1rem 1.5rem;
-  background-color: var(--primary);
+  container-name: header;
+  position: sticky;
+  /* Keep header at the top of the viewport */
+  top: 0;
+  /* Align header to the top */
+  z-index: 1000;
+  height: 100%;
+  /* Ensure header stays on top of other elements */
   color: white;
-  width: 100%;
-  justify-content: center;
-  grid-template-areas:
-    "title search nav";
+  /* Add shadow for better visibility */
+}
+
+.buttons {
+  grid-area: buttons;
+  gap: .5em;
+  display: flex;
+  justify-content: right;
 }
 
 /* Default styling for desktop */
@@ -37,7 +40,6 @@
 }
 
 .searchButton {
-  flex-shrink: 2;
   padding: 0.5rem 1rem;
   border-radius: 5px;
   border: none;
@@ -57,114 +59,45 @@
 }
 
 .nav {
+  background-color: var(--primary);
+  padding: 1rem 1.5rem;
+  height: 100%;
+  container: nav / size;
+  min-width: 150px;
   grid-area: nav;
-  display: flex;
-  gap: 1rem;
+  display: grid;
+  grid-template: 3em / min-content 1fr auto max-content;
+  column-gap: 1em;
+  row-gap: .5em;
   align-items: center;
+  grid-template-areas:
+    "title nav";
+  grid-template-areas:
+  "title search buttons";
 }
 
-.greeting {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  text-wrap: nowrap;
-  font-size: .95rem;
-  /* Adjust size */
-  font-weight: bold;
-  color: var(--tertiary-alt);
-  /* Light green for emphasis */
-  padding: 0.5rem;
-  border: 1px solid var(--tertiary-alt);
-  /* Optional border */
-  border-radius: 5px;
-  transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
-}
-
-.greeting:hover {
-  color: var(--tertiary-alt-hover);
-  /* Darker green on hover */
-}
-
-.buttons {
-  min-width: 350px;
-  width: 100%;
-  container: buttons / size;
-  gap: 1em;
-  align-items: center;
-}
-
-@media (max-width: 850px) {
-  .header {
-    grid-template: 3em 3em / 1fr;
-    grid-template-areas:
-      "title nav"
-      "search search";
-    row-gap: .5em;
-  }
-
-  /* Responsive layout for small screens */
-  @container header (width > 850px) {
-
-    .leftSection {
-      width: 100%;
-      justify-content: left;
-    }
-
-    .searchContainer {
-      width: 100%;
-      display: flex;
-      justify-content: center;
-    }
-
-    .nav {
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      flex-direction: column;
-    }
+@media (max-width: 580px) {
+  .nav {
+    grid-template: 3em 3em / min-content auto;
+    grid-template-areas: "title buttons" "search search";
   }
 }
 
 
 @media (max-width: 450px) {
-  .header {
-    grid-template: 3em auto 3em / 1fr;
-    grid-template-areas:
-      "title hamburger"
-      "nav nav"
-      "search search";
-    row-gap: .25em;
-  }
-  .buttons {
-    display: none;
-    flex-direction: row;
-    padding: .25em;
-    border-radius: .375em;
-    border: 1px solid var(--secondary);
-  }
-
-  @container buttons (width > 100px) {
-
-    .hamburger {
-      grid-area: hamburger;
-      display: flex;
-    }
-
-    .nav {
-      align-items: flex-end;
-    }
-
-    .hamburger {
-      display: none;
-    }
+  .hamburger {
+    grid-area: hamburger;
+    display: flex;
   }
 }
 
+/* 
 @media (min-width: 451px) {
-  .buttons {
-    display: flex !important;
+  .nav {
+    display: grid !important;
   }
 
   .hamburger {
     display: none;
   }
-}
+} */

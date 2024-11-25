@@ -5,15 +5,14 @@ import { FormEvent, InputHTMLAttributes, useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import styles from "./Form.module.css";
 import CloseButton from "@/components/CloseButton";
-import noImage from "../images/no-image.svg"
+import noImage from "../images/no-image.svg";
 import Submit from "./Submit";
 import Delete from "./Delete";
 import Cancel from "./Cancel";
-import Button from "./Button";
 import { useSession } from "next-auth/react";
+import ContactButton from "./ContactButton";
 
 export default function Form({ readOnly }: InputHTMLAttributes<HTMLInputElement>) {
-
     const years = [];
     for (let i = new Date().getFullYear() + 1; i >= 1920; i--) {
         years.push(i);
@@ -35,6 +34,8 @@ export default function Form({ readOnly }: InputHTMLAttributes<HTMLInputElement>
     const [car_model, setCarModel] = useState("");
     const [price, setPrice] = useState<number | undefined>(undefined);
     const [desc, setDesc] = useState("");
+    const [owner, setOwner] = useState<string | null>(null);
+    const [ownerEmail, setOwnerEmail] = useState<string | null>(null); // Ensure we store owner's email
 
     useEffect(() => {
         const getCar = async () => {
@@ -51,10 +52,11 @@ export default function Form({ readOnly }: InputHTMLAttributes<HTMLInputElement>
                 setPrice(carData.price || undefined);
                 setImg(carData.img || "");
                 setDesc(carData.desc || "");
+                setOwner(carData.owner || null); 
+                setOwnerEmail(carData.ownerEmail || null);
                 setImgPreview(carData.img || noImage);
                 setLoading(false);
                 setIsOwner(session ? carData.owner === session?.user?.name : false);
-
             } catch (error) {
                 console.log(`Error getting car ${id}:`, error);
             }
@@ -94,7 +96,7 @@ export default function Form({ readOnly }: InputHTMLAttributes<HTMLInputElement>
                 });
 
                 if (!response.ok) {
-                    throw new Error('Network response was not ok')
+                    throw new Error('Network response was not okay')
                 }
 
                 setImg("");
@@ -115,11 +117,11 @@ export default function Form({ readOnly }: InputHTMLAttributes<HTMLInputElement>
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ car_model, make, year, price, img, desc, owner: session?.user?.name as string }),
+                    body: JSON.stringify({ car_model, make, year, price, img, desc, owner: session?.user?.name as string, ownerEmail: session?.user?.email as string}), 
                 });
 
                 if (!response.ok) {
-                    throw new Error('Network response was not ok')
+                    throw new Error('Network response was not okay')
                 }
 
                 setImg("");
@@ -158,17 +160,11 @@ export default function Form({ readOnly }: InputHTMLAttributes<HTMLInputElement>
         }
     }
 
-    /** TO DO
-     * Make components and stuff for the follow
-     * CSS
-     * fix appearance when resizing
-     */
     return (
         <div className={`gradient`}>
             <form className={styles.formContainer} onSubmit={onSubmit}>
                 <Link href="/"><CloseButton /></Link>
                 <div className={styles.imageContainer}>
-                    {/*FIGURE OUT URL VALIDATION*/}
                     <Image unoptimized fill onError={() => setImgPreview(noImage)} src={imgPreview != noImage ? imgPreview : noImage} alt={car_model + " " + make} className={`${styles.image}`} priority />
                 </div>
                 <div className={styles.formFieldsContainer}>
@@ -187,10 +183,11 @@ export default function Form({ readOnly }: InputHTMLAttributes<HTMLInputElement>
                         </div>
                         <div className={`${styles.inputFieldContainer} ${styles.flexShrink}`}>
                             <label className={styles.label}>Year</label>
-                            {(readOnly && !isOwner) ?
+                            {(readOnly && !isOwner) ? 
                                 <div className={`${styles.yearField} ${((readOnly && !isOwner) || loading) && styles.divReadOnly}`}>
-                                    {loading ? <div className={styles.divLoading}>Loading...</div> : year}</div>
-                                :
+                                    {loading ? <div className={styles.divLoading}>Loading...</div> : year}
+                                </div>
+                                : 
                                 <select disabled={loading} className={`${styles.yearField} ${year === "" && styles.divLoading}`} value={year || ""} onChange={(e) => setYear(e.target.value)} required>
                                     <option value="" disabled>{loading ? "Loading..." : "Year"}</option>
                                     {years.map((year) => <option key={year}>{year}</option>)}
@@ -203,23 +200,14 @@ export default function Form({ readOnly }: InputHTMLAttributes<HTMLInputElement>
                     </div>
                     <div className={styles.inputFieldContainer}>
                         <label className={styles.label}>Description</label>
-                        <textarea disabled={loading} readOnly={readOnly && !isOwner} rows={8} className={`${styles.inputField} ${styles.textareaField}`} value={desc || ""} onChange={(e) => setDesc(e.target.value)} placeholder={loading ? "Loading..." : "Description"} />
+                        <textarea disabled={loading} readOnly={readOnly && !isOwner} className={styles.inputField} placeholder={loading ? "Loading..." : "Description"} value={desc || ""} onChange={(e) => setDesc(e.target.value)} required />
                     </div>
-                </div>
-                <div className={styles.buttonContainer}>
-                    {loading ? <Button className={styles.loading} /> :
-                        <>
-                            {!readOnly || isOwner ?
-                                <>
-                                    <Submit />
-                                    {id ?
-                                        <Delete onClick={onDeleteClick} /> : <Cancel />
-                                    }
-                                </> :
-                                <div>Contact/Buy button</div>
-                            }
-                        </>
+                    {
+                        (isOwner && id) || (status === "authenticated" && !id) ? <><Submit /><Cancel /></> : 
+                        <ContactButton owner={owner || ""} ownerEmail={ownerEmail || ""} isOwner={isOwner} />
+
                     }
+                    {(isOwner && id) && <Delete onClick={onDeleteClick} />}
                 </div>
             </form>
         </div>
