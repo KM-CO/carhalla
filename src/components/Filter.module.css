@@ -10,7 +10,7 @@
 }
 
 .filterButton {
-    padding: 0.85rem 1.5rem;
+    padding: 0.35rem 1.5rem;
     border: none;
     border-radius: 30px;
     font-size: 1.1rem;
@@ -28,7 +28,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-  }
+}
 
 .filterButton .filterButtonEllipsis {
     display: inline-block;
@@ -166,17 +166,14 @@
     align-items: center;
     justify-content: center;
   }
-
   .priceLine {
     font-size: 1.1rem;
     font-weight: 600;
   }
-
 .arrow {
     font-size: 1rem;
     transition: transform 0.3s ease;
   }
-
 /* Media Queries for Tablets */
 @media (max-width: 768px) {
     .filterContainer {
