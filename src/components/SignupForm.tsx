@@ -4,12 +4,12 @@ import styles from "./LoginSignupForms.module.css";
 import { useRouter } from "next/navigation";
 
 const SignupForm: React.FC = () => {
-  
   const router = useRouter();
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
   const handleSignup = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -33,7 +33,13 @@ const SignupForm: React.FC = () => {
       setEmail("");
       setPassword("");
 
-      router.push("/");
+      // Show success message
+      setSuccessMessage("Sign Up Successful!");
+
+      // Navigate to home screen after 2 seconds
+      setTimeout(() => {
+        router.push("/");
+      }, 2000);
     } catch (error: unknown) {
       if (error instanceof Error) {
         setErrorMessage(error.message);
@@ -49,6 +55,7 @@ const SignupForm: React.FC = () => {
     <form onSubmit={handleSignup} className={styles.formContainer}>
       <h2 className={styles.title}>Create an Account</h2>
       {errorMessage && <p className={styles.error}>{errorMessage}</p>}
+      {successMessage && <p className={styles.success}>{successMessage}</p>}
       <div className={styles.inputGroup}>
         <label htmlFor="username" className={styles.label}>
           Username
