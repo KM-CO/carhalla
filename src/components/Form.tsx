@@ -52,7 +52,7 @@ export default function Form({ readOnly }: InputHTMLAttributes<HTMLInputElement>
                 setPrice(carData.price || undefined);
                 setImg(carData.img || "");
                 setDesc(carData.desc || "");
-                setOwner(carData.owner || null); 
+                setOwner(carData.owner || null);
                 setOwnerEmail(carData.ownerEmail || null);
                 setImgPreview(carData.img || noImage);
                 setLoading(false);
@@ -117,7 +117,7 @@ export default function Form({ readOnly }: InputHTMLAttributes<HTMLInputElement>
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ car_model, make, year, price, img, desc, owner: session?.user?.name as string, ownerEmail: session?.user?.email as string}), 
+                    body: JSON.stringify({ car_model, make, year, price, img, desc, owner: session?.user?.name as string, ownerEmail: session?.user?.email as string }),
                 });
 
                 if (!response.ok) {
@@ -183,11 +183,11 @@ export default function Form({ readOnly }: InputHTMLAttributes<HTMLInputElement>
                         </div>
                         <div className={`${styles.inputFieldContainer} ${styles.flexShrink}`}>
                             <label className={styles.label}>Year</label>
-                            {(readOnly && !isOwner) ? 
+                            {(readOnly && !isOwner) ?
                                 <div className={`${styles.yearField} ${((readOnly && !isOwner) || loading) && styles.divReadOnly}`}>
                                     {loading ? <div className={styles.divLoading}>Loading...</div> : year}
                                 </div>
-                                : 
+                                :
                                 <select disabled={loading} className={`${styles.yearField} ${year === "" && styles.divLoading}`} value={year || ""} onChange={(e) => setYear(e.target.value)} required>
                                     <option value="" disabled>{loading ? "Loading..." : "Year"}</option>
                                     {years.map((year) => <option key={year}>{year}</option>)}
@@ -202,12 +202,14 @@ export default function Form({ readOnly }: InputHTMLAttributes<HTMLInputElement>
                         <label className={styles.label}>Description</label>
                         <textarea disabled={loading} readOnly={readOnly && !isOwner} className={styles.inputField} placeholder={loading ? "Loading..." : "Description"} value={desc || ""} onChange={(e) => setDesc(e.target.value)} required />
                     </div>
-                    {
-                        (isOwner && id) || (status === "authenticated" && !id) ? <><Submit /><Cancel /></> : 
-                        <ContactButton owner={owner || ""} ownerEmail={ownerEmail || ""} isOwner={isOwner} />
+                    <div className={styles.buttonContainer}>
+                        {
+                            (isOwner && id) || (status === "authenticated" && !id) ? <><Submit /><Cancel /></> :
+                                <ContactButton owner={owner || ""} ownerEmail={ownerEmail || ""} isOwner={isOwner} />
 
-                    }
-                    {(isOwner && id) && <Delete onClick={onDeleteClick} />}
+                        }
+                        {(isOwner && id) && <Delete onClick={onDeleteClick} />}
+                    </div>
                 </div>
             </form>
         </div>

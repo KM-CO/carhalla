@@ -114,7 +114,7 @@
 
 .buttonContainer {
   display: grid;
-  grid: auto / auto auto;
+  grid: auto / auto auto auto;
   gap: 1rem;
   justify-content: center;
   margin-top: 2rem;

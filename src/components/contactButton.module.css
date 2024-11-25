@@ -31,13 +31,13 @@
   }
   
   .edit-button {
-    background: #4A90E2;
+    background-color: #4A90E2;
     color: white;
     border-radius: 25px;
     border: none;
     padding: 10px 20px;
     font-weight: 600;
-    transition: background 0.3s ease;
+    transition: background-color 0.3s ease;
     cursor: pointer;
     font-size: 16px;
   }
