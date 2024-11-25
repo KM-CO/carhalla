@@ -4,7 +4,7 @@ import Link from "next/link";
 import { FormEvent, InputHTMLAttributes, useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import styles from "./Form.module.css";
-import CloseButton from "@/components/CloseButton";
+import CloseButton from "./CloseButton";
 import noImage from "../images/no-image.svg";
 import Submit from "./Submit";
 import Delete from "./Delete";
