@@ -5,12 +5,14 @@ import { useSession } from 'next-auth/react';
 import Login from './Login';
 import Signup from './Signup';
 import Logout from './Logout';
-
+import Title from './Title';
+import CloseButton from './CloseButton';
+import Hamburger from './Hamburger';
 
 const Header = () => {
 
   const [searchQuery, setSearchQuery] = useState('');
-  const title = "Carhalla";
+  const [open, setOpen] = useState(false);
   const { data: session, status } = useSession()
   const loggedInUser = session?.user;
 
@@ -22,17 +24,15 @@ const Header = () => {
     console.log("Search query:", searchQuery);
   };
 
+  const toggleMenu = () => {
+    setOpen(!open);
+  }
+
   return (
     <header className={styles.header}>
       {/* Logo Section */}
       <div className={styles.leftSection}>
-        <h1 className={styles.title}>
-          {title.split('').map((letter, index) => (
-            <span key={index} className={styles.letter}>
-              {letter}
-            </span>
-          ))}
-        </h1>
+        <Title />
       </div>
 
       {/* Search Bar Section */}
@@ -49,18 +49,22 @@ const Header = () => {
         </button>
       </div>
 
+      <div id="hamburger" className={styles.hamburger} onClick={toggleMenu}><Hamburger /></div>
+
       <nav className={styles.nav}>
-        {status === "authenticated" ? (
-          <>
-            <span className={styles.greeting}>Hello, {loggedInUser?.name}</span>
-            <Logout />
-          </>
-        ) : (
-          <>
-            <Login />
-            <Signup />
-          </>
-        )}
+        <div id="buttons" className={`${styles.buttons}`} style={{display: (open ? "" : "none")}}>
+          {status === "authenticated" ? (
+            <>
+              <span className={styles.greeting}>Hello, {loggedInUser?.name}</span>
+              <Logout />
+            </>
+          ) : (
+            <>
+              <Login />
+              <Signup />
+            </>
+          )}
+        </div>
       </nav>
     </header >
   );
