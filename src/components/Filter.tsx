@@ -1,7 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
 import styles from "./Filter.module.css";
-import { useSession } from "next-auth/react";
 import Hamburger from "./Hamburger";
 
 interface FilterProps {

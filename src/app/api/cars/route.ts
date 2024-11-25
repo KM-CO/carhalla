@@ -65,12 +65,9 @@ export async function POST(request: NextRequest) {
     
     const { car_model, make, year, price, img, desc, owner, ownerEmail } = await request.json();
 
-
-    
     await connectMongoDB();
 
-    
-    const car = await Car.create({ car_model, make, year, price, img, desc, owner, ownerEmail });
+    await Car.create({ car_model, make, year, price, img, desc, owner, ownerEmail });
     
     return NextResponse.json({ message: "Car added successfully" }, { status: 201 });
   } catch (error) {
