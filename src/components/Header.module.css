@@ -76,6 +76,12 @@
   "title search buttons";
 }
 
+@media (max-width: 806px) {
+  .nav {
+    padding-bottom: 0;
+  }
+}
+
 @media (max-width: 646px) {
   .nav {
     grid-template: 3em 3em / min-content auto;
