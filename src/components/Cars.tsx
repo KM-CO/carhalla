@@ -62,7 +62,7 @@ export default function Cars({
   }, [carsFromSearch, selectedMake, selectedModel, selectedYear, selectedPrice]);
 
   return (
-    <div className="m-3 grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-3 grid-rows-[repeat(auto-fill,minmax(280px,280px))] items-center">
+    <div className="m-2 grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-3 grid-rows-[repeat(auto-fill,minmax(280px,280px))] items-center">
       {cars.map((car: Car) => (
         <Suspense key={car._id} fallback={<LoadingDots />}>
           <Card

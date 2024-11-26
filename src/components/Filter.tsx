@@ -85,10 +85,9 @@ const Filter: React.FC<FilterProps> = ({
     onResetFilters();
     fetchFilterOptions(null, null, null); // Reset options to the full list
   };
-
   const adjustFontSize = (text: string) => {
-    const maxChars = 15; // Adjust based on button width
-    return text.length > maxChars ? "0.85rem" : "1.1rem";
+    const maxChars = 8; // Adjust based on button width
+    return text.length > maxChars ? "0.7rem" : "1.1rem";
   };
 
   const [open, setOpen] = useState(false);
@@ -163,7 +162,7 @@ const Filter: React.FC<FilterProps> = ({
         <div className={styles.buttonDropdownContainer}>
           <button
             className={`${styles.filterButton} ${isYearDropdownOpen ? styles.open : ""}`}
-            style={{ fontSize: adjustFontSize(selectedModel) }}
+            style={{ fontSize: adjustFontSize(selectedYear) }}
             onClick={() => setIsYearDropdownOpen((prev) => !prev)}
           >
             <span className={styles.filterButtonEllipsis}>{selectedYear}</span>
@@ -192,6 +191,7 @@ const Filter: React.FC<FilterProps> = ({
         <div className={styles.buttonDropdownContainer}>
           <button
             className={`${styles.filterButton} ${isPriceDropdownOpen ? styles.open : ""}`}
+            style={{ fontSize: adjustFontSize(selectedPrice) }}
             onClick={() => setIsPriceDropdownOpen((prev) => !prev)}
           >
             <span className={styles.filterButtonEllipsis}>{selectedPrice}</span>

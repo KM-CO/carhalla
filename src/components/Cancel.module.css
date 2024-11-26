@@ -1,7 +1,10 @@
 .cancelButton {
-    background-color: #f5b143;
+    background-color: #db9e3a;
   }
   
   .cancelButton:hover {
-    background-color: #db9e3a;
+    background-color: #f5b143;
+  }
+  .cancelButton:active {
+    background-color: #ffbb4e;
   }

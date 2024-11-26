@@ -4,7 +4,7 @@
   position: relative;
   flex-direction: column;
   align-items: center;
-  padding: 2rem;
+  padding: 1.5em;
   margin: auto;
   max-width: 800px;
   /*background: linear-gradient(135deg, #2d3748, #1a202c); */
@@ -12,7 +12,9 @@
   border-radius: 15px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }
-
+.fullPage {
+  min-height: 100vh;
+}
 .imageContainer {
   position: relative;
   min-height: 200px;
@@ -85,7 +87,7 @@
 }
 
 .textareaField {
-  min-height: 16em;
+  min-height: 8em;
   vertical-align: bottom;
 }
 
@@ -113,11 +115,12 @@
 }
 
 .buttonContainer {
-  display: grid;
-  grid: auto / auto auto auto;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
   gap: 1rem;
+  flex-wrap: wrap;
   justify-content: center;
-  margin-top: 2rem;
 }
 
 .loading {

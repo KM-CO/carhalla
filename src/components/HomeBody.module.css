@@ -13,7 +13,7 @@
     grid-area: cars;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 806px) {
     .container {
         grid-template: min-content auto / auto;
         grid-template-areas:

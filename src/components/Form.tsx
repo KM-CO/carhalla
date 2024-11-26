@@ -11,6 +11,7 @@ import Delete from "./Delete";
 import Cancel from "./Cancel";
 import { useSession } from "next-auth/react";
 import ContactButton from "./ContactButton";
+import Button from "./Button";
 
 export default function Form({ readOnly }: InputHTMLAttributes<HTMLInputElement>) {
     const years = [];
@@ -161,7 +162,7 @@ export default function Form({ readOnly }: InputHTMLAttributes<HTMLInputElement>
     }
 
     return (
-        <div className={`gradient`}>
+        <div className={`${styles.fullPage} gradient`}>
             <form className={styles.formContainer} onSubmit={onSubmit}>
                 <Link href="/"><CloseButton /></Link>
                 <div className={styles.imageContainer}>
@@ -200,15 +201,17 @@ export default function Form({ readOnly }: InputHTMLAttributes<HTMLInputElement>
                     </div>
                     <div className={styles.inputFieldContainer}>
                         <label className={styles.label}>Description</label>
-                        <textarea disabled={loading} readOnly={readOnly && !isOwner} className={styles.inputField} placeholder={loading ? "Loading..." : "Description"} value={desc || ""} onChange={(e) => setDesc(e.target.value)} required />
+                        <textarea disabled={loading} readOnly={readOnly && !isOwner} className={`${styles.inputField} ${styles.textareaField}`} placeholder={loading ? "Loading..." : "Description"} value={desc || ""} onChange={(e) => setDesc(e.target.value)} required />
                     </div>
                     <div className={styles.buttonContainer}>
+                        { loading ? <Button className={styles.loading} /> : <>
                         {
                             (isOwner && id) || (status === "authenticated" && !id) ? <><Submit /><Cancel /></> :
                                 <ContactButton owner={owner || ""} ownerEmail={ownerEmail || ""} isOwner={isOwner} />
 
                         }
-                        {(isOwner && id) && <Delete onClick={onDeleteClick} />}
+                        {(isOwner && id) && <Delete onClick={onDeleteClick} />}</>
+                    }
                     </div>
                 </div>
             </form>
