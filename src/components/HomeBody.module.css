@@ -34,3 +34,9 @@
         top: 8.5em;
     }
 }
+
+@media (max-width: 390px) {
+    .filter {
+        top: 12em;
+    }
+}
