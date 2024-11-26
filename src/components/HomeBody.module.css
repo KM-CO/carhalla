@@ -23,7 +23,7 @@
     .filter {
         z-index: 999;
         position: sticky;
-        top: 5em;
+        top: 4em;
     }
 }
 
@@ -31,12 +31,12 @@
     .filter {
         z-index: 999;
         position: sticky;
-        top: 8.5em;
+        top: 7.5em;
     }
 }
 
 @media (max-width: 390px) {
     .filter {
-        top: 12em;
+        top: 11em;
     }
 }
