@@ -14,16 +14,16 @@ const LoginForm: React.FC = () => {
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setErrorMessage(null); // Clear any previous error message
+    setErrorMessage(null); 
     const form = new FormData(e.currentTarget);
 
     const response = await doCredentialLogin(form);
 
     if (response.error) {
-      // Display error message from the response
+      
       setErrorMessage(response.error);
     } else {
-      // Redirect to home page on successful login
+      
       router.push("/");
     }
   }
