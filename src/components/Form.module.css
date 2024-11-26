@@ -129,6 +129,11 @@
   height: 2.5rem;
 }
 
+.error {
+  color: var(--red);
+  margin-bottom: 1.5em;
+}
+
 .label {
   color: var(--foreground);
   font-weight: 700;

@@ -37,12 +37,14 @@ export default function Form({ readOnly }: InputHTMLAttributes<HTMLInputElement>
     const [desc, setDesc] = useState("");
     const [owner, setOwner] = useState<string | null>(null);
     const [ownerEmail, setOwnerEmail] = useState<string | null>(null); // Ensure we store owner's email
+    const [error, setError] = useState("");
 
     useEffect(() => {
         const getCar = async () => {
             try {
                 const response = await fetch(`/api/cars/${id}`);
                 if (!response.ok) {
+                    setError(response.statusText + ": Car not found!");
                     throw new Error('Network response was not okay');
                 }
                 const data = await response.json();
@@ -168,6 +170,7 @@ export default function Form({ readOnly }: InputHTMLAttributes<HTMLInputElement>
                 <div className={styles.imageContainer}>
                     <Image unoptimized fill onError={() => setImgPreview(noImage)} src={imgPreview != noImage ? imgPreview : noImage} alt={car_model + " " + make} className={`${styles.image}`} priority />
                 </div>
+                <div className={styles.error} style={{display: error !== "" ? "" : "none"}}>{error}</div>
                 <div className={styles.formFieldsContainer}>
                     {(isOwner && id) || (status === "authenticated" && !id) ? <div className={styles.inputFieldContainer}>
                         <label className={styles.label}>Image Link</label>
