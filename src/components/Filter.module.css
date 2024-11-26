@@ -210,15 +210,17 @@
         width: 90%; /* Use most of the available space */
         max-height: 200px; /* Adjust dropdown height */
         position: absolute; 
-        z-index: 100;
+        z-index: 1002;
         top: 2.5em;
         min-width: 100px;
         width: max-content;
         max-width: 200px;
     }    
+    .filterButton {
+        z-index: 1001;
+    }
     .buttonDropdownContainer {
         gap: 0;
-        z-index: 1001;
     }
     .filters {
         gap: .5em;
