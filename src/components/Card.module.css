@@ -102,6 +102,7 @@
     display: -webkit-box;
     -webkit-box-orient: vertical;
     line-clamp: 4;
+    text-overflow: ellipsis;
   }
   
   .card-button-container {
