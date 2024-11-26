@@ -100,9 +100,8 @@
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
     overflow: hidden;
     display: -webkit-box;
-    -webkit-box-orient: vertical;
-    line-clamp: 4;
-    text-overflow: ellipsis;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;  
   }
   
   .card-button-container {
