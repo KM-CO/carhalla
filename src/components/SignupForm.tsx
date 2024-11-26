@@ -1,3 +1,4 @@
+
 "use client";
 import React, { FormEvent, useState } from "react";
 import styles from "./LoginSignupForms.module.css";
@@ -33,12 +34,12 @@ const SignupForm: React.FC = () => {
       setEmail("");
       setPassword("");
 
-      // Show success message
+      
       setSuccessMessage("Sign Up Successful!");
 
-      // Navigate to home screen after 2 seconds
+      
       setTimeout(() => {
-        router.push("/");
+        router.push(`/login?username=${encodeURIComponent(username)}`);
       }, 2000);
     } catch (error: unknown) {
       if (error instanceof Error) {
