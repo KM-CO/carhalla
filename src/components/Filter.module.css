@@ -206,9 +206,6 @@
 }
 
 @media (min-width: 710px) and (max-width: 806px) {
-    .buttonDropdownContainer {
-        gap: 0;
-    }
     .dropdownContainer {
         width: 90%; /* Use most of the available space */
         max-height: 200px; /* Adjust dropdown height */
@@ -218,6 +215,10 @@
         min-width: 100px;
         width: max-content;
         max-width: 200px;
+    }    
+    .buttonDropdownContainer {
+        gap: 0;
+        z-index: 1001;
     }
     .filters {
         gap: .5em;
