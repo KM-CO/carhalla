@@ -8,39 +8,12 @@
     gap: 1rem;
 }
 
-.formContainer {
-    width: 100%;
-    max-width: 24rem; /* max-w-sm */
-    padding: 1.5rem;
-    background-color: white;
-    border-radius: 0.5rem; /* rounded-lg */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* shadow-md */
-}
-
-.title {
-    font-size: 1.5rem; /* text-2xl */
-    font-weight: 600; /* font-semibold */
-    text-align: center;
-    color: #2d3748; /* text-gray-800 */
-    margin-bottom: 1rem;
-}
-
-.inputGroup {
-    margin-bottom: 1rem;
-}
-
-.label {
-    display: block;
-    color: #4a5568; /* text-gray-700 */
-    font-weight: 500; /* font-medium */
-}
-
 .linksContainer {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 1rem;
-    margin-top: 1rem;
+    margin-bottom: 2rem;
 }
 
 .linkButton {
@@ -61,10 +34,4 @@
 
 .linkButton:active {
     background-color: var(--tertiary-active);
-}
-
-.error {
-    color: red;
-    margin-top: 0.5rem;
-    font-size: 0.9rem;
 }

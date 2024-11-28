@@ -7,14 +7,17 @@
   padding: 1.5em;
   margin: auto;
   max-width: 800px;
-  /*background: linear-gradient(135deg, #2d3748, #1a202c); */
   background: var(--primary);
   border-radius: 15px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }
+
 .fullPage {
   min-height: 100vh;
+  padding: .5rem;
+  min-width: 100vw;
 }
+
 .imageContainer {
   position: relative;
   min-height: 200px;

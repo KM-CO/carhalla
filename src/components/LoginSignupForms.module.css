@@ -7,6 +7,8 @@
     background-color: var(--primary);
     border-radius: 0.5rem; /* rounded-lg */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* shadow-md */
+    height: 100%;
+    margin: 1rem;
 }
 
 .title {
@@ -64,12 +66,6 @@
 
 .loginButton:active {
     background-color: var(--tertiary-active); /* hover:bg-green-600 */
-}
-
-.linksContainer {
-    display: flex;
-    gap: 1rem;
-    margin-top: 1rem;
 }
 
 .linkButton {
