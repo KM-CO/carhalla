@@ -62,7 +62,7 @@
   background-color: var(--primary);
   padding: 1rem 1.5rem;
   height: 100%;
-  container: nav / size;
+  /* container: nav / size; */
   min-width: 150px;
   grid-area: nav;
   display: grid;
